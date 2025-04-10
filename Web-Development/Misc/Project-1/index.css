@@ -47,3 +47,24 @@ body{
   font-size: 3rem;
   text-transform: uppercase;
 }
+
+/*Body content middle*/
+
+.body-container-middle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35vh;
+  font-size: 20px;
+  padding: 30px;
+}
+
+.body-container-middle > .connect{
+  width: 50%;
+  margin: 20px;
+}
+
+.body-container-middle > .img{
+  width: 50%;
+  margin: 20px;
+}
