@@ -4,7 +4,9 @@ body{
   margin-right: 30px;
 }
 
-.container > .navbar{
+/*Navbar*/
+
+.nav-container > .navbar{
   justify-content: space-between;
 }
 
@@ -24,4 +26,24 @@ body{
 .navbar ul li{
   padding: 10px;
   margin:0 10px;
+}
+
+/*Body content top*/
+
+.body-container-top{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+}
+
+.body-container-top > .title{
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.body-container-top > .title h1{
+  font-size: 3rem;
+  text-transform: uppercase;
 }
