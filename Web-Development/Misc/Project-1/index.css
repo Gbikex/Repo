@@ -79,10 +79,16 @@ body{
 }
 
 .subscirbe{
-  background-color: yellow;
-  width:75px;
+  background-color: rgb(252, 252, 52);
+  width:100px;
   height: 30px;
   border-radius: 30px;
+  cursor: pointer;
+  padding:5px;
+}
+
+.subscirbe span{
+  cursor: pointer;
 }
 
 .input{
@@ -152,7 +158,7 @@ opacity: 0.5;
 
 .body-container-bottom{
   background-color: #7C444F;
-  height: 45vh;
+  height: 52vh;
   padding-bottom: 45px;
   padding-left: 250px;
   padding-right: 250px;
@@ -175,9 +181,10 @@ opacity: 0.5;
   color: #DBDBDB;
 }
 
+
 .price.option{
   width:210px;
-  height: 250px;
+  height: 270px;
   border: 3px solid transparent;
   background-image:
   linear-gradient(#F87A53, #f7b484), linear-gradient(to right, #CC704B, #614124);
@@ -187,9 +194,26 @@ opacity: 0.5;
   padding: 15px;
 }
 
+.button.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+.button.container.free{
+  margin-top:60px;
+}
 .pricing.container{
   display: flex;
   justify-content: space-around;
+}
+
+.price.button{
+  width: 100px;
+  height: 50px;
+  border-radius: 30px;
+  background-color: #F4DFB6;
+  cursor: pointer;
 }
 
 /*Footer*/
