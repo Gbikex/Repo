@@ -146,6 +146,9 @@ opacity: 0.5;
 .body-container-bottom{
   background-color: #7C444F;
   height: 45vh;
+  padding-bottom: 45px;
+  padding-left: 250px;
+  padding-right: 250px;
 }
 
 .body-container-bottom > .container{
@@ -158,10 +161,23 @@ opacity: 0.5;
 .body-container-bottom > .container > .title{
   text-align: center;
   font-size: 30px;
+  text-shadow: -1px 0 #F87A53, 0 1px , 1px 0 #F87A53, 0 -1px #F87A53;
 }
 
 .price.title{
-  color: #E16A54;
+  color: #DBDBDB;
+}
+
+.price.option{
+  width:210px;
+  height: 250px;
+  border: 3px solid transparent;
+  background-image:
+  linear-gradient(#F87A53, #f7b484), linear-gradient(to right, #CC704B, #614124);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border-radius: 25px;
+  padding: 15px;
 }
 
 .pricing.container{
