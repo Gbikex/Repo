@@ -155,3 +155,13 @@ opacity: 0.5;
 }
 
 /*Footer*/
+
+.footer{
+  margin-top: 50px;
+  text-align: center;
+  height: 30px;
+}
+
+.footer p{
+  font-size: 13px;
+}
