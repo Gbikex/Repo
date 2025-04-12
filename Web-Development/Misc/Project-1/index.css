@@ -64,7 +64,41 @@ body{
   margin: 20px;
 }
 
-.body-container-middle > .img{
+.body-container-middle > .information{
   width: 50%;
   margin: 20px;
+}
+
+.subscirbe{
+  background-color: yellow;
+  width:75px;
+  height: 30px;
+  border-radius: 30px;
+}
+
+.input{
+  border-radius: 30px;
+  height: 30px;
+  text-align: center;
+}
+
+.unsubscribe.text{
+font-size: 15px;
+font-style: italic;
+opacity: 0.5;
+}
+
+.contact.img{
+  width: 350px;
+  object-fit: contain;
+}
+
+.information.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.information.text{
+  width: 50%;
 }
