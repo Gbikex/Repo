@@ -103,8 +103,29 @@ opacity: 0.5;
   width: 50%;
 }
 
+/*Content body middle two*/
+
+.body-container-middle-two{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.customer.pricture{
+  width: 100px;
+  height: 100px;
+  border: solid gold 1px;
+  border-radius: 50px;
+}
 
 /*Content body bottom*/
+
+.body-container-bottom{
+  height: 35vh;
+}
 
 .body-container-bottom > .container{
   display: flex;
@@ -115,6 +136,7 @@ opacity: 0.5;
 
 .body-container-bottom > .container > .title{
   text-align: center;
+  font-size: 30px;
 }
 
 .pricing.container{
