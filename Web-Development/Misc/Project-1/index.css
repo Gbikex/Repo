@@ -102,3 +102,24 @@ opacity: 0.5;
 .information.text{
   width: 50%;
 }
+
+
+/*Content body bottom*/
+
+.body-container-bottom > .container{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.body-container-bottom > .container > .title{
+  text-align: center;
+}
+
+.pricing.container{
+  display: flex;
+  justify-content: space-around;
+}
+
+/*Footer*/
