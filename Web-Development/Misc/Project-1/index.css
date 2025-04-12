@@ -1,11 +1,14 @@
 body{
   margin:0;
   padding: 0;
+  font-family: "Nunito", sans-serif;;
 }
 
 /*Navbar*/
 .nav-container{
   background-color: #7C444F;
+  padding-left: 80px;
+  padding-right: 80px;
 }
 
 .nav-container > .navbar{
@@ -58,9 +61,11 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 35vh;
+  height: 50vh;
   font-size: 20px;
   padding: 30px;
+  padding-left: 200px;
+  padding-right: 200px;
 }
 
 .body-container-middle > .connect{
@@ -140,7 +145,7 @@ opacity: 0.5;
 
 .body-container-bottom{
   background-color: #7C444F;
-  height: 40vh;
+  height: 45vh;
 }
 
 .body-container-bottom > .container{
@@ -155,6 +160,10 @@ opacity: 0.5;
   font-size: 30px;
 }
 
+.price.title{
+  color: #E16A54;
+}
+
 .pricing.container{
   display: flex;
   justify-content: space-around;
@@ -164,16 +173,14 @@ opacity: 0.5;
 
 .footer{
   background-color: #9F5255;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 15px;
-  height: 35px;
-
-}
-
-.container p{
-  margin-top:0px;
+  height: 55px;
 }
 
 .footer p{
   font-size: 13px;
+  margin:0;
 }
