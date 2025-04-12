@@ -121,6 +121,16 @@ opacity: 0.5;
   border-radius: 50px;
 }
 
+.feedback.title{
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+.feedback.person.rank{
+  font-style: italic;
+  opacity: 0.5;
+}
+
 /*Content body bottom*/
 
 .body-container-bottom{
