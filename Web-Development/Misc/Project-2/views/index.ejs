@@ -16,6 +16,7 @@
   </form>
   <!---->
   <div>
+    <%if (locals.blogTitle){%>
     <h2>Posts</h2>
     <div class="blog title">
       <%= locals.blogTitle %>
@@ -23,6 +24,7 @@
     <div class="blog post">
       <%= locals.blogContent %>
     </div>
+    <%}%>
   </div>
   <!---->
 </body>
