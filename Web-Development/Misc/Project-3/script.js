@@ -10,10 +10,10 @@ const responses = {
 };
 const formDisable = document.getElementById("guess--number");
 const btnSubmitDisable = document.querySelector(".submit");
+const highscoreHolder = document.querySelector(".highscore.holder");
+
 let guessChance = 20;
 document.querySelector(".left").textContent = guessChance;
-
-//TO DO SCORE NOT WORKS
 
 console.log(randomNumber);
 
@@ -26,14 +26,18 @@ const btnSubmit = document
       if (guess > 0 && guess <= 20) {
         if (guess < randomNumber) {
           responseText.textContent = responses.low;
-          document.querySelector(".left").textContent = guessChance--;
+          guessChance--;
+          document.querySelector(".left").textContent = guessChance;
         } else if (guess > randomNumber) {
           responseText.textContent = responses.high;
-          document.querySelector(".left").textContent = guessChance--;
+          guessChance--;
+          document.querySelector(".left").textContent = guessChance;
         } else {
           responseText.textContent = responses.win;
 
           document.querySelector(".result").textContent = randomNumber;
+
+          highscoreHolder.textContent = guessChance;
 
           formDisable.disabled = true;
           btnSubmitDisable.disabled = true;
