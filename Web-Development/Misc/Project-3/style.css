@@ -2,6 +2,26 @@
   color: aliceblue;
   background-color: black;
 }
+
 li {
   list-style-type: none;
+}
+
+.content {
+  height: 100%;
+}
+
+.content.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.content.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 500px;
 }
