@@ -1,6 +1,6 @@
 "use strict";
 
-const randomNumber = Math.trunc(Math.random() * 20) + 1;
+let randomNumber = Math.trunc(Math.random() * 20) + 1;
 let responseText = document.querySelector(".response");
 const responses = {
   high: "Your guess is too high!",
@@ -46,7 +46,10 @@ const btnSubmit = document
 
           if (guessChance > highScore) {
             highScore = guessChance;
+            highscoreHolder.textContent = highScore;
           }
+          console.log(highScore);
+          console.log(guessChance);
         }
       } else {
         alert("Please enter a valid number between 1 and 20!");
@@ -61,12 +64,13 @@ const btnSubmit = document
 const btnReset = document
   .querySelector(".reset")
   .addEventListener("click", () => {
-    console.log("test");
-
     responseText.textContent = "";
     document.querySelector(".result").textContent = "?";
     document.querySelector(".left").textContent = 20;
+    randomNumber = Math.trunc(Math.random() * 20) + 1;
+    guessChance = 20;
     formDisable.value = "";
     formDisable.disabled = false;
     btnSubmitDisable.disabled = false;
+    console.log(randomNumber);
   });
