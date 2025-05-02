@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guess a number game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <!---->
@@ -18,27 +24,32 @@
 
         <div class="content game">
           <li class="result">?</li>
-          <input type="number" id="guess--number" />
-          <button class="btn submit">Submit</button>
-          <button class="btn reset">Reset</button>
+          <input
+            type="number"
+            id="guess--number"
+            placeholder="Psst guess here"
+          />
+          <div class="content button">
+            <button class="btn submit">Submit</button>
+            <button class="btn reset">Reset</button>
+          </div>
         </div>
 
         <div class="content response">
           <p class="response"></p>
         </div>
 
+        <h2>Score</h2>
+
         <div class="content score">
-          <ul>
-            <li>Score:</li>
-            <li>
-              Guess left:
-              <p class="score left">0</p>
-            </li>
-            <li>
-              Highscore:
-              <p class="highscore holder">0</p>
-            </li>
-          </ul>
+          <div class="score one">
+            <p>Guess left:</p>
+            <p class="score left">0</p>
+          </div>
+          <div class="score two">
+            <p>Highscore:</p>
+            <p class="highscore holder">0</p>
+          </div>
         </div>
       </div>
       <!---->
