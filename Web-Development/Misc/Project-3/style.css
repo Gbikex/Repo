@@ -1,14 +1,23 @@
 * {
-  color: aliceblue;
-  background-color: black;
+  color: #fbdb93;
+  font-optical-sizing: auto;
+  font-family: "Single Day", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+}
+
+body {
+  background: radial-gradient(circle, #641b2e 0%, #8a2d3b 50%, #be5b50 100%);
 }
 
 li {
   list-style-type: none;
 }
 
-.content {
-  height: 100%;
+h1 {
+  font-size: 60px;
+  font-weight: bolder;
 }
 
 .content.page {
@@ -24,4 +33,51 @@ li {
   justify-content: center;
   flex-direction: column;
   height: 500px;
+}
+
+.content.button {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.content.score {
+  display: flex;
+  flex-direction: row;
+}
+
+button {
+  border-radius: 10px;
+  background-color: rgb(44, 37, 37);
+  box-shadow: 1px 1px 10px #fbdb93;
+}
+
+h2 {
+  margin: 0;
+}
+
+.result {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+.response {
+  font-size: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#guess--number {
+  border-radius: 10px;
+  text-align: center;
+}
+
+.score.one {
+  margin-right: 50px;
+}
+
+.score {
+  text-align: center;
 }
