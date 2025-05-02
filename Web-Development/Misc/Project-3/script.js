@@ -3,6 +3,7 @@
 let randomNumber = Math.trunc(Math.random() * 20) + 1;
 let responseText = document.querySelector(".response");
 const responses = {
+  info: "Please guess a number between 1 and 20",
   high: "Your guess is too high!",
   high_emoji: "👇",
   low: "Your guess is too low!",
@@ -11,6 +12,9 @@ const responses = {
   win_emoji: "🫵",
   lost: "Ran out of chances, you lost the game",
 };
+
+responseText.textContent = responses.info;
+
 const formDisable = document.getElementById("guess--number");
 const btnSubmitDisable = document.querySelector(".submit");
 const highscoreHolder = document.querySelector(".highscore.holder");
@@ -64,6 +68,7 @@ const btnSubmit = document
 const btnReset = document
   .querySelector(".reset")
   .addEventListener("click", () => {
+    //Reset variables
     responseText.textContent = "";
     document.querySelector(".result").textContent = "?";
     document.querySelector(".left").textContent = 20;
