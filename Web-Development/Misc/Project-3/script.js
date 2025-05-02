@@ -4,6 +4,7 @@ let randomNumber = Math.trunc(Math.random() * 20) + 1;
 let responseText = document.querySelector(".response");
 const responses = {
   info: "Please guess a number between 1 and 20",
+  wrong_entry: "Please enter a valid number between 1 and 20!",
   high: "Your guess is too high!",
   high_emoji: "👇",
   low: "Your guess is too low!",
@@ -56,7 +57,7 @@ const btnSubmit = document
           console.log(guessChance);
         }
       } else {
-        alert("Please enter a valid number between 1 and 20!");
+        responseText.textContent = responses.wrong_entry;
       }
     } else {
       formDisable.disabled = true;
@@ -69,7 +70,7 @@ const btnReset = document
   .querySelector(".reset")
   .addEventListener("click", () => {
     //Reset variables
-    responseText.textContent = "";
+    responseText.textContent = responses.info;
     document.querySelector(".result").textContent = "?";
     document.querySelector(".left").textContent = 20;
     randomNumber = Math.trunc(Math.random() * 20) + 1;
