@@ -1,20 +1,39 @@
 "use strict";
 
-function generatePassword(pwLong = 11) {
+function generatePassword(pwLong = 15) {
+  let generatedPassword;
+  let passwordTemplate;
+
   const charList = ["a", "b", "c", "e", "e", "f", "g", "h"];
   const numList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
   const symList = ["§", "'", "+", "!", "%", "/", "=", "("];
 
   let numOpt = 0;
 
-  pwLong % 3 === 0 ? (numOpt = pwLong / 3) : (numOpt = pwLong / 2);
+  pwLong % 3 === 0 ? (numOpt = pwLong / 3) : (numOpt = Math.floor(pwLong / 3));
   console.log(numOpt);
 
-  const charLength = Math.floor(numOpt);
-  const numLength = Math.floor(numOpt);
-  const symLength = pwLong - numOpt;
+  const charLength = numOpt;
+  const numLength = numOpt;
+  const symLength = pwLong - numOpt * 2;
 
   console.log(charLength, numLength, symLength);
+
+  passwordTemplate = loopString(charList, charLength);
+  passwordTemplate += loopString(numList, numLength);
+  passwordTemplate += loopString(symList, symLength);
+
+  console.log(`Template string: ${passwordTemplate}`);
+}
+
+function loopString(arr, num) {
+  let tmpPart = "";
+  for (let i = 0; i < num; i++) {
+    const randomIndex = Math.trunc(Math.random() * arr.length);
+    tmpPart += arr[randomIndex];
+  }
+  console.log(`Inner function log: ${tmpPart}`);
+  return tmpPart;
 }
 
 generatePassword(undefined);
