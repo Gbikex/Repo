@@ -1,7 +1,7 @@
 "use strict";
 
-function generatePassword(pwLong = 15) {
-  let generatedPassword;
+function generatePassword(pwLong = 16) {
+  let newPassword;
   let passwordTemplate;
 
   const charList = ["a", "b", "c", "e", "e", "f", "g", "h"];
@@ -24,6 +24,13 @@ function generatePassword(pwLong = 15) {
   passwordTemplate += loopString(symList, symLength);
 
   console.log(`Template string: ${passwordTemplate}`);
+
+  newPassword = passwordTemplate
+    .split("")
+    .sort(() => 0.5 - Math.random())
+    .join("");
+
+  console.log(newPassword);
 }
 
 function loopString(arr, num) {
