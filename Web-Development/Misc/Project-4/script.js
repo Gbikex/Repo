@@ -4,9 +4,11 @@ function generatePassword(pwLong = 16) {
   let newPassword;
   let passwordTemplate;
 
-  const charList = ["a", "b", "c", "e", "e", "f", "g", "h"];
+  // prettier-ignore
+  const charList = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
   const numList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-  const symList = ["§", "'", "+", "!", "%", "/", "=", "("];
+  // prettier-ignore
+  const symList = [" ","!","”","#","$","%","&","’","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~",];
 
   let numOpt = 0;
 
