@@ -1,5 +1,12 @@
 "use strict";
 
+const btnGenerate = document.querySelector(".generate");
+const inputLength = document.querySelector(".pw.length");
+const pDisplay = document.querySelector(".display");
+console.log(btnGenerate);
+console.log(inputLength);
+console.log(pDisplay);
+
 function generatePassword(pwLong = 16) {
   let newPassword;
   let passwordTemplate;
@@ -33,6 +40,7 @@ function generatePassword(pwLong = 16) {
     .join("");
 
   console.log(newPassword);
+  return newPassword;
 }
 
 function loopString(arr, num) {
@@ -45,4 +53,9 @@ function loopString(arr, num) {
   return tmpPart;
 }
 
-generatePassword(undefined);
+btnGenerate.addEventListener("click", () => {
+  console.log("Test");
+  console.log(inputLength.value);
+  let pwDisplay = generatePassword(inputLength.value || undefined);
+  pDisplay.textContent = pwDisplay;
+});
