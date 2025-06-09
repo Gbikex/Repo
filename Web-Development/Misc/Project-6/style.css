@@ -1,3 +1,13 @@
+:root {
+  --color-primary: #afe7e0;
+  --color-secondary: #ffd63a;
+  --color-text-primary: #d37116;
+  --color-text-secondary: #f75a5a;
+}
 body {
-  background-color: antiquewhite;
+  background-color: var(--color-primary);
+}
+
+h1 {
+  color: var(--color-text-primary);
 }
