@@ -36,22 +36,29 @@ const playGame = function (pMove, cMove) {
   console.log(`Computer move is ${cMove}`);
 
   //Player win
-  if (cMove === gameMoves[0] && pMove === gameMoves[2]) {
+  if (pMove === gameMoves[0] && cMove === gameMoves[2]) {
+    console.log(`1 - ${gameMoves[0]} - ${gameMoves[2]}`);
     return gameMessages.playerRound;
-  } else if (cMove === gameMoves[1] && pMove === gameMoves[0]) {
+  } else if (pMove === gameMoves[1] && cMove === gameMoves[0]) {
+    console.log(`2 - ${gameMoves[1]} - ${gameMoves[0]}`);
     return gameMessages.playerRound;
-  } else if (cMove === gameMoves[2] && pMove === gameMoves[1]) {
+  } else if (pMove === gameMoves[2] && cMove === gameMoves[1]) {
+    console.log(`3 - ${gameMoves[2]} - ${gameMoves[1]}`);
     return gameMessages.playerRound;
     //Computer win
-  } else if (cMove === gameMoves[2] && pMove === gameMoves[0]) {
+  } else if (pMove === gameMoves[2] && cMove === gameMoves[0]) {
+    console.log(`4 - ${gameMoves[2]} - ${gameMoves[0]}`);
     return gameMessages.computerRound;
-  } else if (cMove === gameMoves[0] && pMove === gameMoves[1]) {
+  } else if (pMove === gameMoves[0] && cMove === gameMoves[1]) {
+    console.log(`5 - ${gameMoves[0]} - ${gameMoves[1]}`);
     return gameMessages.computerRound;
-  } else if (cMove === gameMoves[1] && pMove === gameMoves[2]) {
+  } else if (pMove === gameMoves[1] && cMove === gameMoves[2]) {
+    console.log(`6 - ${gameMoves[1]} - ${gameMoves[2]}`);
     return gameMessages.computerRound;
   }
   //Draw
   else {
+    console.log(`Draw`);
     return gameMessages.draw;
   }
 };
