@@ -1,14 +1,25 @@
 "use strict";
 
-const playerMove = 1;
+//const playerMove = 1;
 const gameMoves = ["Rock", "Paper", "Scissor"];
 const gameMessages = {
   playerRound: "Player win the round",
+  playerMove: "Player choose:",
   playerWin: "Player won the game",
   computerRound: "Computer win the round",
+  computerMove: "Computer choose",
   computerWin: "Computer won the game",
   draw: "The round is draw",
 };
+let playerScore = 0;
+let computerScore = 0;
+
+const btnSubmit = document.querySelector(".btn--submit");
+const movePlayer = document.querySelector(".game--response_player");
+const moveComputer = document.querySelector(".game--response_computer");
+const gameResponse = document.querySelector(".game--response_response");
+console.log(movePlayer, moveComputer, gameResponse);
+console.log(btnSubmit);
 
 const randomMoveNumber = function () {
   const randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -64,9 +75,26 @@ const playGame = function (pMove, cMove) {
 };
 //console.log(randomMoveNumber());
 //console.log(randomMoveTranslate(randomMoveNumber()));
-console.log(
-  playGame(
+//console.log(
+//  playGame(
+//    randomMoveTranslate(playerMove),
+//    randomMoveTranslate(randomMoveNumber())
+//  )
+//);
+
+btnSubmit.addEventListener("click", function () {
+  const playerMove = Number(document.getElementById("player--move").value);
+  const computerMove = randomMoveNumber();
+  const rpsGame = playGame(
     randomMoveTranslate(playerMove),
-    randomMoveTranslate(randomMoveNumber())
-  )
-);
+    randomMoveTranslate(computerMove)
+  );
+
+  movePlayer.textContent = `${gameMessages.playerMove} ${randomMoveTranslate(
+    playerMove
+  )}`;
+  moveComputer.textContent = `${
+    gameMessages.computerMove
+  } ${randomMoveTranslate(computerMove)}`;
+  gameResponse.textContent = rpsGame;
+});
