@@ -7,7 +7,21 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Rock-Paper-Scissors</h1>
+    <div class="body--wrapper">
+      <h1>Rock-Paper-Scissors</h1>
+      <label for="player--move">Pick a move:</label>
+      <select name="player--move" id="player--move">
+        <option value="1">Rock</option>
+        <option value="2">Paper</option>
+        <option value="3">Scissor</option>
+      </select>
+      <button class="btn--submit">Submit</button>
+    </div>
+    <div class="game--response">
+      <p class="game--response_player"></p>
+      <p class="game--response_computer"></p>
+      <p class="game--response_response"></p>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
