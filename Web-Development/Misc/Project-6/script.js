@@ -11,14 +11,28 @@ const gameMessages = {
   computerWin: "Computer won the game",
   draw: "The round is draw",
 };
-let playerScore = 0;
+let playerScore = 1;
 let computerScore = 0;
 
-const btnSubmit = document.querySelector(".btn--submit");
+const btnSubmit = document.querySelector(".btn--play");
+const btnReset = document.querySelector(".btn--reset");
 const movePlayer = document.querySelector(".game--response_player");
 const moveComputer = document.querySelector(".game--response_computer");
 const gameResponse = document.querySelector(".game--response_response");
-console.log(movePlayer, moveComputer, gameResponse);
+const playerGameScore = document.querySelector(".game--score-player");
+const computerGameScore = document.querySelector(".game--score-computer");
+const scoreDiv = document.querySelector(".game--score");
+
+playerGameScore.textContent = playerScore;
+computerGameScore.textContent = computerScore;
+
+console.log(
+  movePlayer,
+  moveComputer,
+  gameResponse,
+  playerGameScore,
+  computerGameScore
+);
 console.log(btnSubmit);
 
 const randomMoveNumber = function () {
@@ -97,4 +111,10 @@ btnSubmit.addEventListener("click", function () {
     gameMessages.computerMove
   } ${randomMoveTranslate(computerMove)}`;
   gameResponse.textContent = rpsGame;
+
+  if (playerScore > 0 || computerScore > 0) {
+    scoreDiv.style.display = "block";
+  } else {
+    console.log("eh");
+  }
 });
