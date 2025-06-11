@@ -11,3 +11,11 @@ body {
 h1 {
   color: var(--color-text-primary);
 }
+
+.game--score {
+  display: none;
+}
+
+.game--response {
+  display: none;
+}
