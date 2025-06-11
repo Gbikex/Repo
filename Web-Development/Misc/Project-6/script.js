@@ -1,20 +1,21 @@
 "use strict";
 
-//const playerMove = 1;
 const gameMoves = ["Rock", "Paper", "Scissor"];
 const gameMessages = {
   playerRound: "Player win the round",
   playerMove: "Player choose:",
-  playerWin: "Player won the game",
+  playerWin: "Player won the game!",
   computerRound: "Computer win the round",
   computerMove: "Computer choose",
-  computerWin: "Computer won the game",
-  draw: "The round is draw",
+  computerWin: "Computer won the game!",
+  drawRound: "The round is draw",
+  drawGame: "We have two winners!",
 };
 let playerScore = 0;
 let computerScore = 0;
+const gameWinScore = 5;
 
-const btnSubmit = document.querySelector(".btn--play");
+const btnPlay = document.querySelector(".btn--play");
 const btnReset = document.querySelector(".btn--reset");
 const movePlayer = document.querySelector(".game--response_player");
 const moveComputer = document.querySelector(".game--response_computer");
@@ -23,15 +24,17 @@ const playerGameScore = document.querySelector(".game--score-player");
 const computerGameScore = document.querySelector(".game--score-computer");
 const scoreDiv = document.querySelector(".game--score");
 const responseDiv = document.querySelector(".game--response");
+const winner = document.querySelector(".game--response_winner");
 
 console.log(
   movePlayer,
   moveComputer,
   gameResponse,
   playerGameScore,
-  computerGameScore
+  computerGameScore,
+  winner
 );
-console.log(btnSubmit);
+console.log(btnPlay);
 
 const randomMoveNumber = function () {
   const randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -90,19 +93,27 @@ const playGame = function (pMove, cMove) {
     console.log(`Draw`);
     computerScore++;
     playerScore++;
-    return gameMessages.draw;
+    return gameMessages.drawRound;
   }
 };
-//console.log(randomMoveNumber());
-//console.log(randomMoveTranslate(randomMoveNumber()));
-//console.log(
-//  playGame(
-//    randomMoveTranslate(playerMove),
-//    randomMoveTranslate(randomMoveNumber())
-//  )
-//);
 
-btnSubmit.addEventListener("click", function () {
+const isGameOn = function (pScore, cScore) {
+  console.log(pScore, cScore);
+  if (Number(pScore) === gameWinScore || Number(cScore) === gameWinScore) {
+    console.log("end");
+    btnPlay.disabled = true;
+  }
+
+  if (Number(pScore) === gameWinScore && Number(cScore) === gameWinScore) {
+    winner.textContent = gameMessages.drawGame;
+  } else if (Number(pScore) === gameWinScore) {
+    winner.textContent = gameMessages.playerWin;
+  } else if (Number(cScore) === gameWinScore) {
+    winner.textContent = gameMessages.computerWin;
+  }
+};
+
+btnPlay.addEventListener("click", function () {
   responseDiv.style.display = "block";
   const playerMove = Number(document.getElementById("player--move").value);
   const computerMove = randomMoveNumber();
@@ -113,6 +124,8 @@ btnSubmit.addEventListener("click", function () {
 
   playerGameScore.textContent = playerScore;
   computerGameScore.textContent = computerScore;
+
+  isGameOn(playerGameScore.textContent, computerGameScore.textContent);
 
   movePlayer.textContent = `${gameMessages.playerMove} ${randomMoveTranslate(
     playerMove
@@ -135,4 +148,6 @@ btnReset.addEventListener("click", function () {
   computerGameScore.textContent = 0;
   responseDiv.style.display = "none";
   scoreDiv.style.display = "none";
+  btnPlay.disabled = false;
+  winner.textContent = "";
 });
