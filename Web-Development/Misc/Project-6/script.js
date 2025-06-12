@@ -105,16 +105,24 @@ const isGameOn = function (pScore, cScore) {
   }
 
   if (Number(pScore) === gameWinScore && Number(cScore) === gameWinScore) {
-    winner.textContent = gameMessages.drawGame;
     playerChoice.disabled = true;
+    winner.textContent = gameMessages.drawGame;
+    winner.style.color = "var(--color-text-draw)";
   } else if (Number(pScore) === gameWinScore) {
     playerChoice.disabled = true;
     winner.textContent = gameMessages.playerWin;
+    winner.style.color = "var(--color-text-win)";
+    console.log(winner.style, winner.style);
   } else if (Number(cScore) === gameWinScore) {
     playerChoice.disabled = true;
     winner.textContent = gameMessages.computerWin;
+    winner.style.color = "var(--color-text-win)";
+
+    console.log(winner.style, winner.value);
   }
 };
+
+btnReset.style.display = "none";
 
 btnPlay.addEventListener("click", function () {
   responseDiv.style.display = "block";
@@ -127,6 +135,8 @@ btnPlay.addEventListener("click", function () {
 
   playerGameScore.textContent = playerScore;
   computerGameScore.textContent = computerScore;
+
+  btnReset.style.display = "block";
 
   isGameOn(playerGameScore.textContent, computerGameScore.textContent);
 
@@ -153,5 +163,6 @@ btnReset.addEventListener("click", function () {
   scoreDiv.style.display = "none";
   btnPlay.disabled = false;
   playerChoice.disabled = false;
+  btnReset.style.display = "none";
   winner.textContent = "";
 });
