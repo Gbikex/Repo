@@ -25,6 +25,7 @@ const computerGameScore = document.querySelector(".game--score-computer");
 const scoreDiv = document.querySelector(".game--score");
 const responseDiv = document.querySelector(".game--response");
 const winner = document.querySelector(".game--response_winner");
+const playerChoice = document.getElementById("player--move");
 
 console.log(
   movePlayer,
@@ -32,7 +33,8 @@ console.log(
   gameResponse,
   playerGameScore,
   computerGameScore,
-  winner
+  winner,
+  playerChoice
 );
 console.log(btnPlay);
 
@@ -54,8 +56,6 @@ const randomMoveTranslate = function (randomNumber) {
       return "Error invalid number";
   }
 };
-
-//const gameMoves = ["Rock", "Paper", "Scissor"];
 
 const playGame = function (pMove, cMove) {
   console.log(`Player move is ${pMove}`);
@@ -106,16 +106,19 @@ const isGameOn = function (pScore, cScore) {
 
   if (Number(pScore) === gameWinScore && Number(cScore) === gameWinScore) {
     winner.textContent = gameMessages.drawGame;
+    playerChoice.disabled = true;
   } else if (Number(pScore) === gameWinScore) {
+    playerChoice.disabled = true;
     winner.textContent = gameMessages.playerWin;
   } else if (Number(cScore) === gameWinScore) {
+    playerChoice.disabled = true;
     winner.textContent = gameMessages.computerWin;
   }
 };
 
 btnPlay.addEventListener("click", function () {
   responseDiv.style.display = "block";
-  const playerMove = Number(document.getElementById("player--move").value);
+  const playerMove = Number(playerChoice.value);
   const computerMove = randomMoveNumber();
   const rpsGame = playGame(
     randomMoveTranslate(playerMove),
@@ -149,5 +152,6 @@ btnReset.addEventListener("click", function () {
   responseDiv.style.display = "none";
   scoreDiv.style.display = "none";
   btnPlay.disabled = false;
+  playerChoice.disabled = false;
   winner.textContent = "";
 });
