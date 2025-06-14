@@ -3,14 +3,17 @@
 const gameMoves = ["Rock", "Paper", "Scissor"];
 const gameMessages = {
   playerRound: "Player win the round",
+  playerScoreText: "Player score:",
   playerMove: "Player choose:",
   playerWin: "Player won the game!",
   computerRound: "Computer win the round",
+  computerScoreText: "Computer choose:",
   computerMove: "Computer choose",
   computerWin: "Computer won the game!",
   drawRound: "The round is draw",
   drawGame: "We have two winners!",
 };
+
 let playerScore = 0;
 let computerScore = 0;
 const gameWinScore = 5;
@@ -26,6 +29,8 @@ const scoreDiv = document.querySelector(".game--score");
 const responseDiv = document.querySelector(".game--response");
 const winner = document.querySelector(".game--response_winner");
 const playerChoice = document.getElementById("player--move");
+const playerScoreMSG = document.querySelector(".game--score-player-text");
+const computerScoreMSG = document.querySelector(".game--score-computer-text");
 
 console.log(
   movePlayer,
@@ -34,7 +39,9 @@ console.log(
   playerGameScore,
   computerGameScore,
   winner,
-  playerChoice
+  playerChoice,
+  playerScoreMSG,
+  computerScoreMSG
 );
 console.log(btnPlay);
 
@@ -133,6 +140,8 @@ btnPlay.addEventListener("click", function () {
     randomMoveTranslate(computerMove)
   );
 
+  playerScoreMSG.textContent = gameMessages.playerScoreText;
+  computerScoreMSG.textContent = gameMessages.computerScoreText;
   playerGameScore.textContent = playerScore;
   computerGameScore.textContent = computerScore;
 
@@ -165,4 +174,6 @@ btnReset.addEventListener("click", function () {
   playerChoice.disabled = false;
   btnReset.style.display = "none";
   winner.textContent = "";
+  playerScoreMSG.textContent = "";
+  computerScoreMSG.textContent = "";
 });
