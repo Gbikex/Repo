@@ -7,27 +7,44 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="body--wrapper">
-      <h1>Rock-Paper-Scissors</h1>
-      <label for="player--move">Pick a move:</label>
-      <select name="player--move" id="player--move">
-        <option value="1">Rock</option>
-        <option value="2">Paper</option>
-        <option value="3">Scissor</option>
-      </select>
-      <button class="btn--play">Play</button>
-      <button class="btn--reset">Reset</button>
+    <!---->
+    <div class="rpc--version-one">
+      <!---->
+      <div class="head--wrapper">
+        <h1>Rock-Paper-Scissors</h1>
+        <label for="player--move">Pick a move:</label>
+        <select name="player--move" id="player--move">
+          <option value="1">Rock</option>
+          <option value="2">Paper</option>
+          <option value="3">Scissor</option>
+        </select>
+        <button class="btn--play">Play</button>
+        <button class="btn--reset">Reset</button>
+      </div>
+      <!---->
+      <div class="game--response-wrapper">
+        <div class="test">
+          <div class="game--score--text">
+            <p class="game--score-player-text"></p>
+            <p class="game--score-computer-text"></p>
+          </div>
+          <!---->
+          <div class="game--score">
+            <p class="game--score-player"></p>
+            <p class="game--score-computer"></p>
+          </div>
+        </div>
+        <!---->
+        <div class="game--response">
+          <p class="game--response_winner"></p>
+          <p class="game--response_player"></p>
+          <p class="game--response_computer"></p>
+          <p class="game--response_response"></p>
+        </div>
+        <!---->
+      </div>
     </div>
-    <div class="game--score">
-      <p class="game--score-player"></p>
-      <p class="game--score-computer"></p>
-    </div>
-    <div class="game--response">
-      <p class="game--response_winner"></p>
-      <p class="game--response_player"></p>
-      <p class="game--response_computer"></p>
-      <p class="game--response_response"></p>
-    </div>
+    <!---->
     <script src="script.js"></script>
   </body>
 </html>
