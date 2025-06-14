@@ -8,7 +8,7 @@ const gameMessages = {
   playerWin: "Player won the game!",
   computerRound: "Computer win the round",
   computerScoreText: "Computer choose:",
-  computerMove: "Computer choose",
+  computerMove: "Computer choose:",
   computerWin: "Computer won the game!",
   drawRound: "The round is draw",
   drawGame: "We have two winners!",
@@ -114,16 +114,16 @@ const isGameOn = function (pScore, cScore) {
   if (Number(pScore) === gameWinScore && Number(cScore) === gameWinScore) {
     playerChoice.disabled = true;
     winner.textContent = gameMessages.drawGame;
-    winner.style.color = "var(--color-text-draw)";
+    winner.style.color = "var(--color-rps-one-winner)";
   } else if (Number(pScore) === gameWinScore) {
     playerChoice.disabled = true;
     winner.textContent = gameMessages.playerWin;
-    winner.style.color = "var(--color-text-win)";
+    winner.style.color = "var(--color-rps-one-winner)";
     console.log(winner.style, winner.style);
   } else if (Number(cScore) === gameWinScore) {
     playerChoice.disabled = true;
     winner.textContent = gameMessages.computerWin;
-    winner.style.color = "var(--color-text-win)";
+    winner.style.color = "var(--color-rps-one-winner)";
 
     console.log(winner.style, winner.value);
   }
