@@ -16,6 +16,30 @@ h1 {
   color: var(--color-text-primary);
 }
 
+.rpc--version-one {
+  height: 50vh;
+}
+
+.head--wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game--response-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.test {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+}
+
 .game--score {
   display: none;
 }
