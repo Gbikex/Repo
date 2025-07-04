@@ -12,7 +12,12 @@ const responseMsg = {
 };
 
 class PasswordGenerate {
-  //pwLong = 16;
+  // prettier-ignore
+  #charList = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",];
+  #numList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  // prettier-ignore
+  #symList = [" ","!","”","#","$","%","&","’","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~",];
+
   constructor(pwLong) {
     this.pwLong = pwLong;
 
@@ -61,12 +66,6 @@ class PasswordGenerate {
     let newPassword;
     let passwordTemplate;
 
-    // prettier-ignore
-    const charList = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-    const numList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-    // prettier-ignore
-    const symList = [" ","!","”","#","$","%","&","’","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~",];
-
     let numOpt = 0;
 
     this.pwLong % 3 === 0
@@ -80,9 +79,9 @@ class PasswordGenerate {
 
     console.log(charLength, numLength, symLength);
 
-    passwordTemplate = this._loopString(charList, charLength);
-    passwordTemplate += this._loopString(numList, numLength);
-    passwordTemplate += this._loopString(symList, symLength);
+    passwordTemplate = this._loopString(this.#charList, charLength);
+    passwordTemplate += this._loopString(this.#numList, numLength);
+    passwordTemplate += this._loopString(this.#symList, symLength);
 
     console.log(`Template string: ${passwordTemplate}`);
 
