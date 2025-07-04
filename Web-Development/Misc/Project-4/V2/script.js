@@ -1,51 +1,49 @@
 "use strict";
 
-const btnGenerate = document.querySelector(".generate");
-const btnReset = document.querySelector(".reset");
+const btnGenerate = document.querySelector(".btn--generate");
+const btnReset = document.querySelector(".btn--reset");
 const btnCopy = document.createElement("button");
 const btnCopyText = document.createTextNode("Copy");
-let inputLength = document.querySelector(".pw.length");
+let inputLength = document.querySelector(".input--length");
 let pDisplay = document.querySelector(".display.pw");
 const pMessage = document.querySelector(".display.msg");
 const responseMsg = {
   genPw: "Here is your password:",
 };
 
-btnCopy.addEventListener("click", () => {
-  console.log("Copy");
-  let pwToCopy = document.querySelector(".display.pw").textContent;
-  pwToCopy = pwToCopy.replace("Copy", "");
-  navigator.clipboard.writeText(pwToCopy);
-  console.log(pwToCopy);
-});
-
-btnReset.addEventListener("click", () => {
-  pMessage.textContent = "";
-  pDisplay.textContent = "";
-  inputLength.value = "";
-});
-
 class PasswordGenerate {
   //pwLong = 16;
   constructor(pwLong) {
     this.pwLong = pwLong;
 
-    this._loopString();
-
+    //Generates password
     btnGenerate.addEventListener("click", () => {
-      console.log("Test");
-      this._generatePassword();
-      /*
-      console.log("Test");
-      console.log(inputLength.value);
-      let pwDisplay = _generatePassword(inputLength.value || undefined).bind(
-        this
-      );
+      console.log("Generated PW");
+      console.log(`Input number:${inputLength.value}`);
+
+      const value = inputLength.value;
+      console.log(`This is what i need ${value}`);
+
       pMessage.textContent = responseMsg.genPw;
-      pDisplay.textContent = pwDisplay;
+      pDisplay.textContent = this._generatePassword();
       btnCopy.appendChild(btnCopyText);
       pDisplay.appendChild(btnCopy);
-      */
+    });
+
+    //Reset page
+    btnReset.addEventListener("click", () => {
+      pMessage.textContent = "";
+      pDisplay.textContent = "";
+      inputLength.value = "";
+    });
+
+    //Copy PW to clipboard
+    btnCopy.addEventListener("click", () => {
+      console.log("Copy");
+      let pwToCopy = document.querySelector(".display.pw").textContent;
+      pwToCopy = pwToCopy.replace("Copy", "");
+      navigator.clipboard.writeText(pwToCopy);
+      console.log(pwToCopy);
     });
   }
 
@@ -59,7 +57,7 @@ class PasswordGenerate {
     return tmpPart;
   }
 
-  _generatePassword() {
+  _generatePassword(pwLong) {
     let newPassword;
     let passwordTemplate;
 
