@@ -29,7 +29,7 @@ class GeneratePassword {
 
   /**
    * Returns random index from the three arrays (character,numbers,symbols) to create the random new set of characters for the password
-   * @param {*} pInput can be character,number or symbol private elements of the class
+   * @param {Private field} pInput can be character,number or symbol private elements of the class
    */
   generateRandomIndex(pInput) {
     console.log(Math.floor(Math.random() * pInput.length));
@@ -50,8 +50,18 @@ class GeneratePassword {
     return this.newPassword;
   }
 
+  /**
+   * Returns a the number of the distribution of all characters. General logic if the number cannot be divide by 3 then the logic is 30% Character 30% Numbers 40% Symbols is the distribution of the chunks
+   * @param {Number} pLength user input of the length of the generated password
+   */
+  generateCharacterDistribution(pLength) {
+    console.log(pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3 - 1));
+  }
+
   printVariables() {
+    console.log("-- Variable print --");
     console.log(this.newPassword);
+    console.log("-- Variable print --");
   }
 }
 
