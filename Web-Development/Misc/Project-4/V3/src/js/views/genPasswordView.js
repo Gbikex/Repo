@@ -21,10 +21,24 @@ class GeneratePassword {
     console.log(pLength);
     console.log(this.#characters, this.#characters.length);
 
-    //Generating chunks for the password
-    this.generateChunk(pLength, this.#characters);
-    this.generateChunk(pLength, this.#numbers);
-    this.generateChunk(pLength, this.#symbols);
+    // Generating chunks for the password
+    // Characters
+    this.generateChunk(
+      this.generateCharacterDistribution(pLength),
+      this.#characters
+    );
+    // Numbers
+    this.generateChunk(
+      this.generateCharacterDistribution(pLength),
+      this.#numbers
+    );
+    // Symbols
+    this.generateChunk(
+      this.generateCharacterDistribution(pLength),
+      this.#symbols
+    );
+    // Shuffle
+    this.shuffleChunks();
   }
 
   /**
@@ -55,7 +69,17 @@ class GeneratePassword {
    * @param {Number} pLength user input of the length of the generated password
    */
   generateCharacterDistribution(pLength) {
-    console.log(pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3 - 1));
+    return pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3 - 1);
+  }
+  /**
+   *Shuffle the chunks to generate the random chars for the password
+   * @returns newly generated and shuffled password
+   */
+  shuffleChunks() {
+    const carsToShuffle = this.newPassword.split("");
+    return (this.newPassword = carsToShuffle
+      .sort(() => 0.5 - Math.random())
+      .join(""));
   }
 
   printVariables() {
