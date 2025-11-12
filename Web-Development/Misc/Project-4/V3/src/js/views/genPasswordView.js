@@ -27,6 +27,11 @@ class GeneratePassword {
       this.generateCharacterDistribution(pLength),
       this.#characters
     );
+
+    //Test upper case
+
+    console.log(this.newPassword.toLocaleUpperCase());
+
     // Numbers
     this.generateChunk(
       this.generateCharacterDistribution(pLength),
@@ -43,7 +48,7 @@ class GeneratePassword {
 
   /**
    * Returns random index from the three arrays (character,numbers,symbols) to create the random new set of characters for the password
-   * @param {Private field} pInput can be character,number or symbol private elements of the class
+   * @param {Array} pInput can be character,number or symbol private elements of the class
    */
   generateRandomIndex(pInput) {
     console.log(Math.floor(Math.random() * pInput.length));
@@ -53,7 +58,7 @@ class GeneratePassword {
   /**
    * Returns the newly generated chunk for the build of the password
    * @param {Number} pLength Length of the element
-   * @param {Private field} pElement The chunk that has to be processed
+   * @param {Array} pElement The chunk that has to be processed
    */
   generateChunk(pLength, pElement) {
     for (let i = 0; i <= pLength - 1; i++)
@@ -62,6 +67,23 @@ class GeneratePassword {
       );
     this.newPassword += pElement[this.generateRandomIndex(pElement)];
     return this.newPassword;
+  }
+
+  /**
+   * According the selected number of characters the function randomly generates capital letters. Based on the following logic => floor(characters.length / (characters.length / 2))
+   * @param {Number} pLength length of the string for the loop
+   */
+  generateRandomCapitals(pLength) {
+    let test = "abcd";
+    let test1 = "";
+    const perCapitalLetters = Math.ceil(test.length / 2);
+
+    console.log(
+      "aa",
+      test.split("").map((el) => el)
+    );
+    console.log("random capital", pLength, test, perCapitalLetters, test.at(1));
+    console.log(this.generateRandomIndex("test"));
   }
 
   /**
@@ -77,6 +99,7 @@ class GeneratePassword {
    */
   shuffleChunks() {
     const carsToShuffle = this.newPassword.split("");
+    console.log("test", this.newPassword.split(""));
     return (this.newPassword = carsToShuffle
       .sort(() => 0.5 - Math.random())
       .join(""));
