@@ -21,16 +21,13 @@ class GeneratePassword {
     console.log(pLength);
     console.log(this.#characters, this.#characters.length);
 
-    // Generating chunks for the password
-    // Characters
-    this.generateChunk(
-      this.generateCharacterDistribution(pLength),
-      this.#characters
+    // Characters plus capitalization
+    this.generateRandomCapitals(
+      this.generateChunk(
+        this.generateCharacterDistribution(pLength),
+        this.#characters
+      )
     );
-
-    //Test upper case
-
-    console.log(this.newPassword.toLocaleUpperCase());
 
     // Numbers
     this.generateChunk(
@@ -70,20 +67,15 @@ class GeneratePassword {
   }
 
   /**
-   * According the selected number of characters the function randomly generates capital letters. Based on the following logic => floor(characters.length / (characters.length / 2))
-   * @param {Number} pLength length of the string for the loop
+   * Creates an array from the random generated chunk, checks for array index number if it cannot be divided by two the character is capitalized.
+   * @param {String} pChunk chunk of the generated characters
    */
-  generateRandomCapitals(pLength) {
-    let test = "abcd";
-    let test1 = "";
-    const perCapitalLetters = Math.ceil(test.length / 2);
+  generateRandomCapitals(pChunk) {
+    this.newPassword = [...pChunk]
+      .map((w, i) => (i % 2 === 0 ? w.toUpperCase() : w))
+      .join("");
 
-    console.log(
-      "aa",
-      test.split("").map((el) => el)
-    );
-    console.log("random capital", pLength, test, perCapitalLetters, test.at(1));
-    console.log(this.generateRandomIndex("test"));
+    return this.newPassword;
   }
 
   /**
