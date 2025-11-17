@@ -1,4 +1,6 @@
+"use strict";
 import { CHARACTERS, NUMBERS, SYMBOLS } from "../config";
+import { generateRandomIndex } from "../helper.js";
 
 /**
  * Class that holds all the functions that are necessary to generate a new password upon the selected user options
@@ -44,15 +46,6 @@ class GeneratePassword {
   }
 
   /**
-   * Returns random index from the three arrays (character,numbers,symbols) to create the random new set of characters for the password
-   * @param {Array} pInput can be character,number or symbol private elements of the class
-   */
-  generateRandomIndex(pInput) {
-    console.log(Math.floor(Math.random() * pInput.length));
-    return Math.floor(Math.random() * pInput.length);
-  }
-
-  /**
    * Returns the newly generated chunk for the build of the password
    * @param {Number} pLength Length of the element
    * @param {Array} pElement The chunk that has to be processed
@@ -60,9 +53,9 @@ class GeneratePassword {
   generateChunk(pLength, pElement) {
     for (let i = 0; i <= pLength - 1; i++)
       console.log(
-        (this.newPassword += pElement[this.generateRandomIndex(pElement)])
+        (this.newPassword += pElement[generateRandomIndex(pElement)])
       );
-    this.newPassword += pElement[this.generateRandomIndex(pElement)];
+    this.newPassword += pElement[generateRandomIndex(pElement)];
     return this.newPassword;
   }
 
