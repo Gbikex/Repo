@@ -4,9 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Password generator V3</title>
+    <link rel="stylesheet" href="src/sass/main.scss" />
   </head>
   <body>
-    <p>Password generator</p>
+    <div class="app_ui">
+      <div class="app_gen_pw">
+        <div class="get_password">
+          <p>Password generator</p>
+          <p class="return_pw">Placeholder for the generated PW</p>
+          <button class="gen_pw_btn">Generate PW</button>
+        </div>
+      </div>
+    </div>
     <script type="module" src="src/js/controller.js"></script>
   </body>
 </html>
