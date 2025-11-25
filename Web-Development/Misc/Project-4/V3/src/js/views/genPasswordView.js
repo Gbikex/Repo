@@ -10,11 +10,30 @@ class GeneratePassword {
   #numbers = NUMBERS;
   #symbols = SYMBOLS;
 
+  _parentElement = document.querySelector(".return_pw");
+
   newPassword = "";
+
+  /**
+   * Clears the value of the return msg
+   */
+  clear() {
+    this._parentElement.innerHTML = "";
+  }
 
   gpTest() {
     console.log("genPasswordView");
   }
+
+  /**
+   *
+   */
+  renderPassword() {
+    this._parentElement.innerHTML = "";
+    this.generateNewPassword();
+    this._parentElement.innerHTML = this.newPassword;
+  }
+
   /**
    *  Function returns the newly generated password according the user inputs
    * @param {number} pLength length of the new generated password
@@ -43,6 +62,9 @@ class GeneratePassword {
     );
     // Shuffle
     this.shuffleChunks();
+
+    // Clear
+    //this.clear();
   }
 
   /**
