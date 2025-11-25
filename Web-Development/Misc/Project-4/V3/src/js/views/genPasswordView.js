@@ -11,6 +11,7 @@ class GeneratePassword {
   #symbols = SYMBOLS;
 
   _parentElement = document.querySelector(".return_pw");
+  _inputElement = document.querySelector(".input_pw");
 
   newPassword = "";
 
@@ -26,7 +27,7 @@ class GeneratePassword {
   }
 
   /**
-   *
+   * Wraps and renders the newly generated password
    */
   renderPassword() {
     this._parentElement.innerHTML = "";
@@ -38,7 +39,7 @@ class GeneratePassword {
    *  Function returns the newly generated password according the user inputs
    * @param {number} pLength length of the new generated password
    */
-  generateNewPassword(pLength) {
+  generateNewPassword(pLength = 10) {
     console.log(pLength);
     console.log(this.#characters, this.#characters.length);
 
@@ -49,7 +50,6 @@ class GeneratePassword {
         this.#characters
       )
     );
-
     // Numbers
     this.generateChunk(
       this.generateCharacterDistribution(pLength),
@@ -57,7 +57,7 @@ class GeneratePassword {
     );
     // Symbols
     this.generateChunk(
-      this.generateCharacterDistribution(pLength),
+      this.generateCharacterDistribution(pLength + 1),
       this.#symbols
     );
     // Shuffle
@@ -65,6 +65,7 @@ class GeneratePassword {
 
     // Clear
     //this.clear();
+    return this.newPassword;
   }
 
   /**
@@ -73,7 +74,7 @@ class GeneratePassword {
    * @param {Array} pElement The chunk that has to be processed
    */
   generateChunk(pLength, pElement) {
-    for (let i = 0; i <= pLength - 1; i++)
+    for (let i = 0; i < pLength - 1; i++)
       console.log(
         (this.newPassword += pElement[generateRandomIndex(pElement)])
       );
@@ -98,6 +99,10 @@ class GeneratePassword {
    * @param {Number} pLength user input of the length of the generated password
    */
   generateCharacterDistribution(pLength) {
+    console.log(
+      "SHOW",
+      pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3 - 1)
+    );
     return pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3 - 1);
   }
   /**
