@@ -47,24 +47,29 @@ class GeneratePassword {
     this.generateRandomCapitals(
       this.generateChunk(
         this.generateCharacterDistribution(pLength),
-        this.#characters
+        this.#characters,
+        "C"
       )
     );
     // Numbers
     this.generateChunk(
       this.generateCharacterDistribution(pLength),
-      this.#numbers
+      this.#numbers,
+      "N"
     );
     // Symbols
     this.generateChunk(
-      this.generateCharacterDistribution(pLength + 1),
-      this.#symbols
+      this.generateCharacterDistribution(pLength),
+      this.#symbols,
+      "S"
     );
     // Shuffle
     this.shuffleChunks();
 
     // Clear
     //this.clear();
+    console.log("--- IN GENERATE --");
+    console.log(this.newPassword);
     return this.newPassword;
   }
 
@@ -72,13 +77,21 @@ class GeneratePassword {
    * Returns the newly generated chunk for the build of the password
    * @param {Number} pLength Length of the element
    * @param {Array} pElement The chunk that has to be processed
+   * @param {String} pType In the current logic used for only Symbols
    */
-  generateChunk(pLength, pElement) {
-    for (let i = 0; i < pLength - 1; i++)
-      console.log(
-        (this.newPassword += pElement[generateRandomIndex(pElement)])
-      );
+  generateChunk(pLength, pElement, pType) {
+    // Symbol only
+    if (pType === "S")
+      for (let i = 0; i < 2 * pLength - 1; i++)
+        console.log(
+          (this.newPassword += pElement[generateRandomIndex(pElement)])
+        );
     this.newPassword += pElement[generateRandomIndex(pElement)];
+
+    // All other
+    if (pType === "C" || pType === "N")
+      for (let i = 0; i < pLength - 1; i++)
+        this.newPassword += pElement[generateRandomIndex(pElement)];
     return this.newPassword;
   }
 
@@ -95,15 +108,15 @@ class GeneratePassword {
   }
 
   /**
-   * Returns a the number of the distribution of all characters. General logic if the number cannot be divide by 3 then the logic is 30% Character 30% Numbers 40% Symbols is the distribution of the chunks
+   * Returns a the number of the distribution of all characters. General logic is if the number cannot be divide by 3 then the logic is 30% Character 30% Numbers 40% Symbols is the distribution of the chunks
    * @param {Number} pLength user input of the length of the generated password
    */
   generateCharacterDistribution(pLength) {
     console.log(
       "SHOW",
-      pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3 - 1)
+      pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3)
     );
-    return pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3 - 1);
+    return pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3);
   }
   /**
    *Shuffle the chunks to generate the random chars for the password
