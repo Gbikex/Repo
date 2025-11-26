@@ -9,6 +9,7 @@ class GeneratePassword {
   #characters = CHARACTERS;
   #numbers = NUMBERS;
   #symbols = SYMBOLS;
+  _inputPwLength = 10; // document.querySelector(".input_pw").value;
 
   _parentElement = document.querySelector(".return_pw");
   _inputElement = document.querySelector(".input_pw");
@@ -24,6 +25,7 @@ class GeneratePassword {
 
   gpTest() {
     console.log("genPasswordView");
+    console.log(this._inputPwLength);
   }
 
   /**
@@ -39,27 +41,29 @@ class GeneratePassword {
    *  Function returns the newly generated password according the user inputs
    * @param {number} pLength length of the new generated password
    */
-  generateNewPassword(pLength = 10) {
-    console.log(pLength);
+  generateNewPassword(pLength) {
+    console.log(pLength === undefined ? 10 : pLength);
     console.log(this.#characters, this.#characters.length);
+
+    const pwLength = pLength === undefined ? 10 : pLength;
 
     // Characters plus capitalization
     this.generateRandomCapitals(
       this.generateChunk(
-        this.generateCharacterDistribution(pLength),
+        this.generateCharacterDistribution(pwLength),
         this.#characters,
         "C"
       )
     );
     // Numbers
     this.generateChunk(
-      this.generateCharacterDistribution(pLength),
+      this.generateCharacterDistribution(pwLength),
       this.#numbers,
       "N"
     );
     // Symbols
     this.generateChunk(
-      this.generateCharacterDistribution(pLength),
+      this.generateCharacterDistribution(pwLength),
       this.#symbols,
       "S"
     );
