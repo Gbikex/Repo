@@ -81,17 +81,22 @@ class GeneratePassword {
    */
   generateChunk(pLength, pElement, pType) {
     // Symbol only
-    if (pType === "S")
-      for (let i = 0; i < 2 * pLength - 1; i++)
-        console.log(
-          (this.newPassword += pElement[generateRandomIndex(pElement)])
-        );
-    this.newPassword += pElement[generateRandomIndex(pElement)];
+    if (pType === "S") this.generateChunkLoop(pLength, pElement);
 
     // All other
     if (pType === "C" || pType === "N")
-      for (let i = 0; i < pLength - 1; i++)
-        this.newPassword += pElement[generateRandomIndex(pElement)];
+      this.generateChunkLoop(pLength, pElement);
+    return this.newPassword;
+  }
+  /**
+   * Simple loop function for the chunks to avoid code repetition
+   * @param {Number} pLength Length of the element
+   * @param {Array} pElement The chunk that has to be processed
+   * @returns Generated password chunk
+   */
+  generateChunkLoop(pLength, pElement) {
+    for (let i = 0; i < pLength - 1; i++)
+      this.newPassword += pElement[generateRandomIndex(pElement)];
     return this.newPassword;
   }
 
