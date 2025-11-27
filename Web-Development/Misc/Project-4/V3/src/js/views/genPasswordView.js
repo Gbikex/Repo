@@ -11,16 +11,25 @@ class GeneratePassword {
   #symbols = SYMBOLS;
   _inputPwLength = 10; // document.querySelector(".input_pw").value;
 
-  _parentElement = document.querySelector(".return_pw");
+  _btnElement = document.querySelector(".gen_pw_btn");
+  _returnInput = document.querySelector(".return_pw");
   _inputElement = document.querySelector(".input_pw");
 
   newPassword = "";
+
+  addHandlerPwGen(handler) {
+    this._btnElement.addEventListener("click", function (e) {
+      //e.preventDefault();
+      handler();
+      console.log(this._btnElement.value);
+    });
+  }
 
   /**
    * Clears the value of the return msg
    */
   clear() {
-    this._parentElement.innerHTML = "";
+    this._returnInput.innerHTML = "";
   }
 
   gpTest() {
@@ -32,9 +41,9 @@ class GeneratePassword {
    * Wraps and renders the newly generated password
    */
   renderPassword() {
-    this._parentElement.innerHTML = "";
+    this._returnInput.innerHTML = "";
     this.generateNewPassword();
-    this._parentElement.innerHTML = this.newPassword;
+    this._returnInput.innerHTML = this.newPassword;
   }
 
   /**
