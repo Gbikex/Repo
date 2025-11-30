@@ -1,5 +1,5 @@
 "use strict";
-import { CHARACTERS, NUMBERS, SYMBOLS } from "../config";
+import { CHARACTERS, NUMBERS, SYMBOLS, MINLENGTH } from "../config";
 import { generateRandomIndex } from "../helper.js";
 
 /**
@@ -34,7 +34,7 @@ class GeneratePassword {
     console.log(typeof this._inputElement.value);
     this._returnInput.innerHTML = "";
 
-    if (this._inputElement.value < 10) return;
+    if (this._inputElement.value < MINLENGTH) return;
 
     this.generateNewPassword(this._inputElement.value);
     this._returnInput.innerHTML = this.newPassword;
