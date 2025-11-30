@@ -26,13 +26,6 @@ class GeneratePassword {
   }
 
   /**
-   * Clears the value of the return msg
-   */
-  clear() {
-    this._returnInput.innerHTML = "";
-  }
-
-  /**
    * Wraps and renders the newly generated password
    */
   renderPassword() {
