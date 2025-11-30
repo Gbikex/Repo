@@ -21,7 +21,6 @@ class GeneratePassword {
     this._btnElement.addEventListener("click", function (e) {
       e.preventDefault();
       handler();
-      console.log(this._inputElement.value);
     });
   }
 
@@ -29,8 +28,9 @@ class GeneratePassword {
    * Wraps and renders the newly generated password
    */
   renderPassword() {
+    console.log(typeof this._inputElement.value);
     this._returnInput.innerHTML = "";
-    this.generateNewPassword();
+    this.generateNewPassword(this._inputElement.value);
     this._returnInput.innerHTML = this.newPassword;
     this.newPassword = "";
   }
@@ -40,10 +40,10 @@ class GeneratePassword {
    * @param {number} pLength length of the new generated password
    */
   generateNewPassword(pLength) {
-    console.log(pLength === undefined ? 10 : pLength);
+    console.log(pLength === undefined || !pLength ? 10 : pLength);
     console.log(this.#characters, this.#characters.length);
 
-    const pwLength = pLength === undefined ? 10 : pLength;
+    const pwLength = pLength === undefined || !pLength ? 10 : pLength;
 
     // Characters plus capitalization
     this.generateRandomCapitals(
