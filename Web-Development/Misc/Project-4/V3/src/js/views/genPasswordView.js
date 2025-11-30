@@ -19,9 +19,9 @@ class GeneratePassword {
 
   addHandlerPwGen(handler) {
     this._btnElement.addEventListener("click", function (e) {
-      //e.preventDefault();
+      e.preventDefault();
       handler();
-      console.log(this._btnElement.value);
+      console.log(this._inputElement.value);
     });
   }
 
@@ -32,11 +32,6 @@ class GeneratePassword {
     this._returnInput.innerHTML = "";
   }
 
-  gpTest() {
-    console.log("genPasswordView");
-    console.log(this._inputPwLength);
-  }
-
   /**
    * Wraps and renders the newly generated password
    */
@@ -44,6 +39,7 @@ class GeneratePassword {
     this._returnInput.innerHTML = "";
     this.generateNewPassword();
     this._returnInput.innerHTML = this.newPassword;
+    this.newPassword = "";
   }
 
   /**
