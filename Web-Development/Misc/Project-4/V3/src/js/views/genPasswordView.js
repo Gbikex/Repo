@@ -9,7 +9,6 @@ class GeneratePassword {
   #characters = CHARACTERS;
   #numbers = NUMBERS;
   #symbols = SYMBOLS;
-  _inputPwLength = 10; // document.querySelector(".input_pw").value;
 
   _btnElement = document.querySelector(".gen_pw_btn");
   _returnInput = document.querySelector(".return_pw");
@@ -17,6 +16,10 @@ class GeneratePassword {
 
   newPassword = "";
 
+  /**
+   * Handles the call action
+   * @param {Function} Function is expected to be called
+   */
   addHandlerPwGen(handler) {
     this._btnElement.addEventListener("click", function (e) {
       e.preventDefault();
@@ -30,6 +33,9 @@ class GeneratePassword {
   renderPassword() {
     console.log(typeof this._inputElement.value);
     this._returnInput.innerHTML = "";
+
+    if (this._inputElement.value < 10) return;
+
     this.generateNewPassword(this._inputElement.value);
     this._returnInput.innerHTML = this.newPassword;
     this.newPassword = "";
