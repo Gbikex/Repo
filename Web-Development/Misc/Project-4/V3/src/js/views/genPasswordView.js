@@ -1,6 +1,7 @@
 "use strict";
 import { CHARACTERS, NUMBERS, SYMBOLS, MINLENGTH } from "../config";
 import { generateRandomIndex } from "../helper.js";
+import { state } from "../model.js";
 
 /**
  * Class that holds all the functions that are necessary to generate a new password upon the selected user options
@@ -13,6 +14,7 @@ class GeneratePassword {
   _btnElement = document.querySelector(".gen_pw_btn");
   _returnInput = document.querySelector(".return_pw");
   _inputElement = document.querySelector(".input_pw");
+  _returnMessage = document.querySelector(".return_msg");
 
   newPassword = "";
 
@@ -38,6 +40,7 @@ class GeneratePassword {
 
     this.generateNewPassword(this._inputElement.value);
     this._returnInput.innerHTML = this.newPassword;
+    this._returnMessage.innerHTML = state.successMsg;
     this.newPassword = "";
   }
 
