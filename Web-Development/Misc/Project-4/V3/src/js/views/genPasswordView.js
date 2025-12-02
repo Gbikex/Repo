@@ -33,7 +33,6 @@ class GeneratePassword {
    * Wraps and renders the newly generated password
    */
   renderPassword() {
-    console.log(typeof this._inputElement.value);
     this._returnInput.innerHTML = "";
 
     if (this._inputElement.value < MINLENGTH) return;
@@ -92,7 +91,8 @@ class GeneratePassword {
    */
   generateChunk(pLength, pElement, pType) {
     // Symbol only
-    if (pType === "S") this.generateChunkLoop(pLength, pElement);
+    if (pType === "S")
+      this.generateChunkLoop(this._inputElement.value - 2 * pLength, pElement);
 
     // All other
     if (pType === "C" || pType === "N")
@@ -106,7 +106,7 @@ class GeneratePassword {
    * @returns Generated password chunk
    */
   generateChunkLoop(pLength, pElement) {
-    for (let i = 0; i < pLength - 1; i++)
+    for (let i = 0; i < pLength; i++)
       this.newPassword += pElement[generateRandomIndex(pElement)];
     return this.newPassword;
   }
@@ -130,9 +130,9 @@ class GeneratePassword {
   generateCharacterDistribution(pLength) {
     console.log(
       "SHOW",
-      pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3)
+      pLength % 3 === 0 ? pLength / 3 : Math.floor(pLength / 3)
     );
-    return pLength % 3 === 0 ? pLength / 3 : Math.ceil(pLength / 3);
+    return pLength % 3 === 0 ? pLength / 3 : Math.floor(pLength / 3);
   }
   /**
    *Shuffle the chunks to generate the random chars for the password
