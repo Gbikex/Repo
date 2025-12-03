@@ -36,22 +36,25 @@ class GeneratePassword {
   clear() {
     this._returnInput.innerHTML = "";
     this.newPassword = "";
+    this._errorMessage.innerHTML = "";
   }
 
   /**
    * Wraps and renders the newly generated password
    */
   renderPassword() {
-    console.log(this._inputElement.value);
+    console.log(typeof this._inputElement.value);
     this.clear();
 
-    if (this._inputElement.value >= MINLENGTH || !this._inputElement.value)
-      this.generateNewPassword(
-        // prettier-ignore
-        !this._inputElement.value  
+    if (this._inputElement.value < MINLENGTH || !this._inputElement.value)
+      return (this._errorMessage.innerHTML = state.incorrectPwLength);
+
+    this.generateNewPassword(
+      // prettier-ignore
+      !this._inputElement.value  
         ? GENERAL_PW_LENGTH 
         : this._inputElement.value
-      );
+    );
     this._returnInput.innerHTML = this.newPassword;
     this._returnMessage.innerHTML = state.successMsg;
   }
