@@ -30,17 +30,24 @@ class GeneratePassword {
   }
 
   /**
+   * Clears the DOM elements before generating new password
+   */
+  clear() {
+    this._returnInput.innerHTML = "";
+    this.newPassword = "";
+  }
+
+  /**
    * Wraps and renders the newly generated password
    */
   renderPassword() {
-    this._returnInput.innerHTML = "";
+    this.clear();
 
     if (this._inputElement.value < MINLENGTH) return;
 
     this.generateNewPassword(this._inputElement.value);
     this._returnInput.innerHTML = this.newPassword;
     this._returnMessage.innerHTML = state.successMsg;
-    this.newPassword = "";
   }
 
   /**
