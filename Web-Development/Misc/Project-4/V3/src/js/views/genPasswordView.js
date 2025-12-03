@@ -1,5 +1,5 @@
-"use strict";
-import { CHARACTERS, NUMBERS, SYMBOLS, MINLENGTH } from "../config";
+// prettier-ignore
+import {CHARACTERS, NUMBERS, SYMBOLS, MINLENGTH, GENERAL_PW_LENGTH,BASE_SYMBOL_LENGTH} from "../config";
 import { generateRandomIndex } from "../helper.js";
 import { state } from "../model.js";
 
@@ -15,6 +15,7 @@ class GeneratePassword {
   _returnInput = document.querySelector(".return_pw");
   _inputElement = document.querySelector(".input_pw");
   _returnMessage = document.querySelector(".return_msg");
+  _errorMessage = document.querySelector(".return_error_msg");
 
   newPassword = "";
 
@@ -41,11 +42,16 @@ class GeneratePassword {
    * Wraps and renders the newly generated password
    */
   renderPassword() {
+    console.log(this._inputElement.value);
     this.clear();
 
-    if (this._inputElement.value < MINLENGTH) return;
-
-    this.generateNewPassword(this._inputElement.value);
+    if (this._inputElement.value >= MINLENGTH || !this._inputElement.value)
+      this.generateNewPassword(
+        // prettier-ignore
+        !this._inputElement.value  
+        ? GENERAL_PW_LENGTH 
+        : this._inputElement.value
+      );
     this._returnInput.innerHTML = this.newPassword;
     this._returnMessage.innerHTML = state.successMsg;
   }
@@ -55,10 +61,15 @@ class GeneratePassword {
    * @param {number} pLength length of the new generated password
    */
   generateNewPassword(pLength) {
-    console.log(pLength === undefined || !pLength ? 10 : pLength);
+    console.log("GENPW");
+    console.log(pLength);
+    console.log(
+      pLength === undefined || !pLength ? GENERAL_PW_LENGTH : pLength
+    );
     console.log(this.#characters, this.#characters.length);
 
-    const pwLength = pLength === undefined || !pLength ? 10 : pLength;
+    const pwLength =
+      pLength === undefined || !pLength ? GENERAL_PW_LENGTH : pLength;
 
     // Characters plus capitalization
     this.generateRandomCapitals(
@@ -99,7 +110,14 @@ class GeneratePassword {
   generateChunk(pLength, pElement, pType) {
     // Symbol only
     if (pType === "S")
-      this.generateChunkLoop(this._inputElement.value - 2 * pLength, pElement);
+      //      this.generateChunkLoop(this._inputElement.value - 2 * pLength, pElement);
+
+      this.generateChunkLoop(
+        !this._inputElement.value
+          ? BASE_SYMBOL_LENGTH
+          : this._inputElement.value - 2 * pLength,
+        pElement
+      );
 
     // All other
     if (pType === "C" || pType === "N")
@@ -137,7 +155,7 @@ class GeneratePassword {
   generateCharacterDistribution(pLength) {
     console.log(
       "SHOW",
-      pLength % 3 === 0 ? pLength / 3 : Math.floor(pLength / 3)
+      pLength % 3 === 0 ? pLength / 3 : Math.floor(pLength / 3, pLength)
     );
     return pLength % 3 === 0 ? pLength / 3 : Math.floor(pLength / 3);
   }
