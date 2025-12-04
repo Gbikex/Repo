@@ -46,7 +46,7 @@ class GeneratePassword {
     console.log(typeof this._inputElement.value);
     this.clear();
 
-    if (this._inputElement.value < MINLENGTH || !this._inputElement.value)
+    if (this._inputElement.value < MINLENGTH && this._inputElement.value)
       return (this._errorMessage.innerHTML = state.incorrectPwLength);
 
     this.generateNewPassword(
