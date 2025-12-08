@@ -2,7 +2,7 @@
 import {CHARACTERS, NUMBERS, SYMBOLS, MINLENGTH, GENERAL_PW_LENGTH,BASE_SYMBOL_LENGTH} from "../config";
 import { generateRandomIndex } from "../helper.js";
 import { state } from "../model.js";
-
+import logView from "./logView.js";
 /**
  * Class that holds all the functions that are necessary to generate a new password upon the selected user options
  */
@@ -49,6 +49,7 @@ class GeneratePassword {
     this._returnInput.innerHTML = "";
     this.newPassword = "";
     this._errorMessage.innerHTML = "";
+    this._returnMessage.innerHTML = "";
   }
 
   /**
@@ -59,7 +60,7 @@ class GeneratePassword {
     this.clear();
 
     if (this._inputElement.value < MINLENGTH && this._inputElement.value)
-      return (this._errorMessage.innerHTML = state.incorrectPwLength);
+      return logView.errorLog(); //(this._errorMessage.innerHTML = state.incorrectPwLength);
 
     this.generateNewPassword(
       // prettier-ignore
