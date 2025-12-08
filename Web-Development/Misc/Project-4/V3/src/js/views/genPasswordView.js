@@ -16,15 +16,27 @@ class GeneratePassword {
   _inputElement = document.querySelector(".input_pw");
   _returnMessage = document.querySelector(".return_msg");
   _errorMessage = document.querySelector(".return_error_msg");
+  _btnReset = document.querySelector(".res_pw_btn");
 
   newPassword = "";
 
   /**
    * Handles the call action
-   * @param {Function} Function is expected to be called
+   * @param {Function} handler is expected to be called
    */
   addHandlerPwGen(handler) {
     this._btnElement.addEventListener("click", function (e) {
+      e.preventDefault();
+      handler();
+    });
+  }
+
+  /**
+   *
+   * @param {Function} handler, to reset interface
+   */
+  addHandlerPwReset(handler) {
+    this._btnReset.addEventListener("click", function (e) {
       e.preventDefault();
       handler();
     });
