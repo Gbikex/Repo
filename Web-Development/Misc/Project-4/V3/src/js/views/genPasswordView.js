@@ -70,7 +70,7 @@ class GeneratePassword {
         : this._inputElement.value
     );
     this._returnInput.innerHTML = this.newPassword;
-    this._returnMessage.innerHTML = state.successMsg;
+    this._returnMessage.innerHTML = state.responses.pwGeneration;
     logView.successLog();
   }
 

@@ -16,7 +16,7 @@ class LogResponses {
    * Failed generation response
    */
   errorLog() {
-    genPasswordView._errorMessage.innerHTML = state.incorrectPwLength;
+    genPasswordView._errorMessage.innerHTML = state.responses.pwMaxLengthMSG;
     this._returnElement.innerHTML = state.log.fail;
   }
 
