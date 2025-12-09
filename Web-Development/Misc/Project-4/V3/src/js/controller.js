@@ -14,6 +14,7 @@ const controlPasswordCopy = function () {
 // Reset interface
 const controlReset = function () {
   generatePasswordView.clear();
+  generatePasswordView._inputElement.value = "";
 };
 
 const init = function () {
