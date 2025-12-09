@@ -9,3 +9,4 @@ export const SYMBOLS = ["§","@","+","!","%","/","=","(",")","?",".",":","_","-"
 export const MINLENGTH = 9;
 export const GENERAL_PW_LENGTH = 10;
 export const BASE_SYMBOL_LENGTH = 4;
+export const TIMEOUT_IN_SEC = 5000;
