@@ -1,6 +1,6 @@
 // prettier-ignore
 import {CHARACTERS, NUMBERS, SYMBOLS, MINLENGTH, GENERAL_PW_LENGTH,BASE_SYMBOL_LENGTH} from "../config";
-import { generateRandomIndex } from "../helper.js";
+import { generateRandomIndex, logTimeout } from "../helper.js";
 import { state } from "../model.js";
 import logView from "./logView.js";
 /**
@@ -50,7 +50,7 @@ class GeneratePassword {
     this.newPassword = "";
     this._errorMessage.innerHTML = "";
     this._returnMessage.innerHTML = "";
-    logView.clearLog();
+    logView.resetLog();
   }
 
   /**
@@ -72,6 +72,8 @@ class GeneratePassword {
     this._returnInput.innerHTML = this.newPassword;
     this._returnMessage.innerHTML = state.responses.pwGeneration;
     logView.successLog();
+    // Remove log message after 5 second
+    logTimeout(logView._returnElement);
   }
 
   /**
