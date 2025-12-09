@@ -18,7 +18,7 @@ class GeneratePassword {
   _errorMessage = document.querySelector(".return_error_msg");
   _btnReset = document.querySelector(".res_pw_btn");
 
-  newPassword = "";
+  newPassword = state.password;
 
   /**
    * Handles the call action
@@ -50,6 +50,7 @@ class GeneratePassword {
     this.newPassword = "";
     this._errorMessage.innerHTML = "";
     this._returnMessage.innerHTML = "";
+    logView.clearLog();
   }
 
   /**
@@ -70,6 +71,7 @@ class GeneratePassword {
     );
     this._returnInput.innerHTML = this.newPassword;
     this._returnMessage.innerHTML = state.successMsg;
+    logView.successLog();
   }
 
   /**
@@ -110,10 +112,6 @@ class GeneratePassword {
     // Shuffle
     this.shuffleChunks();
 
-    // Clear
-    //this.clear();
-    console.log("--- IN GENERATE --");
-    console.log(this.newPassword);
     return this.newPassword;
   }
 

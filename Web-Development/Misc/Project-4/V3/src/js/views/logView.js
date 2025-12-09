@@ -8,7 +8,8 @@ class LogResponses {
    * Successful generation response
    */
   successLog() {
-    this._returnElement = state.log.success;
+    //this._returnElement = state.log.success;
+    this._returnElement.innerHTML = state.log.success;
   }
 
   /**
@@ -16,7 +17,11 @@ class LogResponses {
    */
   errorLog() {
     genPasswordView._errorMessage.innerHTML = state.incorrectPwLength;
-    this._returnElement = state.log.fail;
+    this._returnElement.innerHTML = state.log.fail;
+  }
+
+  clearLog() {
+    this._returnElement.innerHTML = "";
   }
 }
 
