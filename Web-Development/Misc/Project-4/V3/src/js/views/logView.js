@@ -16,11 +16,13 @@ class LogResponses {
   /**
    * Failed generation response
    */
-  errorLog() {
-    genPasswordView._errorMessage.innerHTML = state.responses.pwMaxLengthMSG;
+  errorLog(paramErrorType) {
+    //const { paramErrorType } = state.responses;
+    console.log("heheheehhee");
+    console.log(paramErrorType);
+    genPasswordView._errorMessage.innerHTML = paramErrorType;
     this._returnElement.innerHTML = state.log.fail;
-
-    //TO_DO reset log needs some love
+    this.clearLog();
   }
 
   resetLog() {
