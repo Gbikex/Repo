@@ -1,6 +1,6 @@
 // prettier-ignore
 import {CHARACTERS, NUMBERS, SYMBOLS, MINLENGTH, GENERAL_PW_LENGTH,BASE_SYMBOL_LENGTH, MAX_LENGTH} from "../config";
-import { generateRandomIndex, logTimeout } from "../helper.js";
+import { generateRandomIndex } from "../helper.js";
 import { state } from "../model.js";
 import logView from "./logView.js";
 /**
@@ -17,6 +17,7 @@ class GeneratePassword {
   _returnMessage = document.querySelector(".return_msg");
   _errorMessage = document.querySelector(".return_error_msg");
   _btnReset = document.querySelector(".res_pw_btn");
+  _returnElement = document.querySelector(".return_msg__log");
 
   newPassword = state.password;
 
@@ -50,7 +51,7 @@ class GeneratePassword {
     this.newPassword = "";
     this._errorMessage.innerHTML = "";
     this._returnMessage.innerHTML = "";
-    logView.resetLog();
+    this._returnElement.innerHTML = "";
   }
 
   /**
@@ -61,10 +62,10 @@ class GeneratePassword {
     this.clear();
 
     if (this._inputElement.value < MINLENGTH && this._inputElement.value)
-      return logView.errorLog(state.responses.pwMinLengthMsg); //(this._errorMessage.innerHTML = state.incorrectPwLength);
+      return logView.renderErrorElement(state.responses.pwMinLengthMsg); //(this._errorMessage.innerHTML = state.incorrectPwLength);
 
     if (this._inputElement.value > MAX_LENGTH)
-      return logView.errorLog(state.responses.pwMaxLengthMSG);
+      return logView.renderErrorElement(state.responses.pwMaxLengthMSG);
 
     this.generateNewPassword(
       // prettier-ignore
@@ -74,7 +75,7 @@ class GeneratePassword {
     );
     this._returnInput.innerHTML = this.newPassword;
     this._returnMessage.innerHTML = state.responses.pwGeneration;
-    logView.successLog();
+    logView.renderSuccessElement();
     // Remove log message after 5 second
     //logTimeout(logView._returnElement);
     logView.clearLog();
