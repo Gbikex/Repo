@@ -1,37 +1,34 @@
 import { state } from "../model.js";
 import genPasswordView from "./genPasswordView.js";
-import { logTimeout } from "../helper.js";
+import { resetElement } from "../helper.js";
+import { LOG_ELEMENT_RESET } from "../config.js";
 
-class LogResponses {
+class LogView {
   _returnElement = document.querySelector(".return_msg__log");
 
   /**
-   * Successful generation response
+   * Renders successful password generation
    */
-  successLog() {
-    //this._returnElement = state.log.success;
+  renderSuccessElement() {
     this._returnElement.innerHTML = state.log.success;
   }
 
   /**
-   * Failed generation response
+   * Renders failed generation response
+   * @param {string} paramErrorType
    */
-  errorLog(paramErrorType) {
-    //const { paramErrorType } = state.responses;
-    console.log("heheheehhee");
-    console.log(paramErrorType);
+  renderErrorElement(paramErrorType) {
     genPasswordView._errorMessage.innerHTML = paramErrorType;
     this._returnElement.innerHTML = state.log.fail;
     this.clearLog();
   }
 
-  resetLog() {
-    this._returnElement.innerHTML = "";
-  }
-
+  /**
+   * Clears the dedicated log responses for certain processes
+   */
   clearLog() {
-    logTimeout(this._returnElement);
+    resetElement(this._returnElement, LOG_ELEMENT_RESET);
   }
 }
 
-export default new LogResponses();
+export default new LogView();
