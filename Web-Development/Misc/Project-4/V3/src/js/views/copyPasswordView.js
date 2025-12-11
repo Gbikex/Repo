@@ -14,18 +14,10 @@ class CopyPassword {
   }
 
   /**
-   * Copy the generated password
+   * Copy the generated password to clipboard
    */
   copyPassword() {
     navigator.clipboard.writeText(this._returnInput.innerHTML);
-    console.log("Copy");
-    console.log(this._copyBtn);
-    console.log("!!!!!!!!!!!!!!!!!!!");
-    console.log(this._returnInput.innerHTML);
-  }
-
-  test() {
-    console.log("This is a test");
   }
 }
 
