@@ -1,19 +1,22 @@
-import { TIMEOUT_IN_SEC } from "./config.js";
-
 /**
- * Returns random index from the three arrays (character,numbers,symbols) to create the random new set of characters for the password
- * @param {Array} pInput can be character,number or symbol private elements of the class
+ * Standard function to create random indexes for further processes
+ * @param {Array} pInput
+ * @returns Generated random index
  */
 export const generateRandomIndex = function (pInput) {
-  console.log(Math.floor(Math.random() * pInput.length));
   return Math.floor(Math.random() * pInput.length);
 };
 
-export const logTimeout = function (p) {
-  console.log(p);
+/**
+ * Delays events after a certain seconds on the selected HTML element
+ * @param {String} pElement - Selected element to manipulate
+ * @param {Number} pDelay - Seconds for the delay
+ */
+export const resetElement = function (pElement, pDelay) {
+  clearTimeout();
+
+  console.log(pElement, pDelay);
   setTimeout(() => {
-    console.log("!! - Test timeout print - !!");
-    console.log(p);
-    p.innerHTML = "";
-  }, TIMEOUT_IN_SEC);
+    pElement.innerHTML = "";
+  }, pDelay);
 };
