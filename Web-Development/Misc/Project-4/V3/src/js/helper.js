@@ -13,10 +13,9 @@ export const generateRandomIndex = function (pInput) {
  * @param {Number} pDelay - Seconds for the delay
  */
 export const resetElement = function (pElement, pDelay) {
-  clearTimeout();
-
-  console.log(pElement, pDelay);
-  setTimeout(() => {
+  const timeOutID = setTimeout(() => {
     pElement.innerHTML = "";
   }, pDelay);
+
+  clearTimeout(timeOutID);
 };
