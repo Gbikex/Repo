@@ -1,0 +1,15 @@
+@use "color";
+
+.app_btn {
+  padding: 5px;
+  border-radius: 10px;
+  border-color: color.$app-emphasis-one;
+  font-weight: bold;
+  //background-color: #c9b59c;
+  background-image: linear-gradient(
+    150deg,
+    color.$app-emphasis-one,
+    color.$app-emphasis-two
+  );
+  box-shadow: 1px 1px 0.5px 0px color.$app-shadow-one;
+}
