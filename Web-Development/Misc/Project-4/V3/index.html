@@ -8,25 +8,31 @@
   </head>
   <body>
     <div class="app_ui">
-      <div class="get_password">
-        <div class="return_msg">
-          <a class="return_msg__resp">a</a>
+      <div class="app_ui_password">
+        <!---->
+        <div class="return_log_cont">
+          <a class="return_msg__log"></a>
         </div>
+        <!---->
+        <div class="return_log"></div>
         <p>Password generator</p>
         <div>
           <p class="return_msg"></p>
           <p class="return_error_msg"></p>
-          <p class="return_pw">Placeholder for the generated PW</p>
+          <p class="return_pw"></p>
         </div>
-
+        <!---->
         <input class="input_pw" type="number" placeholder="10" />
-        <div>
-          <button class="gen_pw_btn">Generate PW</button>
-          <button class="res_pw_btn">Reset</button>
+        <!---->
+        <div class="btn_holder">
+          <button class="app_btn gen_pw_btn">Generate PW</button>
+          <button class="app_btn res_pw_btn">Reset</button>
         </div>
-        <button class="copy_pw_btn">Copy PW</button>
+        <button class="app_btn copy_pw_btn">Copy PW</button>
       </div>
+      <!----->
     </div>
+    <!---->
     <script type="module" src="src/js/controller.js"></script>
   </body>
 </html>
