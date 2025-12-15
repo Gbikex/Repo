@@ -3,6 +3,7 @@
 //Main UI
 .app_ui {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   align-items: center;
   justify-content: center;
@@ -10,9 +11,22 @@
 }
 ////
 
+//App information
+.app_info {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  color: color.$app-emphasis-three;
+  width: 500px;
+}
+
+.app_info_p {
+  width: 25px;
+  text-align: center;
+}
+
 //Password generation with all the elements
 .app_ui_password {
-  position: fixed;
   border: 1px color.$app-emphasis-one solid;
   width: 500px;
   height: 500px;
