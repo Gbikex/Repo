@@ -25,6 +25,18 @@
   text-align: center;
 }
 
+//App modal dialog
+.app_info_modal {
+  display: none;
+  top: 20%;
+  right: 20%;
+  width: 550px;
+  height: 550px;
+  position: absolute;
+  background-color: rgba(226, 216, 216, 0.95);
+  border-radius: 5%;
+}
+
 //Password generation with all the elements
 .app_ui_password {
   border: 1px color.$app-emphasis-one solid;
