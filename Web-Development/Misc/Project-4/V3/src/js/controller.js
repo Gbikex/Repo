@@ -1,3 +1,8 @@
+import {
+  MODAL_DISPLAY_VARIABLE,
+  MODAL_DISPLAY_VAL_ON,
+  MODAL_DISPLAY_VAL_OFF,
+} from "./config.js";
 import generatePasswordView from "./views/genPasswordView.js";
 import copyPasswordView from "./views/copyPasswordView.js";
 import getInformationView from "./views/getInformationView.js";
@@ -17,16 +22,27 @@ const controlReset = function () {
   generatePasswordView.clear();
   generatePasswordView._inputElement.value = "";
 };
-// Get info
-const controlGetInfo = function () {
-  getInformationView.test();
+// Open modal dialog
+const controlOpenDialog = function () {
+  getInformationView.changeElement(
+    MODAL_DISPLAY_VARIABLE,
+    MODAL_DISPLAY_VAL_ON
+  );
+};
+// Close dialog
+const controlCloseDialog = function () {
+  getInformationView.changeElement(
+    MODAL_DISPLAY_VARIABLE,
+    MODAL_DISPLAY_VAL_OFF
+  );
 };
 
 const init = function () {
   generatePasswordView.addHandlerPwGen(controlPasswordGeneration);
   copyPasswordView.addHandlerPwCopy(controlPasswordCopy);
   generatePasswordView.addHandlerPwReset(controlReset);
-  getInformationView.addHandlerInfo(controlGetInfo);
+  getInformationView.addHandlerInfoOpen(controlOpenDialog);
+  getInformationView.addHandlerInfoClose(controlCloseDialog);
 };
 
 init();
