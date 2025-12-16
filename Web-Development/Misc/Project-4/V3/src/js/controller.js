@@ -3,6 +3,7 @@ import {
   MODAL_DISPLAY_VAL_ON,
   MODAL_DISPLAY_VAL_OFF,
 } from "./config.js";
+import { changeElement } from "./helper.js";
 import generatePasswordView from "./views/genPasswordView.js";
 import copyPasswordView from "./views/copyPasswordView.js";
 import getInformationView from "./views/getInformationView.js";
@@ -24,17 +25,11 @@ const controlReset = function () {
 };
 // Open modal dialog
 const controlOpenDialog = function () {
-  getInformationView.changeElement(
-    MODAL_DISPLAY_VARIABLE,
-    MODAL_DISPLAY_VAL_ON
-  );
+  changeElement(MODAL_DISPLAY_VARIABLE, MODAL_DISPLAY_VAL_ON);
 };
 // Close dialog
 const controlCloseDialog = function () {
-  getInformationView.changeElement(
-    MODAL_DISPLAY_VARIABLE,
-    MODAL_DISPLAY_VAL_OFF
-  );
+  changeElement(MODAL_DISPLAY_VARIABLE, MODAL_DISPLAY_VAL_OFF);
 };
 
 const init = function () {

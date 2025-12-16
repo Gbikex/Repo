@@ -15,4 +15,4 @@ export const LOG_ELEMENT_RESET = 5000;
 //Changing SASS related global variables
 export const MODAL_DISPLAY_VAL_ON = "block";
 export const MODAL_DISPLAY_VAL_OFF = "none";
-export const MODAL_DISPLAY_VARIABLE = "--displayType";
+export const MODAL_DISPLAY_VARIABLE = "--displayTypeDiv";
