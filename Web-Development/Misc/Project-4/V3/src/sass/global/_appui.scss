@@ -1,7 +1,7 @@
 @use "color";
 
 :root {
-  --displayType: none;
+  --displayTypeDiv: none;
 }
 
 //Main UI
@@ -31,7 +31,7 @@
 
 //App modal dialog
 .app_info_modal {
-  display: var(--displayType);
+  display: var(--displayTypeDiv);
   top: 20%;
   right: 20%;
   width: 550px;
