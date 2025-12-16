@@ -30,3 +30,13 @@ export const resetElement = function (pElement, pDelay) {
 const resetTimeoutID = function () {
   clearTimeout(GlobalTimeOutID);
 };
+
+/**
+ * Changes the variables in the SASS files used for opening and closing the modal dialog by adding or removing display -> block,none
+ * @param {String} pElement --
+ * @param {String} pProperty
+ */
+export const changeElement = function (pVariable, pProperty) {
+  console.log("test");
+  document.documentElement.style.setProperty(pVariable, pProperty);
+};
