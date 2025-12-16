@@ -1,7 +1,8 @@
 import {
   MODAL_DISPLAY_VARIABLE,
-  MODAL_DISPLAY_VAL_ON,
-  MODAL_DISPLAY_VAL_OFF,
+  BTN_COPY_VARIABLE,
+  DISPLAY_VAL_ON,
+  DISPLAY_VAL_OFF,
 } from "./config.js";
 import { changeElement } from "./helper.js";
 import generatePasswordView from "./views/genPasswordView.js";
@@ -13,6 +14,7 @@ console.log("Controller");
 // Generates password
 const controlPasswordGeneration = function () {
   generatePasswordView.renderPassword();
+  changeElement(BTN_COPY_VARIABLE, DISPLAY_VAL_ON);
 };
 // Copy generated password
 const controlPasswordCopy = function () {
@@ -22,14 +24,15 @@ const controlPasswordCopy = function () {
 const controlReset = function () {
   generatePasswordView.clear();
   generatePasswordView._inputElement.value = "";
+  changeElement(BTN_COPY_VARIABLE, DISPLAY_VAL_OFF);
 };
 // Open modal dialog
 const controlOpenDialog = function () {
-  changeElement(MODAL_DISPLAY_VARIABLE, MODAL_DISPLAY_VAL_ON);
+  changeElement(MODAL_DISPLAY_VARIABLE, DISPLAY_VAL_ON);
 };
 // Close dialog
 const controlCloseDialog = function () {
-  changeElement(MODAL_DISPLAY_VARIABLE, MODAL_DISPLAY_VAL_OFF);
+  changeElement(MODAL_DISPLAY_VARIABLE, DISPLAY_VAL_OFF);
 };
 
 const init = function () {
