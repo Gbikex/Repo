@@ -13,12 +13,12 @@ class GeneratePassword {
 
   _btnElement = document.querySelector(".gen_pw_btn");
   _returnInput = document.querySelector(".return_pw");
-  _inputElement = document.querySelector(".input_pw");
   _returnMessage = document.querySelector(".return_msg");
   _errorMessage = document.querySelector(".return_error_msg");
   _btnReset = document.querySelector(".res_pw_btn");
   _returnElement = document.querySelector(".return_msg__log");
 
+  inputElement = document.querySelector(".input_pw");
   newPassword = state.password;
 
   /**
@@ -58,20 +58,19 @@ class GeneratePassword {
    * Wraps and renders the newly generated password
    */
   renderPassword() {
-    console.log(typeof this._inputElement.value);
     this.clear();
 
-    if (this._inputElement.value < MINLENGTH && this._inputElement.value)
+    if (this.inputElement.value < MINLENGTH && this.inputElement.value)
       return logView.renderErrorElement(state.responses.pwMinLengthMsg); //(this._errorMessage.innerHTML = state.incorrectPwLength);
 
-    if (this._inputElement.value > MAX_LENGTH)
+    if (this.inputElement.value > MAX_LENGTH)
       return logView.renderErrorElement(state.responses.pwMaxLengthMSG);
 
     this.generateNewPassword(
       // prettier-ignore
-      !this._inputElement.value  
+      !this.inputElement.value  
         ? GENERAL_PW_LENGTH 
-        : this._inputElement.value
+        : this.inputElement.value
     );
     this._returnInput.innerHTML = this.newPassword;
     this._returnMessage.innerHTML = state.responses.pwGeneration;
@@ -79,6 +78,10 @@ class GeneratePassword {
     // Remove log message after 5 second
     //logTimeout(logView._returnElement);
     logView.clearLog();
+  }
+
+  isGenPwError() {
+    if (!this._errorMessage.innerHTML) return "Error";
   }
 
   /**
@@ -134,9 +137,9 @@ class GeneratePassword {
       //      this.generateChunkLoop(this._inputElement.value - 2 * pLength, pElement);
 
       this.generateChunkLoop(
-        !this._inputElement.value
+        !this.inputElement.value
           ? BASE_SYMBOL_LENGTH
-          : this._inputElement.value - 2 * pLength,
+          : this.inputElement.value - 2 * pLength,
         pElement
       );
 
