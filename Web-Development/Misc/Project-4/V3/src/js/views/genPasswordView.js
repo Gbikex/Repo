@@ -60,12 +60,6 @@ class GeneratePassword {
   renderPassword() {
     this.clear();
 
-    if (this.inputElement.value < MINLENGTH && this.inputElement.value)
-      return logView.renderErrorElement(state.responses.pwMinLengthMsg); //(this._errorMessage.innerHTML = state.incorrectPwLength);
-
-    if (this.inputElement.value > MAX_LENGTH)
-      return logView.renderErrorElement(state.responses.pwMaxLengthMSG);
-
     this.generateNewPassword(
       // prettier-ignore
       !this.inputElement.value  
