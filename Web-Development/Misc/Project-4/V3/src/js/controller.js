@@ -31,6 +31,12 @@ const controlPasswordGeneration = function () {
   // 3) If all pre requirements met pw is generated
   generatePasswordView.renderPassword();
   changeElement(BTN_COPY_VARIABLE, DISPLAY_VAL_ON);
+
+  // 4) Render generated PW and success msg to ui
+  generatePasswordView.renderSuccessfullyGenPW();
+
+  // 5) Render success msg
+  logView.renderSuccessElement();
 };
 // Copy generated password
 const controlPasswordCopy = function () {
