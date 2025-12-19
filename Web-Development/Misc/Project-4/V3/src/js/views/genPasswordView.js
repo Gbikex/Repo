@@ -66,12 +66,13 @@ class GeneratePassword {
         ? GENERAL_PW_LENGTH 
         : this.inputElement.value
     );
+
+    logView.clearLog();
+  }
+
+  renderSuccessfullyGenPW() {
     this._returnInput.innerHTML = this.newPassword;
     this._returnMessage.innerHTML = state.responses.pwGeneration;
-    logView.renderSuccessElement();
-    // Remove log message after 5 second
-    //logTimeout(logView._returnElement);
-    logView.clearLog();
   }
 
   isGenPwError() {
