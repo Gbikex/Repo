@@ -12,14 +12,14 @@ class GeneratePassword {
   #symbols = SYMBOLS;
 
   _btnElement = document.querySelector(".gen_pw_btn");
-  _returnInput = document.querySelector(".return_pw");
-  _returnMessage = document.querySelector(".return_msg");
   _errorMessage = document.querySelector(".return_error_msg");
   _btnReset = document.querySelector(".res_pw_btn");
   _returnElement = document.querySelector(".return_msg__log");
 
   inputElement = document.querySelector(".input_pw");
   newPassword = state.password;
+  returnInput = document.querySelector(".return_pw");
+  returnMessage = document.querySelector(".return_msg");
 
   /**
    * Handles the call action
@@ -47,10 +47,10 @@ class GeneratePassword {
    * Clears the DOM elements before generating new password
    */
   clear() {
-    this._returnInput.innerHTML = "";
+    this.returnInput.innerHTML = "";
     this.newPassword = "";
     this._errorMessage.innerHTML = "";
-    this._returnMessage.innerHTML = "";
+    this.returnMessage.innerHTML = "";
     this._returnElement.innerHTML = "";
   }
 
@@ -58,8 +58,10 @@ class GeneratePassword {
    * Wraps and renders the newly generated password
    */
   renderPassword() {
+    // 1) Clears DOM elements for the new run
     this.clear();
 
+    // 2) Starts the password generation
     this.generateNewPassword(
       // prettier-ignore
       !this.inputElement.value  
@@ -67,16 +69,21 @@ class GeneratePassword {
         : this.inputElement.value
     );
 
+    // 3) Log to the UI
     logView.clearLog();
   }
 
+  /**
+   * Renders the generated password to the UI
+   */
   renderSuccessfullyGenPW() {
-    this._returnInput.innerHTML = this.newPassword;
-    this._returnMessage.innerHTML = state.responses.pwGeneration;
+    this.returnInput.innerHTML = this.newPassword;
+    this.returnMessage.innerHTML = state.responses.pwGeneration;
   }
 
-  isGenPwError() {
-    if (!this._errorMessage.innerHTML) return "Error";
+  clearUiFailedGen() {
+    this.returnInput.innerHTML = "";
+    this.returnMessage.innerHTML = "";
   }
 
   /**

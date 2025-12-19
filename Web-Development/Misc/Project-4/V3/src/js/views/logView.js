@@ -20,6 +20,7 @@ class LogView {
   renderErrorElement(paramErrorType) {
     genPasswordView._errorMessage.innerHTML = paramErrorType;
     this._returnElement.innerHTML = state.log.fail;
+    genPasswordView.clearUiFailedGen();
     this.clearLog();
   }
 
@@ -31,7 +32,7 @@ class LogView {
    * @returns
    */
   renderError(pInputElement, pLimit, pErrorMsg) {
-    if (pInputElement.value < pLimit && pInputElement.value)
+    if (pInputElement < pLimit && pInputElement)
       return this.renderErrorElement(pErrorMsg);
   }
 
