@@ -15,7 +15,7 @@ class LogView {
 
   /**
    * Renders failed generation response
-   * @param {string} paramErrorType
+   * @param {String} paramErrorType -> Based on the error type, msg rendered
    */
   renderErrorElement(paramErrorType) {
     genPasswordView._errorMessage.innerHTML = paramErrorType;
@@ -25,10 +25,10 @@ class LogView {
   }
 
   /**
-   * Dynamic error render procedure for the possible input limits to generate a password
-   * @param {String} pInputElement -- DOM Element that is required for the check
-   * @param {Number} pLimit -- Limit in number to check if it is failed or not
-   * @param {String} pErrorMsg -- Error message that is passed to renderErrorElement method to show it in the DOM
+   * Dynamic error render function for the possible input limits to generate a password
+   * @param {String} pInputElement -> DOM Element that is required for the check
+   * @param {Number} pLimit -> Limit in number to check if it is failed or not
+   * @param {String} pErrorMsg ->Error message that is passed to renderErrorElement method to show it in the DOM
    * @returns
    */
   renderError(pInputElement, pLimit, pErrorMsg) {
@@ -37,7 +37,7 @@ class LogView {
   }
 
   /**
-   * Clears the dedicated log responses for certain processes
+   * Clears the dedicated log responses for pw generation
    */
   clearLog() {
     resetElement(this._returnElement, LOG_ELEMENT_RESET);
