@@ -5,7 +5,7 @@ class GetInformationView {
 
   /**
    * Open information dialog window, when the ? button clicked css property changed via adjusting a variable.
-   * @param {*} handler
+   * @param {Function} handler
    */
   addHandlerInfoOpen(handler) {
     console.log(this._infoDiv);
@@ -17,7 +17,7 @@ class GetInformationView {
 
   /**
    * Closes the dialog window via adding back the block property to the SASS variable
-   * @param {*} handler
+   * @param {Function} handler
    */
   addHandlerInfoClose(handler) {
     this._infoClose.addEventListener("click", function (e) {
