@@ -4,7 +4,7 @@ class CopyPassword {
 
   /**
    * Handles the click event on the copy pw button
-   * @param {*} handler function to be called
+   * @param {*} handler -> Function to be called
    */
   addHandlerPwCopy(handler) {
     this._copyBtn.addEventListener("click", function (e) {
