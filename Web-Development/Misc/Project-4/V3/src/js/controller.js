@@ -38,20 +38,24 @@ const controlPasswordGeneration = function () {
   // 5) Render success msg
   logView.renderSuccessElement();
 };
+
 // Copy generated password
 const controlPasswordCopy = function () {
   copyPasswordView.copyPassword();
 };
+
 // Reset interface
 const controlReset = function () {
   generatePasswordView.clear();
   generatePasswordView.inputElement.value = "";
   changeElement(BTN_COPY_VARIABLE, DISPLAY_VAL_OFF);
 };
+
 // Open modal dialog
 const controlOpenDialog = function () {
   changeElement(MODAL_DISPLAY_VARIABLE, DISPLAY_VAL_ON);
 };
+
 // Close dialog
 const controlCloseDialog = function () {
   changeElement(MODAL_DISPLAY_VARIABLE, DISPLAY_VAL_OFF);
