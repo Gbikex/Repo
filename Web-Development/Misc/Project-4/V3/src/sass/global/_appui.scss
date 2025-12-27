@@ -32,11 +32,12 @@
 //App modal dialog
 .app_info_modal {
   display: var(--displayTypeDiv);
-  top: 20%;
-  right: 20%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 550px;
   height: 550px;
-  position: absolute;
   background-color: rgba(226, 216, 216, 0.95);
   border-radius: 5%;
 }
@@ -51,9 +52,6 @@
 
 .app_info_close {
   cursor: pointer;
-}
-
-.app_info_msg {
 }
 
 //Password generation with all the elements
