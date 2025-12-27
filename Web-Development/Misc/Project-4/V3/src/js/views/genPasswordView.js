@@ -1,11 +1,9 @@
 // prettier-ignore
-import {CHARACTERS, NUMBERS, SYMBOLS, MINLENGTH, GENERAL_PW_LENGTH,BASE_SYMBOL_LENGTH, MAX_LENGTH} from "../config";
+import { CHARACTERS, NUMBERS, SYMBOLS, GENERAL_PW_LENGTH,BASE_SYMBOL_LENGTH } from "../config";
 import { generateRandomIndex } from "../helper.js";
 import { state } from "../model.js";
 import logView from "./logView.js";
-/**
- * Class that holds all the functions that are necessary to generate a new password upon the selected user options
- */
+
 class GeneratePassword {
   #characters = CHARACTERS;
   #numbers = NUMBERS;
@@ -23,7 +21,7 @@ class GeneratePassword {
 
   /**
    * Handles the call action
-   * @param {Function} handler is expected to be called
+   * @param {Function} handler -> Handler to generate password event
    */
   addHandlerPwGen(handler) {
     this._btnElement.addEventListener("click", function (e) {
@@ -33,8 +31,8 @@ class GeneratePassword {
   }
 
   /**
-   *
-   * @param {Function} handler, to reset interface
+   * Handles the reset action
+   * @param {Function} handler -> Handler to reset PW
    */
   addHandlerPwReset(handler) {
     this._btnReset.addEventListener("click", function (e) {
@@ -80,7 +78,9 @@ class GeneratePassword {
     this.returnInput.innerHTML = this.newPassword;
     this.returnMessage.innerHTML = state.responses.pwGeneration;
   }
-
+  /**
+   * Clears UI after failed pw generation
+   */
   clearUiFailedGen() {
     this.returnInput.innerHTML = "";
     this.returnMessage.innerHTML = "";
@@ -88,7 +88,8 @@ class GeneratePassword {
 
   /**
    *  Function returns the newly generated password according the user inputs
-   * @param {number} pLength length of the new generated password
+   * @param {number} pLength -> length of the new generated password
+   * @return -> The generated password
    */
   generateNewPassword(pLength) {
     console.log("GENPW");
@@ -128,16 +129,15 @@ class GeneratePassword {
   }
 
   /**
-   * Returns the newly generated chunk for the build of the password
-   * @param {Number} pLength Length of the element
-   * @param {Array} pElement The chunk that has to be processed
-   * @param {String} pType In the current logic used for only Symbols
+   * Wraps and returns the chunk creations based on the main logic
+   * @param {Number} pLength -> Length of the element
+   * @param {Array} pElement -> The chunk that has to be processed
+   * @param {String} pType -> In the current logic used for only Symbols
+   * @returns -> Chunks of the password
    */
   generateChunk(pLength, pElement, pType) {
     // Symbol only
     if (pType === "S")
-      //      this.generateChunkLoop(this._inputElement.value - 2 * pLength, pElement);
-
       this.generateChunkLoop(
         !this.inputElement.value
           ? BASE_SYMBOL_LENGTH
@@ -145,16 +145,17 @@ class GeneratePassword {
         pElement
       );
 
-    // All other
+    // All other (Character, Numbers)
     if (pType === "C" || pType === "N")
       this.generateChunkLoop(pLength, pElement);
     return this.newPassword;
   }
+
   /**
    * Simple loop function for the chunks to avoid code repetition
-   * @param {Number} pLength Length of the element
-   * @param {Array} pElement The chunk that has to be processed
-   * @returns Generated password chunk
+   * @param {Number} pLength -> Length of the element
+   * @param {Array} pElement -> The chunk that has to be processed
+   * @returns -> Generated password chunk
    */
   generateChunkLoop(pLength, pElement) {
     for (let i = 0; i < pLength; i++)
@@ -164,7 +165,8 @@ class GeneratePassword {
 
   /**
    * Creates an array from the random generated chunk, checks for array index number if it cannot be divided by two the character is capitalized.
-   * @param {String} pChunk chunk of the generated characters
+   * @param {String} pChunk -> Chunk of the generated characters
+   * @returns -> Randomly capitalized characters in the password
    */
   generateRandomCapitals(pChunk) {
     this.newPassword = [...pChunk]
@@ -175,8 +177,9 @@ class GeneratePassword {
   }
 
   /**
-   * Returns a the number of the distribution of all characters. General logic is if the number cannot be divide by 3 then the logic is 30% Character 30% Numbers 40% Symbols is the distribution of the chunks
-   * @param {Number} pLength user input of the length of the generated password
+   * Returns a the number of the distribution of all characters. General logic is if the number cannot be divide by 3 then the logic is 30% Character 30% Numbers, the remaining is put on Symbols -> this is handled in generateChunk method
+   * @param {Number} pLength -> User input of the length of the generated password
+   * @returns -> Length of the chunk that will be created
    */
   generateCharacterDistribution(pLength) {
     console.log(
@@ -186,8 +189,8 @@ class GeneratePassword {
     return pLength % 3 === 0 ? pLength / 3 : Math.floor(pLength / 3);
   }
   /**
-   *Shuffle the chunks to generate the random chars for the password
-   * @returns newly generated and shuffled password
+   * Shuffles the chunks to generate the random chars for the password
+   * @returns -> Newly generated and shuffled password
    */
   shuffleChunks() {
     const carsToShuffle = this.newPassword.split("");
@@ -195,12 +198,6 @@ class GeneratePassword {
     return (this.newPassword = carsToShuffle
       .sort(() => 0.5 - Math.random())
       .join(""));
-  }
-
-  printVariables() {
-    console.log("-- Variable print --");
-    console.log(this.newPassword);
-    console.log("-- Variable print --");
   }
 }
 
