@@ -1,0 +1,76 @@
+:root {
+  --color-primary: #ecfae5;
+  --color-secondary: #da6c6c;
+  --color-text-primary: #da6c6c;
+  --color-text-secondary: #f75a5a;
+
+  --color-text-win: #a0c878;
+  --color-text-lose: #690b22;
+  --color-text-draw: #ff7601;
+
+  /* Rock-Paper-Scissor-Version-One-Color-Schema*/
+  --color-rps-one-body: #ffc107;
+  --color-rps-one-main-text: #000000;
+  --color-rps-one-winner: #2d4f2b;
+  /* ------------------------------------------ */
+}
+
+/* Rock-Paper-Scissor-Version-One-Style-Schema*/
+
+body {
+  background-color: antiquewhite;
+}
+
+.single-day-regular {
+  font-family: "Single Day", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.cinzel-rps-one {
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.rpc--version-one-h1 {
+  color: var(--color-text-primary);
+}
+
+.rpc--version-one {
+  height: 50vh;
+  background-color: var(--color-rps-one-body);
+  color: var(--color-rps-one-main-text);
+  font-size: 15;
+  font-weight: 500;
+  font-family: "Cinzel", serif;
+}
+
+.head--wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game--response-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.test {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+}
+
+.game--score {
+  display: none;
+}
+
+.game--response {
+  display: none;
+}
+
+/* ------------------------------------------ */
