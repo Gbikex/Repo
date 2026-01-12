@@ -1,0 +1,19 @@
+{
+  "name": "rps-v2",
+  "version": "1.0.0",
+  "description": "Exercise project for MVC",
+  "license": "ISC",
+  "author": "Gábor Csát",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "vite": "^7.3.1"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.97.2"
+  }
+}
