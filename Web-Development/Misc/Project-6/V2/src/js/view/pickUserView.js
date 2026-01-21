@@ -7,42 +7,29 @@ class PickUser {
 
   _container = document.querySelector(".container");
 
-  userMove = null;
-
-  handlerUserPick() {
+  /**
+   * Via delegation the method checks on the clicked button and the handler returns the value which later has to be stored to be compared against generated computer move.
+   * @param {*} handler
+   */
+  userPick(handler) {
     this._container.addEventListener("click", function (e) {
-      let userPick = "";
-
       const btn = e.target.closest(".btn");
-
-      // Click was outside a button
+      //If not a button return
       if (!btn) return;
 
-      // Determine which button was clicked
+      //Determines which button was clicked
       if (btn.classList.contains("pick-rock")) {
-        //console.log(MOVES[0]);
-        handler((this.userMove = MOVES[0]));
+        handler(MOVES[0]);
       }
 
       if (btn.classList.contains("pick-paper")) {
-        //console.log(MOVES[1]);
         handler(MOVES[1]);
       }
 
       if (btn.classList.contains("pick-scissor")) {
-        //console.log(MOVES[2]);
         handler(MOVES[2]);
       }
-      //console.log(userPick);
     });
-  }
-
-  test() {
-    console.log("Test-Pick-User");
-  }
-
-  printVariables() {
-    console.log(this._rock.value, this._paper.value, this._scissor.value);
   }
 }
 
