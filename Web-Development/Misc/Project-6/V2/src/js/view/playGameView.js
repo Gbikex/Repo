@@ -1,6 +1,102 @@
+import { MOVES } from "../config.js";
+
 class PlayGame {
-  testPrint() {
-    console.log("Hello from the playGame js file");
+  playedGames = 0;
+  playerScore = 0;
+  computerScore = 0;
+
+  playGame(userPick, computerPick) {
+    /// Logs for development
+    console.log(`User pick: ${userPick}, Computer pick: ${computerPick}`);
+    console.log(
+      `User score:${this.playerScore},Computer:score ${this.computerScore}`,
+    );
+    console.log(`Played games: ${this.playedGames}`);
+    ///
+
+    // Handle move -> Rock
+    if (
+      userPick.toLowerCase() === MOVES[0] &&
+      computerPick.toLowerCase() === MOVES[0]
+    ) {
+      this.playerScore++;
+      this.computerScore++;
+      this.playedGames++;
+      console.log(1);
+    }
+
+    if (
+      userPick.toLowerCase() === MOVES[0] &&
+      computerPick.toLowerCase() === MOVES[1]
+    ) {
+      this.computerScore++;
+      this.playedGames++;
+      console.log(2);
+    }
+
+    if (
+      userPick.toLowerCase() === MOVES[0] &&
+      computerPick.toLowerCase() === MOVES[2]
+    ) {
+      this.playerScore++;
+      this.playedGames++;
+      console.log(3);
+    }
+
+    // Handle move -> Paper
+    /*
+    if (
+      userPick.toLowerCase() === "paper" &&
+      computerPick.toLowerCase() === "paper"
+    ) {
+      this.playerScore++;
+      this.computerScore++;
+      this.playedGames++;
+    }
+
+    if (
+      userPick.toLowerCase() === "paper" &&
+      computerPick.toLowerCase() === "scissor"
+    ) {
+      this.computerScore++;
+      this.playedGames++;
+    }
+
+    if (
+      userPick.toLowerCase() === "paper" &&
+      computerPick.toLowerCase() === "rock"
+    ) {
+      this.playerScore++;
+      this.playedGames++;
+    }
+
+    // Handle move -> Scissor
+
+    if (
+      userPick.toLowerCase() === "scissor" &&
+      computerPick.toLowerCase() === "scissor"
+    ) {
+      this.playerScore++;
+      this.computerScore++;
+      this.playedGames++;
+    }
+
+    if (
+      userPick.toLowerCase() === "paper" &&
+      computerPick.toLowerCase() === "scissor"
+    ) {
+      this.computerScore++;
+      this.playedGames++;
+    }
+
+    if (
+      userPick.toLowerCase() === "rock" &&
+      computerPick.toLowerCase() === "scissors"
+    ) {
+      this.playerScore++;
+      this.playedGames++;
+    }
+       */
   }
 
   // 1. User input
@@ -16,8 +112,6 @@ class PlayGame {
   // Count points
   // After 5 win declare who got more points
   // Print end result
-
-  generateRandomIndex() {}
 }
 
 export default new PlayGame();

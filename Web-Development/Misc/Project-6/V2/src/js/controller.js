@@ -1,13 +1,20 @@
 "use strict";
 
 import playGame from "./view/playGameView.js";
-import pickUserView from "./view/pickUserView.js";
-import pickComputerView from "./view/pickComputerView.js";
+import pickUser from "./view/pickUserView.js";
+import pickComputer from "./view/pickComputerView.js";
 
-// Test //
-playGame.testPrint();
-pickUserView.printVariables();
-pickComputerView.testPrint();
+const userPick = pickUser.userPick(function (pick) {
+  const userMove = pick;
+  const computerMove = pickComputer.computerPick();
+
+  playGame.playGame(userMove, computerMove);
+});
+
+const init = function () {
+  userPick;
+};
+init();
 
 console.log("Hello from the Controller");
 // Test //
