@@ -53,7 +53,12 @@ function Counter() {
       </div>
       <div className="div set_date">
         <p>
-          {count} days from today is {dateToday(count).toLocaleDateString()}
+          {count === 0
+            ? "Today is"
+            : count > 0
+              ? `${count} days from today is `
+              : `${count} days ago was`}{" "}
+          {dateToday(count).toLocaleDateString()}
         </p>
       </div>
     </div>
