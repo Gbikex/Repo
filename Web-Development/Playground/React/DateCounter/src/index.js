@@ -23,6 +23,13 @@ function Counter() {
     setCount((count) => count - step);
   }
 
+  const dateToday = function (pCount) {
+    const result = new Date();
+    result.setDate(result.getDate() + pCount);
+
+    return result;
+  };
+
   return (
     <div>
       <div className="div div_step">
@@ -44,7 +51,11 @@ function Counter() {
           +
         </button>
       </div>
-      <div className="div set_date"></div>
+      <div className="div set_date">
+        <p>
+          {count} days from today is {dateToday(count).toLocaleDateString()}
+        </p>
+      </div>
     </div>
   );
 }
