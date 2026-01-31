@@ -51,7 +51,7 @@ function Forms({ onAddTasks }) {
 
     setProjectName("");
     setTaskName("");
-    setPriority("");
+    setPriority(3);
     setDescription("");
     setAssignedTo("");
   }
@@ -80,15 +80,19 @@ function Forms({ onAddTasks }) {
           setTaskName(e.target.value);
         }}
       />
-      <input
+      <select
         className="input"
-        type="number"
-        placeholder="Priority"
         value={priority}
         onChange={(e) => {
           setPriority(Number(e.target.value));
         }}
-      />
+      >
+        {Array.from({ length: 3 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
       <input
         className="input"
         type="text"
@@ -98,7 +102,7 @@ function Forms({ onAddTasks }) {
           setDescription(e.target.value);
         }}
       />
-      <input
+      <select
         className="input"
         type="text"
         placeholder="Assigned to"
@@ -106,7 +110,13 @@ function Forms({ onAddTasks }) {
         onChange={(e) => {
           setAssignedTo(e.target.value);
         }}
-      />
+      >
+        {Array.from({ length: 3 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            Emp-{num}
+          </option>
+        ))}
+      </select>
     </form>
   );
 }
@@ -114,8 +124,6 @@ function Forms({ onAddTasks }) {
 function Tasks({ tasks }) {
   return (
     <div className="tasks">
-      <p>Hello from Tasks</p>
-
       <div className="task_list">
         <ul>
           {tasks.map((task) => (
@@ -131,11 +139,11 @@ function TaskList({ task }) {
   return (
     <li>
       <span>
-        {task.projectName}
-        {task.taskName}
-        {task.priority}
-        {task.description}
-        {task.assignedTo}
+        Project Name: {task.projectName}
+        Task Name: {task.taskName}
+        Priority: {task.priority}
+        Description: {task.description}
+        Assigned to: {task.assignedTo}
       </span>
     </li>
   );
