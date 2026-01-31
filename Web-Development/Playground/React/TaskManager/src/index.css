@@ -53,8 +53,26 @@ h1 {
   border: 1px purple dotted;
 }
 
+.task_list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  justify-content: center;
+}
+
+.task_attributes {
+  width: auto;
+  border: 1px red solid;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+}
 .footer {
   width: 75%;
   height: 100px;
   border: 1px yellow dotted;
+}
+
+li {
+  list-style-type: none;
 }
