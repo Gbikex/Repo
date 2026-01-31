@@ -21,19 +21,22 @@ function Header() {
 function Forms() {
   return (
     <div className="forms">
+      <div className="forms__btn">
+        <button> Add Task</button>
+      </div>
       <p>Hello from Form</p>
-      <input type="text" />
-      <input type="text" />
-      <input type="text" />
-      <input type="text" />
-      <input type="text" />
+      <input className="input" type="text" />
+      <input className="input" type="text" />
+      <input className="input" type="text" />
+      <input className="input" type="text" />
+      <input className="input" type="text" />
     </div>
   );
 }
 
 function Tasks() {
   return (
-    <div>
+    <div className="tasks">
       <p>Hello from Tasks</p>
     </div>
   );
@@ -41,7 +44,7 @@ function Tasks() {
 
 function Footer() {
   return (
-    <div>
+    <div className="footer">
       <p>Hello from Footer</p>
     </div>
   );
