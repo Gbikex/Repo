@@ -12,7 +12,7 @@ export default function App() {
       <p>Welcome from App.js</p>
       <Header />
       <Forms onAddTasks={handleAddTasks} />
-      <Tasks />
+      <Tasks tasks={tasks} />
       <Footer />
     </div>
   );
@@ -111,11 +111,33 @@ function Forms({ onAddTasks }) {
   );
 }
 
-function Tasks() {
+function Tasks({ tasks }) {
   return (
     <div className="tasks">
       <p>Hello from Tasks</p>
+
+      <div className="task_list">
+        <ul>
+          {tasks.map((task) => (
+            <TaskList task={task} key={task.id} />
+          ))}
+        </ul>
+      </div>
     </div>
+  );
+}
+
+function TaskList({ task }) {
+  return (
+    <li>
+      <span>
+        {task.projectName}
+        {task.taskName}
+        {task.priority}
+        {task.description}
+        {task.assignedTo}
+      </span>
+    </li>
   );
 }
 
