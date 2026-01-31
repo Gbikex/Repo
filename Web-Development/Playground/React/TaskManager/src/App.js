@@ -1,9 +1,17 @@
+import { useState } from "react";
+
 export default function App() {
+  const [tasks, setTasks] = useState([]);
+
+  function handleAddTasks(task) {
+    setTasks((tasks) => [...tasks, task]);
+  }
+
   return (
     <div className="app">
       <p>Welcome from App.js</p>
       <Header />
-      <Forms />
+      <Forms onAddTasks={handleAddTasks} />
       <Tasks />
       <Footer />
     </div>
@@ -18,19 +26,88 @@ function Header() {
   );
 }
 
-function Forms() {
+function Forms({ onAddTasks }) {
+  const [projectName, setProjectName] = useState("");
+  const [taskName, setTaskName] = useState("");
+  const [priority, setPriority] = useState(3);
+  const [description, setDescription] = useState("");
+  const [assignedTo, setAssignedTo] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const newTask = {
+      projectName,
+      taskName,
+      priority,
+      description,
+      assignedTo,
+      id: Date.now(),
+    };
+
+    console.log(newTask);
+
+    onAddTasks(newTask);
+
+    setProjectName("");
+    setTaskName("");
+    setPriority("");
+    setDescription("");
+    setAssignedTo("");
+  }
+
   return (
-    <div className="forms">
+    <form className="forms" onSubmit={handleSubmit}>
       <div className="forms__btn">
         <button> Add Task</button>
       </div>
       <p>Hello from Form</p>
-      <input className="input" type="text" />
-      <input className="input" type="text" />
-      <input className="input" type="text" />
-      <input className="input" type="text" />
-      <input className="input" type="text" />
-    </div>
+      <input
+        className="input"
+        type="text"
+        placeholder="Project Name"
+        value={projectName}
+        onChange={(e) => {
+          setProjectName(e.target.value);
+        }}
+      />
+      <input
+        className="input"
+        type="text"
+        placeholder="Task Name"
+        value={taskName}
+        onChange={(e) => {
+          setTaskName(e.target.value);
+        }}
+      />
+      <input
+        className="input"
+        type="number"
+        placeholder="Priority"
+        value={priority}
+        onChange={(e) => {
+          setPriority(Number(e.target.value));
+        }}
+      />
+      <input
+        className="input"
+        type="text"
+        placeholder="Description"
+        value={description}
+        onChange={(e) => {
+          setDescription(e.target.value);
+        }}
+      />
+      <input
+        className="input"
+        type="text"
+        placeholder="Assigned to"
+        value={assignedTo}
+        onChange={(e) => {
+          setAssignedTo(e.target.value);
+        }}
+      />
+    </form>
   );
 }
 
