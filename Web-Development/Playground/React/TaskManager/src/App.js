@@ -35,11 +35,14 @@ function Header() {
 }
 
 function Forms({ onAddTasks, onResetTasks }) {
+  //State for inputs
   const [projectName, setProjectName] = useState("");
   const [taskName, setTaskName] = useState("");
   const [priority, setPriority] = useState("");
   const [description, setDescription] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
+  //State for error
+  const [error, setError] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -55,6 +58,14 @@ function Forms({ onAddTasks, onResetTasks }) {
 
     console.log(newTask);
 
+    if (!projectName.trim()) {
+      setError("Project name is required");
+      return;
+    }
+
+    // Clear error when valid
+    setError("");
+
     onAddTasks(newTask);
 
     setProjectName("");
@@ -66,6 +77,7 @@ function Forms({ onAddTasks, onResetTasks }) {
 
   return (
     <form className="forms" onSubmit={handleSubmit}>
+      {error && <p className="error">{error}</p>}
       <div className="forms__btn">
         <button>Add Task</button>
         <button onClick={onResetTasks}>Reset</button>
