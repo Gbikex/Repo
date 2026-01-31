@@ -7,11 +7,19 @@ export default function App() {
     setTasks((tasks) => [...tasks, task]);
   }
 
+  function handleResetItems() {
+    const confirmed = window.confirm(
+      "Are you sure you want to reset the task list?",
+    );
+
+    if (confirmed) setTasks([]);
+  }
+
   return (
     <div className="app">
       <p>Welcome from App.js</p>
       <Header />
-      <Forms onAddTasks={handleAddTasks} />
+      <Forms onAddTasks={handleAddTasks} onResetTasks={handleResetItems} />
       <Tasks tasks={tasks} />
       <Footer />
     </div>
@@ -26,10 +34,10 @@ function Header() {
   );
 }
 
-function Forms({ onAddTasks }) {
+function Forms({ onAddTasks, onResetTasks }) {
   const [projectName, setProjectName] = useState("");
   const [taskName, setTaskName] = useState("");
-  const [priority, setPriority] = useState(3);
+  const [priority, setPriority] = useState("");
   const [description, setDescription] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
 
@@ -51,7 +59,7 @@ function Forms({ onAddTasks }) {
 
     setProjectName("");
     setTaskName("");
-    setPriority(3);
+    setPriority("");
     setDescription("");
     setAssignedTo("");
   }
@@ -59,9 +67,10 @@ function Forms({ onAddTasks }) {
   return (
     <form className="forms" onSubmit={handleSubmit}>
       <div className="forms__btn">
-        <button> Add Task</button>
+        <button>Add Task</button>
+        <button onClick={onResetTasks}>Reset</button>
       </div>
-      <p>Hello from Form</p>
+      <p>Task details</p>
       <input
         className="input"
         type="text"
@@ -125,11 +134,11 @@ function Tasks({ tasks }) {
   return (
     <div className="tasks">
       <div className="task_list">
-        <ul>
-          {tasks.map((task) => (
+        {tasks.map((task) => (
+          <div>
             <TaskList task={task} key={task.id} />
-          ))}
-        </ul>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -137,15 +146,13 @@ function Tasks({ tasks }) {
 
 function TaskList({ task }) {
   return (
-    <li>
-      <span>
-        Project Name: {task.projectName}
-        Task Name: {task.taskName}
-        Priority: {task.priority}
-        Description: {task.description}
-        Assigned to: {task.assignedTo}
-      </span>
-    </li>
+    <div className="task_attributes">
+      <li className="">Project Name: {task.projectName}</li>
+      <li> Task Name: {task.taskName}</li>
+      <li>Priority: {task.priority}</li>
+      <li> Description: {task.description}</li>
+      <li> Assigned to: {task.assignedTo}</li>
+    </div>
   );
 }
 
