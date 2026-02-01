@@ -1,18 +1,40 @@
 import { useState } from "react";
 
 export default function App() {
+  const [bill, setBill] = useState(0);
+  const [mySatisfaction, setMySatisfaction] = useState("");
+  const [friendSatisfaction, setFriendSatisfaction] = useState("");
+
+  function handleReset() {
+    setBill(0);
+    setMySatisfaction("");
+    setFriendSatisfaction("");
+  }
+
   return (
     <div>
-      <HandleBill />
+      <HandleBill
+        onReset={handleReset}
+        bill={bill}
+        setBill={setBill}
+        mySatisfaction={mySatisfaction}
+        setMySatisfaction={setMySatisfaction}
+        friendSatisfaction={friendSatisfaction}
+        setFriendSatisfaction={setFriendSatisfaction}
+      />
     </div>
   );
 }
 
-function HandleBill() {
-  const [bill, setBill] = useState();
-  const [mySatisfaction, setMySatisfaction] = useState();
-  const [friendSatisfaction, setFriendSatisfaction] = useState();
-
+function HandleBill({
+  bill,
+  setBill,
+  mySatisfaction,
+  setMySatisfaction,
+  friendSatisfaction,
+  setFriendSatisfaction,
+  onReset,
+}) {
   return (
     <div>
       <p>How much was the bill:</p>
@@ -69,7 +91,7 @@ function HandleBill() {
           </div>
         }
       </ServiceSatisfaction>
-      <Button>{<span>Reset</span>}</Button>
+      <Button onClick={onReset}>{<span>Reset</span>}</Button>
       <div>
         <p>
           You pay $ {bill} {mySatisfaction} {friendSatisfaction}
