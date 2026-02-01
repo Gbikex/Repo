@@ -35,6 +35,10 @@ function HandleBill({
   setFriendSatisfaction,
   onReset,
 }) {
+  const rate = (mySatisfaction + friendSatisfaction) / 2;
+  const tip = bill * (rate / 100);
+  const total = bill + tip;
+
   return (
     <div>
       <p>How much was the bill:</p>
@@ -56,9 +60,9 @@ function HandleBill({
 
       <Button onClick={onReset}>{<span>Reset</span>}</Button>
       <div>
-        <p>
+        <p style={{ fontWeight: 900 }}>
           {bill > 0
-            ? `You pay $ ${bill} ${mySatisfaction} ${friendSatisfaction}`
+            ? `You pay $ ${total.toFixed(2)} ($ ${bill} + $ ${tip.toFixed(2)} tip)`
             : ""}
         </p>
       </div>
