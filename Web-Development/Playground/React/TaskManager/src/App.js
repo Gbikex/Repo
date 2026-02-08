@@ -122,8 +122,6 @@ function Forms({
 
     const errorMessage = validateInputs(newTask);
 
-    console.log(errorMessage);
-
     if (errorMessage) {
       onRaiseError(errorMessage);
       return;
@@ -219,13 +217,38 @@ function Forms({
 }
 
 function Tasks({ tasks }) {
+  const [sortBy, setSortBy] = useState("input");
+
+  let sortedItems;
+
+  if (sortBy === "input") sortedItems = tasks;
+
+  if (sortBy === "priority")
+    sortedItems = [...tasks].sort((a, b) => +a.priority - +b.priority);
+
   return (
     <div className="tasks">
-      <div className="task_list">
-        {tasks.map((task) => (
-          <TaskList task={task} key={task.id} />
-        ))}
-      </div>
+      {tasks.length > 0 && (
+        <>
+          <div className="task_list">
+            {sortedItems.map((task) => (
+              <TaskList task={task} key={task.id} />
+            ))}
+          </div>
+          <div>
+            <select
+              value={sortBy}
+              onChange={(e) => {
+                setSortBy(e.target.value);
+              }}
+            >
+              <option value="input">Select order</option>
+              <option value="priority">Order by priority</option>
+            </select>
+            <button>Order</button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
