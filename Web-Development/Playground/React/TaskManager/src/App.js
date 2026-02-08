@@ -72,6 +72,42 @@ function Forms({
   const [description, setDescription] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
 
+  function validateInputs({
+    projectName,
+    taskName,
+    priority,
+    description,
+    assignedTo,
+  }) {
+    //prettier-ignore
+    const rules = [
+      {
+        valid: projectName.trim(),
+        message: "Project name is required",
+      },
+      { 
+        valid: taskName.trim(), 
+        message: "Task name is required" 
+      },
+      {
+        valid: priority,
+        message: "Priority is required",
+      },
+      { 
+        valid: description.trim(), 
+        message: "Task description is required" 
+      },
+      { 
+        valid: assignedTo, 
+        message: "Assign to is required" 
+      },
+    ];
+
+    for (const rule of rules) {
+      if (!rule.valid) return rule.message;
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -84,30 +120,12 @@ function Forms({
       id: Date.now(),
     };
 
-    console.log(newTask);
+    const errorMessage = validateInputs(newTask);
 
-    if (!projectName.trim()) {
-      onRaiseError("Project name is required");
-      return;
-    }
+    console.log(errorMessage);
 
-    if (!taskName.trim()) {
-      onRaiseError("Task name is required");
-      return;
-    }
-
-    if (!priority) {
-      onRaiseError("Priority is required");
-      return;
-    }
-
-    if (!description) {
-      onRaiseError("Description is required");
-      return;
-    }
-
-    if (!assignedTo) {
-      onRaiseError("Assign is required");
+    if (errorMessage) {
+      onRaiseError(errorMessage);
       return;
     }
 
