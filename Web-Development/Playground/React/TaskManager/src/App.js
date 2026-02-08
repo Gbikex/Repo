@@ -164,9 +164,7 @@ function Tasks({ tasks }) {
     <div className="tasks">
       <div className="task_list">
         {tasks.map((task) => (
-          <div>
-            <TaskList task={task} key={task.id} />
-          </div>
+          <TaskList task={task} key={task.id} />
         ))}
       </div>
     </div>
@@ -175,13 +173,13 @@ function Tasks({ tasks }) {
 
 function TaskList({ task }) {
   return (
-    <div className="task_attributes">
+    <ul className="task_attributes">
       <li className="">Project Name: {task.projectName}</li>
       <li> Task Name: {task.taskName}</li>
       <li> Priority: {task.priority}</li>
       <li> Description: {task.description}</li>
       <li> Assigned to: {task.assignedTo}</li>
-    </div>
+    </ul>
   );
 }
 
