@@ -219,12 +219,21 @@ function Forms({
 function Tasks({ tasks }) {
   const [sortBy, setSortBy] = useState("input");
 
+  //Store ordered value
   let sortedItems;
 
+  //Default
   if (sortBy === "input") sortedItems = tasks;
 
+  //Order by priority
   if (sortBy === "priority")
     sortedItems = [...tasks].sort((a, b) => +a.priority - +b.priority);
+
+  //Order by task name
+  if (sortBy === "taskName")
+    sortedItems = tasks
+      .slice()
+      .sort((a, b) => a.taskName.localeCompare(b.taskName));
 
   return (
     <div className="tasks">
@@ -244,8 +253,8 @@ function Tasks({ tasks }) {
             >
               <option value="input">Select order</option>
               <option value="priority">Order by priority</option>
+              <option value="taskName">Order by task name</option>
             </select>
-            <button>Order</button>
           </div>
         </>
       )}
