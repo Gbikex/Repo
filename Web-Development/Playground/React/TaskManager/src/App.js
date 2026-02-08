@@ -2,9 +2,20 @@ import { useState } from "react";
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
+  //State for error
+  const [error, setError] = useState("");
 
   function handleAddTasks(task) {
     setTasks((tasks) => [...tasks, task]);
+  }
+  function handleError(error) {
+    setError(error);
+  }
+
+  function resetBundle() {
+    setTasks([]);
+    //console.log("here");
+    setError("");
   }
 
   function handleResetItems() {
@@ -12,14 +23,20 @@ export default function App() {
       "Are you sure you want to reset the task list?",
     );
 
-    if (confirmed) setTasks([]);
+    //if (confirmed) setTasks([]);
+    if (confirmed) resetBundle();
   }
 
   return (
     <div className="app">
       <p>Welcome from App.js</p>
       <Header />
-      <Forms onAddTasks={handleAddTasks} onResetTasks={handleResetItems} />
+      <Forms
+        onAddTasks={handleAddTasks}
+        onResetTasks={handleResetItems}
+        onRaiseError={handleError}
+        error={error}
+      />
       <Tasks tasks={tasks} />
       <Footer />
     </div>
@@ -34,15 +51,13 @@ function Header() {
   );
 }
 
-function Forms({ onAddTasks, onResetTasks }) {
+function Forms({ onAddTasks, onResetTasks, onRaiseError, error }) {
   //State for inputs
   const [projectName, setProjectName] = useState("");
   const [taskName, setTaskName] = useState("");
   const [priority, setPriority] = useState("");
   const [description, setDescription] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
-  //State for error
-  const [error, setError] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -59,12 +74,12 @@ function Forms({ onAddTasks, onResetTasks }) {
     console.log(newTask);
 
     if (!projectName.trim()) {
-      setError("Project name is required");
+      onRaiseError("Project name is required");
       return;
     }
 
     // Clear error when valid
-    setError("");
+    //onRaiseError("");
 
     onAddTasks(newTask);
 
@@ -76,69 +91,71 @@ function Forms({ onAddTasks, onResetTasks }) {
   }
 
   return (
-    <form className="forms" onSubmit={handleSubmit}>
-      {error && <p className="error">{error}</p>}
-      <div className="forms__btn">
-        <button>Add Task</button>
-        <button onClick={onResetTasks}>Reset</button>
-      </div>
-      <p>Task details</p>
-      <input
-        className="input"
-        type="text"
-        placeholder="Project Name"
-        value={projectName}
-        onChange={(e) => {
-          setProjectName(e.target.value);
-        }}
-      />
-      <input
-        className="input"
-        type="text"
-        placeholder="Task Name"
-        value={taskName}
-        onChange={(e) => {
-          setTaskName(e.target.value);
-        }}
-      />
-      <select
-        className="input"
-        value={priority}
-        onChange={(e) => {
-          setPriority(Number(e.target.value));
-        }}
-      >
-        {Array.from({ length: 3 }, (_, i) => i + 1).map((num) => (
-          <option value={num} key={num}>
-            {num}
-          </option>
-        ))}
-      </select>
-      <input
-        className="input"
-        type="text"
-        placeholder="Description"
-        value={description}
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-      />
-      <select
-        className="input"
-        type="text"
-        placeholder="Assigned to"
-        value={assignedTo}
-        onChange={(e) => {
-          setAssignedTo(e.target.value);
-        }}
-      >
-        {Array.from({ length: 3 }, (_, i) => i + 1).map((num) => (
-          <option value={num} key={num}>
-            Emp-{num}
-          </option>
-        ))}
-      </select>
-    </form>
+    <div>
+      <button onClick={onResetTasks}>Reset</button>
+      <form className="forms" onSubmit={handleSubmit}>
+        {error && <p className="error">{error}</p>}
+        <div className="forms__btn">
+          <button>Add Task</button>
+        </div>
+        <p>Task details</p>
+        <input
+          className="input"
+          type="text"
+          placeholder="Project Name"
+          value={projectName}
+          onChange={(e) => {
+            setProjectName(e.target.value);
+          }}
+        />
+        <input
+          className="input"
+          type="text"
+          placeholder="Task Name"
+          value={taskName}
+          onChange={(e) => {
+            setTaskName(e.target.value);
+          }}
+        />
+        <select
+          className="input"
+          value={priority}
+          onChange={(e) => {
+            setPriority(Number(e.target.value));
+          }}
+        >
+          {Array.from({ length: 3 }, (_, i) => i + 1).map((num) => (
+            <option value={num} key={num}>
+              {num}
+            </option>
+          ))}
+        </select>
+        <input
+          className="input"
+          type="text"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
+        />
+        <select
+          className="input"
+          type="text"
+          placeholder="Assigned to"
+          value={assignedTo}
+          onChange={(e) => {
+            setAssignedTo(e.target.value);
+          }}
+        >
+          {Array.from({ length: 3 }, (_, i) => i + 1).map((num) => (
+            <option value={num} key={num}>
+              Emp-{num}
+            </option>
+          ))}
+        </select>
+      </form>
+    </div>
   );
 }
 
@@ -161,7 +178,7 @@ function TaskList({ task }) {
     <div className="task_attributes">
       <li className="">Project Name: {task.projectName}</li>
       <li> Task Name: {task.taskName}</li>
-      <li>Priority: {task.priority}</li>
+      <li> Priority: {task.priority}</li>
       <li> Description: {task.description}</li>
       <li> Assigned to: {task.assignedTo}</li>
     </div>
