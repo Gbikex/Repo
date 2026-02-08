@@ -18,7 +18,13 @@ export default function App() {
     setError("");
   }
 
+  function handleErrorResetAfterSubmit() {
+    setError("");
+  }
+
   function handleResetItems() {
+    if (tasks === undefined || tasks.length === 0) return;
+
     const confirmed = window.confirm(
       "Are you sure you want to reset the task list?",
     );
@@ -36,6 +42,7 @@ export default function App() {
         onResetTasks={handleResetItems}
         onRaiseError={handleError}
         error={error}
+        onSuccessfulTaskCreationResetError={handleErrorResetAfterSubmit}
       />
       <Tasks tasks={tasks} />
       <Footer />
@@ -51,7 +58,13 @@ function Header() {
   );
 }
 
-function Forms({ onAddTasks, onResetTasks, onRaiseError, error }) {
+function Forms({
+  onAddTasks,
+  onResetTasks,
+  onRaiseError,
+  error,
+  onSuccessfulTaskCreationResetError,
+}) {
   //State for inputs
   const [projectName, setProjectName] = useState("");
   const [taskName, setTaskName] = useState("");
@@ -78,8 +91,25 @@ function Forms({ onAddTasks, onResetTasks, onRaiseError, error }) {
       return;
     }
 
-    // Clear error when valid
-    //onRaiseError("");
+    if (!taskName.trim()) {
+      onRaiseError("Task name is required");
+      return;
+    }
+
+    if (!priority) {
+      onRaiseError("Priority is required");
+      return;
+    }
+
+    if (!description) {
+      onRaiseError("Description is required");
+      return;
+    }
+
+    if (!assignedTo) {
+      onRaiseError("Assign is required");
+      return;
+    }
 
     onAddTasks(newTask);
 
@@ -88,13 +118,16 @@ function Forms({ onAddTasks, onResetTasks, onRaiseError, error }) {
     setPriority("");
     setDescription("");
     setAssignedTo("");
+
+    onSuccessfulTaskCreationResetError();
   }
 
   return (
     <div>
+      {error && <p className="error">{error}</p>}
+
       <button onClick={onResetTasks}>Reset</button>
       <form className="forms" onSubmit={handleSubmit}>
-        {error && <p className="error">{error}</p>}
         <div className="forms__btn">
           <button>Add Task</button>
         </div>
@@ -124,6 +157,10 @@ function Forms({ onAddTasks, onResetTasks, onRaiseError, error }) {
             setPriority(Number(e.target.value));
           }}
         >
+          <option value="" disabled>
+            Please select a priority!
+          </option>
+
           {Array.from({ length: 3 }, (_, i) => i + 1).map((num) => (
             <option value={num} key={num}>
               {num}
@@ -148,6 +185,10 @@ function Forms({ onAddTasks, onResetTasks, onRaiseError, error }) {
             setAssignedTo(e.target.value);
           }}
         >
+          <option value="" disabled>
+            Please assign the task!
+          </option>
+
           {Array.from({ length: 3 }, (_, i) => i + 1).map((num) => (
             <option value={num} key={num}>
               Emp-{num}
