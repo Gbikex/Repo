@@ -2,16 +2,30 @@ import { useState } from "react";
 
 export default function App() {
   const [shoppingList, setShoppingList] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleShoppingList(item) {
     setShoppingList((items) => [...items, item]);
+  }
+
+  function handleErrorMessage(error) {
+    setErrorMessage(error);
+  }
+
+  function handleErrorReset() {
+    setErrorMessage("");
   }
 
   return (
     <div>
       <p>Test</p>
       <Header />
-      <ShoppingListForm onAddShoppingItem={handleShoppingList} />
+      <ShoppingListForm
+        onAddShoppingItem={handleShoppingList}
+        onValidation={handleErrorMessage}
+        error={errorMessage}
+        onSuccessfulAdd={handleErrorReset}
+      />
       <ShoppingList />
       <Footer />
     </div>
@@ -26,26 +40,55 @@ function Header() {
   );
 }
 
-function ShoppingListForm({ onAddShoppingItem }) {
+function ShoppingListForm({
+  onAddShoppingItem,
+  onValidation,
+  error,
+  onSuccessfulAdd,
+}) {
   const [product, setProduct] = useState("");
   const [quantity, setQuantity] = useState(1);
+
+  function validation({ product }) {
+    const validations = [
+      {
+        valid: product.trim(),
+        message: "Product shall have some name for the list",
+      },
+    ];
+
+    for (const validation of validations) {
+      if (!validation.valid) return validation.message;
+    }
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    const shoppingList = {
+    const newItem = {
       product,
       quantity,
     };
 
-    console.log(shoppingList);
+    const errorMessage = validation(newItem);
 
-    onAddShoppingItem(shoppingList);
+    if (errorMessage) {
+      onValidation(errorMessage);
+      return;
+    }
+
+    console.log(newItem);
+
+    onAddShoppingItem(newItem);
+
+    setProduct("");
+    onSuccessfulAdd("");
   }
 
   return (
     <div className="shopping-list-form">
       <p>This is the shopping list form area</p>
+      {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
