@@ -26,7 +26,7 @@ export default function App() {
         error={errorMessage}
         onSuccessfulAdd={handleErrorReset}
       />
-      <ShoppingList />
+      <ShoppingList shoppingList={shoppingList} />
       <Footer />
     </div>
   );
@@ -68,6 +68,7 @@ function ShoppingListForm({
     const newItem = {
       product,
       quantity,
+      id: Date.now(),
     };
 
     const errorMessage = validation(newItem);
@@ -117,10 +118,29 @@ function ShoppingListForm({
   );
 }
 
-function ShoppingList() {
+function ShoppingList({ shoppingList }) {
   return (
     <div className="shopping-list">
       <p>Render shopping list</p>
+
+      {shoppingList.map((items) => (
+        <Item
+          product={items.product}
+          quantity={items.quantity}
+          key={items.id}
+        />
+      ))}
+    </div>
+  );
+}
+
+function Item({ product, quantity }) {
+  return (
+    <div>
+      <ul>
+        <li>{product}</li>
+        <li>{quantity}</li>
+      </ul>
     </div>
   );
 }
