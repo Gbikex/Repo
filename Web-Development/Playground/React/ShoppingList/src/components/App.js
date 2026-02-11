@@ -8,6 +8,10 @@ export default function App() {
     setShoppingList((items) => [...items, item]);
   }
 
+  function handleDeleteItem(id) {
+    setShoppingList((items) => items.filter((item) => item.id !== id));
+  }
+
   function handleErrorMessage(error) {
     setErrorMessage(error);
   }
@@ -26,7 +30,10 @@ export default function App() {
         error={errorMessage}
         onSuccessfulAdd={handleErrorReset}
       />
-      <ShoppingList shoppingList={shoppingList} />
+      <ShoppingList
+        shoppingList={shoppingList}
+        onDeleteItem={handleDeleteItem}
+      />
       <Footer />
     </div>
   );
@@ -83,6 +90,7 @@ function ShoppingListForm({
     onAddShoppingItem(newItem);
 
     setProduct("");
+    setQuantity(1);
     onSuccessfulAdd("");
   }
 
@@ -118,7 +126,7 @@ function ShoppingListForm({
   );
 }
 
-function ShoppingList({ shoppingList }) {
+function ShoppingList({ shoppingList, onDeleteItem }) {
   return (
     <div className="shopping-list">
       <p>Render shopping list</p>
@@ -127,6 +135,8 @@ function ShoppingList({ shoppingList }) {
         <Item
           product={items.product}
           quantity={items.quantity}
+          id={items.id}
+          onDeleteItem={onDeleteItem}
           key={items.id}
         />
       ))}
@@ -134,9 +144,12 @@ function ShoppingList({ shoppingList }) {
   );
 }
 
-function Item({ product, quantity }) {
+function Item({ product, quantity, id, onDeleteItem }) {
   return (
     <div>
+      <div>
+        <button onClick={() => onDeleteItem(id)}>❌</button>
+      </div>
       <ul>
         <li>{product}</li>
         <li>{quantity}</li>
