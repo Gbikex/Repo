@@ -127,11 +127,31 @@ function ShoppingListForm({
 }
 
 function ShoppingList({ shoppingList, onDeleteItem }) {
+  const [sortBy, setSortBy] = useState("input");
+
+  let sortedItems;
+
+  if (sortBy === "input") sortedItems = shoppingList;
+
+  if (sortBy === "quantity")
+    sortedItems = [...shoppingList].sort(
+      (a, b) => Number(a.quantity) - Number(b.quantity),
+    );
+
+  if (sortBy === "description")
+    sortedItems = shoppingList
+      .slice()
+      .sort((a, b) => a.product.localeCompare(b.product));
+
   return (
     <div className="shopping-list">
       <p>Render shopping list</p>
-
-      {shoppingList.map((items) => (
+      <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+        <option value="input">Select order by</option>
+        <option value="quantity">Sort by quantity</option>
+        <option value="description">Sort by description</option>
+      </select>
+      {sortedItems.map((items) => (
         <Item
           product={items.product}
           quantity={items.quantity}
