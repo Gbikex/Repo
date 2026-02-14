@@ -1,3 +1,36 @@
-body {
+.app{
+  font-size: 30px;
+}
+
+.app.app-ui {
   background-color: antiquewhite;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  width:100vw; 
+  height:100vh; 
+  margin:0; 
+  padding:0;
+}
+
+.app.app-ui > .div {
+  width: 100%;
+  flex: 0 0 auto;     
+  overflow: auto; 
+}
+
+.app.app-ui > .header {
+  height: 10%;
+}
+
+.app.app-ui > .shopping-list-form{
+  height: 30%;
+}
+
+.app.app-ui > .shopping-list{
+  height: 50%;
+}  
+
+.app.app-ui > .footer {
+  height: 10%;
 }
