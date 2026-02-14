@@ -146,11 +146,14 @@ function ShoppingList({ shoppingList, onDeleteItem }) {
   return (
     <div className="shopping-list">
       <p>Render shopping list</p>
+      {shoppingList.length > 1 && (
       <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+    
         <option value="input">Select order by</option>
         <option value="quantity">Sort by quantity</option>
         <option value="description">Sort by description</option>
       </select>
+        )}
       {sortedItems.map((items) => (
         <Item
           product={items.product}
