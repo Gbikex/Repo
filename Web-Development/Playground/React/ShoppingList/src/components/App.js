@@ -21,20 +21,20 @@ export default function App() {
   }
 
   return (
-    <div>
-      <p>Test</p>
-      <Header />
-      <ShoppingListForm
+    <div className="app app-ui">
+      <Header className="div header" />
+      <ShoppingListForm className="div shopping-list-form"
         onAddShoppingItem={handleShoppingList}
         onValidation={handleErrorMessage}
         error={errorMessage}
         onSuccessfulAdd={handleErrorReset}
+        shoppingList={shoppingList}
       />
-      <ShoppingList
+      <ShoppingList className="div shopping-list"
         shoppingList={shoppingList}
         onDeleteItem={handleDeleteItem}
       />
-      <Footer />
+      <Footer className="div footer" />
     </div>
   );
 }
@@ -52,6 +52,7 @@ function ShoppingListForm({
   onValidation,
   error,
   onSuccessfulAdd,
+  shoppingList
 }) {
   const [product, setProduct] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -96,7 +97,9 @@ function ShoppingListForm({
 
   return (
     <div className="shopping-list-form">
-      <p>This is the shopping list form area</p>
+      {shoppingList.length === 0 && (
+        <p>Lets add something to the list 🙂</p>
+      )}
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
@@ -145,15 +148,17 @@ function ShoppingList({ shoppingList, onDeleteItem }) {
 
   return (
     <div className="shopping-list">
-      <p>Render shopping list</p>
-      {shoppingList.length > 1 && (
+     <div>
+      { sortedItems.length > 1 && (
       <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-    
-        <option value="input">Select order by</option>
+        <option value="input" disabled>Select order by</option>
         <option value="quantity">Sort by quantity</option>
         <option value="description">Sort by description</option>
       </select>
-        )}
+      )
+      }
+     </div>
+     
       {sortedItems.map((items) => (
         <Item
           product={items.product}
