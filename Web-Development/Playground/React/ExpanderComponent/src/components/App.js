@@ -49,14 +49,10 @@ function TextExpander({
     setExpand(toggle);
   }
 
-  const buttonStyle = {
-    color: buttonColor,
-    cursor: "pointer",
-  };
-
   return (
     <div className={className}>
       {expand ? children : children.substring(0, collapsedNumWords) + "..."}
+      {/*
       <span
         role="button"
         style={buttonStyle}
@@ -64,6 +60,33 @@ function TextExpander({
       >
         {!expand ? expandButtonText : collapseButtonText}
       </span>
+      */}
+      <SpanButton
+        buttonColor={buttonColor}
+        expand={expand}
+        expandButtonText={expandButtonText}
+        collapseButtonText={collapseButtonText}
+        onExpand={() => handlerExpand(!expand)}
+      />
     </div>
+  );
+}
+
+function SpanButton({
+  buttonColor,
+  expand,
+  expandButtonText,
+  collapseButtonText,
+  onExpand,
+}) {
+  const buttonStyle = {
+    color: buttonColor,
+    cursor: "pointer",
+  };
+
+  return (
+    <span role="button" style={buttonStyle} onClick={onExpand}>
+      {!expand ? expandButtonText : collapseButtonText}
+    </span>
   );
 }
