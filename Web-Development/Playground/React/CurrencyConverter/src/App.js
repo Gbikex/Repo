@@ -11,14 +11,17 @@ export default function App() {
 
   useEffect(
     function () {
+      setError("");
+
       if (inputAmount === "") return;
 
-      if (convertFrom === convertTo)
-        throw new Error(
-          "The currencies to exchange the entered volume must be different",
-        );
-
       try {
+        if (convertFrom === convertTo) {
+          throw new Error(
+            "The currencies to exchange the entered volume must be different",
+          );
+        }
+
         async function useConverter() {
           const res = await fetch(
             `https://api.frankfurter.app/latest?amount=${inputAmount}&from=${convertFrom}&to=${convertTo}`,
@@ -33,10 +36,8 @@ export default function App() {
         }
         useConverter();
       } catch (error) {
-        //console.error(error);
-        setError(error);
-      } finally {
-        setError("");
+        setError(error.message);
+        return;
       }
     },
     [inputAmount, convertFrom, convertTo],
@@ -66,7 +67,7 @@ export default function App() {
         <option value="INR">INR</option>
       </select>
       <p>OUTPUT: {outPut}</p>
-      {!error && <p>{error}</p>}
+      {error && <p>{error}</p>}
     </div>
   );
 }
