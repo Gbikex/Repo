@@ -8,6 +8,7 @@ export default function App() {
   const [convertTo, setConvertTo] = useState("EUR");
   const [outPut, setOutPut] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(
     function () {
@@ -23,6 +24,8 @@ export default function App() {
         }
 
         async function useConverter() {
+          setIsLoading(true);
+
           const res = await fetch(
             `https://api.frankfurter.app/latest?amount=${inputAmount}&from=${convertFrom}&to=${convertTo}`,
           );
@@ -33,6 +36,7 @@ export default function App() {
           const rate = rates[convertTo];
           console.log(rate);
           setOutPut(rate);
+          setIsLoading(false);
         }
         useConverter();
       } catch (error) {
@@ -50,17 +54,23 @@ export default function App() {
         onChange={(e) => {
           setInputAmount(Number(e.target.value));
         }}
+        disabled={isLoading}
       />
       <select
         value={convertFrom}
         onChange={(e) => setConvertFrom(e.target.value)}
+        disabled={isLoading}
       >
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
         <option value="CAD">CAD</option>
         <option value="INR">INR</option>
       </select>
-      <select value={convertTo} onChange={(e) => setConvertTo(e.target.value)}>
+      <select
+        value={convertTo}
+        onChange={(e) => setConvertTo(e.target.value)}
+        disabled={isLoading}
+      >
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
         <option value="CAD">CAD</option>
