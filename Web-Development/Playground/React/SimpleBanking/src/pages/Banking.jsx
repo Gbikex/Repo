@@ -7,7 +7,7 @@ const initialState = {
   loan: 0,
   depositInput: 0,
   withdrawInput: 0,
-  requestLoan: 1000,
+  requestLoanInput: 0,
 };
 
 function reducer(state, action) {
@@ -35,11 +35,17 @@ function reducer(state, action) {
         balance: state.balance - state.withdrawInput,
         withdrawInput: 0,
       };
+    case "setRequestLoanInput":
+      return {
+        ...state,
+        requestLoanInput: action.payLoad,
+      };
     case "requestLoan":
       return {
         ...state,
-        balance: state.balance + action.payLoad,
-        loan: state.loan + action.payLoad,
+        balance: state.balance + state.requestLoanInput,
+        loan: state.loan + state.requestLoanInput,
+        requestLoanInput: 0,
       };
     case "payLoan":
     case "payLoanInOne":
@@ -50,8 +56,10 @@ function reducer(state, action) {
 }
 
 function Banking() {
-  const [{ isOpen, balance, loan, depositInput, withdrawInput }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { isOpen, balance, loan, depositInput, withdrawInput, requestLoanInput },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   const handleChangeDeposit = function (e) {
     dispatch({ type: "setDepositInput", payLoad: Number(e.target.value) });
@@ -59,6 +67,10 @@ function Banking() {
 
   const handleChangeWithdraw = function (e) {
     dispatch({ type: "setWithdrawInput", payLoad: Number(e.target.value) });
+  };
+
+  const handleChangeRequestLoan = function (e) {
+    dispatch({ type: "setRequestLoanInput", payLoad: Number(e.target.value) });
   };
 
   return (
@@ -119,11 +131,15 @@ function Banking() {
       </div>
       <div>
         <p>Request Loan - 1000</p>
-        <input placeholder="Enter loan amount"></input>
+        <input
+          placeholder="Enter loan amount"
+          value={requestLoanInput}
+          onChange={handleChangeRequestLoan}
+        ></input>
         <button
           className={styles.btn}
           disabled={!isOpen}
-          onClick={() => dispatch({ type: "requestLoan", payLoad: 1000 })}
+          onClick={() => dispatch({ type: "requestLoan" })}
         >
           Request Loan
         </button>
