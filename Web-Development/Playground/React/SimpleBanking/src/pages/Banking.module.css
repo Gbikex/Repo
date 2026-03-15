@@ -9,7 +9,8 @@ html {
   font-size: 30px;
 }
 
-.h1 {
+input {
+  height: 25px;
 }
 
 .btn {
