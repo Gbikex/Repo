@@ -5,8 +5,8 @@ const initialState = {
   isOpen: false,
   balance: 0,
   loan: 0,
-  deposit: 150,
-  withdraw: 50,
+  depositInput: 0,
+  withdrawInput: 0,
   requestLoan: 1000,
 };
 
@@ -19,10 +19,22 @@ function reducer(state, action) {
     case "closeAccount":
       if (state.balance > 0 || state.loan > 0) return state;
       return initialState;
+    case "setDepositInput":
+      return { ...state, depositInput: action.payLoad };
     case "deposit":
-      return { ...state, balance: state.balance + action.payLoad };
+      return {
+        ...state,
+        balance: state.balance + state.depositInput,
+        depositInput: 0,
+      };
+    case "setWithdrawInput":
+      return { ...state, withdrawInput: action.payLoad };
     case "withdraw":
-      return { ...state, balance: state.balance - action.payLoad };
+      return {
+        ...state,
+        balance: state.balance - state.withdrawInput,
+        withdrawInput: 0,
+      };
     case "requestLoan":
       return {
         ...state,
@@ -38,10 +50,16 @@ function reducer(state, action) {
 }
 
 function Banking() {
-  const [{ isOpen, balance, loan, deposit, withdraw }, dispatch] = useReducer(
-    reducer,
-    initialState,
-  );
+  const [{ isOpen, balance, loan, depositInput, withdrawInput }, dispatch] =
+    useReducer(reducer, initialState);
+
+  const handleChangeDeposit = function (e) {
+    dispatch({ type: "setDepositInput", payLoad: Number(e.target.value) });
+  };
+
+  const handleChangeWithdraw = function (e) {
+    dispatch({ type: "setWithdrawInput", payLoad: Number(e.target.value) });
+  };
 
   return (
     <div className={styles.divContent}>
@@ -71,22 +89,30 @@ function Banking() {
         </button>
       </div>
       <div>
-        <p>Deposit - 150</p>
-        <input placeholder="Deposit amount"></input>
+        <p>Deposit</p>
+        <input
+          placeholder="Deposit amount"
+          value={depositInput}
+          onChange={handleChangeDeposit}
+        ></input>
         <button
           className={styles.btn}
           disabled={!isOpen}
-          onClick={() => dispatch({ type: "deposit", payLoad: 150 })}
+          onClick={() => dispatch({ type: "deposit" })}
         >
           Deposit
         </button>
 
-        <p>Withdraw - 50</p>
-        <input placeholder="Withdraw amount"></input>
+        <p>Withdraw</p>
+        <input
+          placeholder="Withdraw amount"
+          value={withdrawInput}
+          onChange={handleChangeWithdraw}
+        ></input>
         <button
           className={styles.btn}
           disabled={!isOpen}
-          onClick={() => dispatch({ type: "withdraw", payLoad: 50 })}
+          onClick={() => dispatch({ type: "withdraw" })}
         >
           Withdraw
         </button>
