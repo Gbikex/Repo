@@ -2,12 +2,18 @@ import { useReducer } from "react";
 import styles from "./Banking.module.css";
 
 const MAX_DEPOSIT = 5000;
+const BALANCE_MIN_LIMIT = -1500;
+const LOAN_LIMIT = 10000;
+const BALANCE_LOAN_MIN = 3000;
 
 const initialState = {
   isOpen: false,
   isError: false,
   balance: 0,
+  balanceMin: BALANCE_MIN_LIMIT,
   loan: 0,
+  loanLimit: LOAN_LIMIT,
+  loanBalanceReq: BALANCE_LOAN_MIN,
   depositInput: 0,
   withdrawInput: 0,
   requestLoanInput: 0,
@@ -49,10 +55,18 @@ function reducer(state, action) {
     case "setWithdrawInput":
       return { ...state, withdrawInput: action.payLoad };
     case "withdraw":
+      if (state.balance <= state.balanceMin)
+        return {
+          ...state,
+          isError: true,
+          errorMessage: `You exceeded the allowed balance minimum limit: ${state.balanceMin}`,
+        };
       return {
         ...state,
         balance: state.balance - state.withdrawInput,
         withdrawInput: 0,
+        isError: false,
+        errorMessage: "",
       };
     case "setRequestLoanInput":
       return {
@@ -60,11 +74,22 @@ function reducer(state, action) {
         requestLoanInput: action.payLoad,
       };
     case "requestLoan":
+      if (
+        state.requestLoanInput > state.loanLimit ||
+        state.balance < state.loanBalanceReq
+      )
+        return {
+          ...state,
+          isError: true,
+          errorMessage: `${state.requestLoanInput > state.loanLimit ? `The requested loan is over the limit ${state.loanLimit}` : `Account balance is less then the minimum for requesting any loan: ${state.loanBalanceReq}`}`,
+        };
       return {
         ...state,
         balance: state.balance + state.requestLoanInput,
         loan: state.loan + state.requestLoanInput,
         requestLoanInput: 0,
+        isError: false,
+        errorMessage: "",
       };
     case "payLoanInput":
       return { ...state, payLoanInput: action.payLoad };
@@ -75,9 +100,20 @@ function reducer(state, action) {
         loan: state.loan - state.payLoanInput,
       };
     case "payLoanInOne":
-      return { ...state, balance: state.balance - state.loan, loan: 0 };
-    case "errorMessage":
-      return { ...state };
+      if (state.balance - state.loan < 0)
+        return {
+          ...state,
+          isError: true,
+          errorMessage:
+            "Current balance amount is not enough to preform this action!",
+        };
+      return {
+        ...state,
+        balance: state.balance - state.loan,
+        loan: 0,
+        isError: false,
+        errorMessage: "",
+      };
     default:
       throw Error("Unknown action type ");
   }
