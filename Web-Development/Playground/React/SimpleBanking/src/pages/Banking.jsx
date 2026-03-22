@@ -1,14 +1,19 @@
 import { useReducer } from "react";
 import styles from "./Banking.module.css";
 
+const MAX_DEPOSIT = 5000;
+
 const initialState = {
   isOpen: false,
+  isError: false,
   balance: 0,
   loan: 0,
   depositInput: 0,
   withdrawInput: 0,
   requestLoanInput: 0,
   payLoanInput: 0,
+  errorMessage: "",
+  maxDeposit: MAX_DEPOSIT,
 };
 
 function reducer(state, action) {
@@ -18,15 +23,28 @@ function reducer(state, action) {
     case "openAccount":
       return { ...state, isOpen: true, balance: 500 };
     case "closeAccount":
-      if (state.balance > 0 || state.loan > 0) return state;
+      if (state.balance > 0 || state.loan > 0)
+        return {
+          ...state,
+          isError: true,
+          errorMessage: "Account can be closed when the Balance and Loan is 0!",
+        };
       return initialState;
     case "setDepositInput":
       return { ...state, depositInput: action.payLoad };
     case "deposit":
+      if (state.depositInput <= 0 || state.depositInput > MAX_DEPOSIT)
+        return {
+          ...state,
+          isError: true,
+          errorMessage: `The deposit amount can not be${state.depositInput <= 0 ? " 0 or negative" : ` more then the limit ${MAX_DEPOSIT} `}`,
+        };
       return {
         ...state,
         balance: state.balance + state.depositInput,
         depositInput: 0,
+        isError: false,
+        errorMessage: "",
       };
     case "setWithdrawInput":
       return { ...state, withdrawInput: action.payLoad };
@@ -69,6 +87,8 @@ function Banking() {
   const [
     {
       isOpen,
+      isError,
+      errorMessage,
       balance,
       loan,
       depositInput,
@@ -100,6 +120,11 @@ function Banking() {
       <p>Simple Banking</p>
       <div>
         <p>Account information</p>
+        {isError && (
+          <div>
+            <p className={styles.isError}>{errorMessage}</p>
+          </div>
+        )}
         <p>
           Balance: {balance}, Loan: {loan}
         </p>
