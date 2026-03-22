@@ -8,6 +8,7 @@ const initialState = {
   depositInput: 0,
   withdrawInput: 0,
   requestLoanInput: 0,
+  payLoanInput: 0,
 };
 
 function reducer(state, action) {
@@ -47,9 +48,18 @@ function reducer(state, action) {
         loan: state.loan + state.requestLoanInput,
         requestLoanInput: 0,
       };
+    case "payLoanInput":
+      return { ...state, payLoanInput: action.payLoad };
     case "payLoan":
+      return {
+        ...state,
+        balance: state.balance - state.loan,
+        loan: state.loan - state.payLoanInput,
+      };
     case "payLoanInOne":
       return { ...state, balance: state.balance - state.loan, loan: 0 };
+    case "errorMessage":
+      return { ...state };
     default:
       throw Error("Unknown action type ");
   }
@@ -57,7 +67,15 @@ function reducer(state, action) {
 
 function Banking() {
   const [
-    { isOpen, balance, loan, depositInput, withdrawInput, requestLoanInput },
+    {
+      isOpen,
+      balance,
+      loan,
+      depositInput,
+      withdrawInput,
+      requestLoanInput,
+      payLoanInput,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -71,6 +89,10 @@ function Banking() {
 
   const handleChangeRequestLoan = function (e) {
     dispatch({ type: "setRequestLoanInput", payLoad: Number(e.target.value) });
+  };
+
+  const handlePayLoan = function (e) {
+    dispatch({ type: "payLoanInput", payLoad: Number(e.target.value) });
   };
 
   return (
@@ -130,7 +152,7 @@ function Banking() {
         </button>
       </div>
       <div>
-        <p>Request Loan - 1000</p>
+        <p>Request Loan</p>
         <input
           placeholder="Enter loan amount"
           value={requestLoanInput}
@@ -145,9 +167,17 @@ function Banking() {
         </button>
 
         <p>Pay Loan</p>
-        <input placeholder="Pay loan amount"></input>
+        <input
+          placeholder="Pay loan amount"
+          value={payLoanInput}
+          onChange={handlePayLoan}
+        ></input>
         <div>
-          <button className={styles.btn} disabled={!isOpen}>
+          <button
+            className={styles.btn}
+            disabled={!isOpen}
+            onClick={() => dispatch({ type: "payLoan" })}
+          >
             Pay Loan
           </button>
           <button
