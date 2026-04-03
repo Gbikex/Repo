@@ -1,0 +1,14 @@
+.btn {
+  border-radius: 5px;
+  width: 150px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.open {
+  background-color: rgb(5, 227, 5);
+}
+
+.close {
+  background-color: brown;
+}
