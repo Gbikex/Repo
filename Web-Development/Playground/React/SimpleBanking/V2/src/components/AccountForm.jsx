@@ -60,26 +60,85 @@ function AccountForm() {
           }}
           disabled={!isOpen}
         ></input>
-        <Button isDisabled={!isOpen}>Deposit</Button>
+        <Button
+          isDisabled={!isOpen}
+          onClick={() => {
+            dispatch({ type: "deposit" });
+          }}
+        >
+          Deposit
+        </Button>
       </div>
       <div className={styles.containerInput}>
         <p>Withdraw</p>
-        <input value={withdrawInput} disabled={!isOpen}></input>
-        <Button isDisabled={!isOpen}>Withdraw</Button>
+        <input
+          value={withdrawInput}
+          onChange={(e) => {
+            handleWithdrawInput(e);
+          }}
+          disabled={!isOpen}
+        ></input>
+        <Button
+          isDisabled={!isOpen}
+          onClick={() => {
+            dispatch({ type: "withdraw" });
+          }}
+        >
+          Withdraw
+        </Button>
       </div>
       <div className={styles.containerInput}>
         <p>Request loan</p>
-        <input value={requestLoanInput} disabled={!isOpen}></input>
-        <Button isDisabled={!isOpen}>Request Loan</Button>
+        <input
+          value={requestLoanInput}
+          disabled={!isOpen}
+          onChange={(e) => {
+            handleRequestLoanInput(e);
+          }}
+        ></input>
+        <Button
+          isDisabled={!isOpen}
+          onClick={() => {
+            dispatch({ type: "loanRequest" });
+          }}
+        >
+          Request Loan
+        </Button>
       </div>
       <div className={styles.containerInput}>
         <p>Pay loan</p>
-        <input value={payLoanInput} disabled={!isOpen}></input>
-        <Button isDisabled={!isOpen}>Pay Loan</Button>
-        <Button isDisabled={!isOpen}>Pay all</Button>
+        <input
+          value={payLoanInput}
+          disabled={!isOpen}
+          onChange={(e) => {
+            handlePayLoanInput(e);
+          }}
+        ></input>
+        <Button
+          isDisabled={!isOpen}
+          onClick={() => {
+            dispatch({ type: "payLoan" });
+          }}
+        >
+          Pay Loan
+        </Button>
+        <Button
+          isDisabled={!isOpen}
+          onClick={() => {
+            dispatch({ type: "payLoanAll" });
+          }}
+        >
+          Pay all
+        </Button>
       </div>
       <div>
-        <Button type="close" isDisabled={!isOpen}>
+        <Button
+          type="close"
+          isDisabled={!isOpen}
+          onClick={() => {
+            dispatch({ type: "closeAccount" });
+          }}
+        >
           Close Account
         </Button>
       </div>
