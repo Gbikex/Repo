@@ -3,6 +3,7 @@
   width: 150px;
   cursor: pointer;
   font-weight: bolder;
+  margin: 5px;
 }
 
 .open {
