@@ -9,13 +9,19 @@ const initialState = {
   loan: 0,
   depositInput: 0,
   withdrawInput: 0,
+  requestLoanInput: 0,
   payLoanInput: 0,
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "deposit":
-      return { ...state, balance: balance + depositInput, depositInput: 0 };
+    case "openAccount":
+      return { ...state, isOpen: true, balance: 500 };
+    case "inputDeposit":
+      return {
+        ...state,
+        depositInput: action.payLoad,
+      };
     case "withdraw":
       return { ...state, balance: balance - withdrawInput, withdrawInput: 0 };
     default:
@@ -32,6 +38,7 @@ function AccountProvider({ children }) {
       loan,
       depositInput,
       withdrawInput,
+      requestLoanInput,
       payLoanInput,
     },
     dispatch,
@@ -46,6 +53,7 @@ function AccountProvider({ children }) {
         loan,
         depositInput,
         withdrawInput,
+        requestLoanInput,
         payLoanInput,
         dispatch,
       }}
