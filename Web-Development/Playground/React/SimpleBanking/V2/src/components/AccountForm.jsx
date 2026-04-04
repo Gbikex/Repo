@@ -7,6 +7,7 @@ function AccountForm() {
   const {
     isOpen,
     isError,
+    errorMsg,
     balance,
     loan,
     depositInput,
@@ -34,6 +35,7 @@ function AccountForm() {
 
   return (
     <div className={styles.container}>
+      {isError && <div>{errorMsg}</div>}
       <div className={styles.containerDetails}>
         <p>Account Details</p>
         <Button
