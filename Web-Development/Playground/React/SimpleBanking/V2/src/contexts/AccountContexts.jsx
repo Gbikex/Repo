@@ -22,8 +22,49 @@ function reducer(state, action) {
         ...state,
         depositInput: action.payLoad,
       };
+    case "deposit":
+      return {
+        ...state,
+        balance: state.balance + state.depositInput,
+        depositInput: 0,
+      };
+    case "inputWithdraw":
+      return {
+        ...state,
+        withdrawInput: action.payLoad,
+      };
     case "withdraw":
-      return { ...state, balance: balance - withdrawInput, withdrawInput: 0 };
+      return {
+        ...state,
+        balance: state.balance - state.withdrawInput,
+        withdrawInput: 0,
+      };
+    case "inputLoanRequest":
+      return { ...state, requestLoanInput: action.payLoad };
+    case "loanRequest":
+      return {
+        ...state,
+        loan: state.requestLoanInput,
+        balance: state.balance - state.requestLoanInput,
+        requestLoanInput: 0,
+      };
+    case "inputPayLoan":
+      return { ...state, payLoanInput: action.payLoad };
+    case "payLoan":
+      return {
+        ...state,
+        balance: state.balance - state.payLoanInput,
+        loan: state.loan - state.payLoanInput,
+        payLoanInput: 0,
+      };
+    case "payLoanAll":
+      return {
+        ...state,
+        balance: state.balance - state.loan,
+        loan: 0,
+      };
+    case "closeAccount":
+      return initialState;
     default:
       throw new Error("Unknown action 💣💣");
   }
