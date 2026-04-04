@@ -5,12 +5,19 @@ const AccountContext = createContext();
 const initialState = {
   isOpen: false,
   isError: false,
+  errorMsg: "",
   balance: 0,
   loan: 0,
   depositInput: 0,
   withdrawInput: 0,
+  maxWithdraw: 5000,
   requestLoanInput: 0,
+  maxLoan: 10000,
   payLoanInput: 0,
+};
+
+const errorMessages = {
+  withdrawError: `The withdraw amount is more then the allowed limit as of ${initialState.maxWithdraw}`,
 };
 
 function reducer(state, action) {
@@ -27,6 +34,7 @@ function reducer(state, action) {
         ...state,
         balance: state.balance + state.depositInput,
         depositInput: 0,
+        isError: false,
       };
     case "inputWithdraw":
       return {
@@ -34,10 +42,18 @@ function reducer(state, action) {
         withdrawInput: action.payLoad,
       };
     case "withdraw":
+      if (state.withdrawInput > state.maxWithdraw)
+        return {
+          ...state,
+          isError: true,
+          errorMsg: errorMessages.withdrawError,
+        };
+
       return {
         ...state,
         balance: state.balance - state.withdrawInput,
         withdrawInput: 0,
+        isError: false,
       };
     case "inputLoanRequest":
       return { ...state, requestLoanInput: action.payLoad };
@@ -47,6 +63,7 @@ function reducer(state, action) {
         loan: state.requestLoanInput,
         balance: state.balance - state.requestLoanInput,
         requestLoanInput: 0,
+        isError: false,
       };
     case "inputPayLoan":
       return { ...state, payLoanInput: action.payLoad };
@@ -56,12 +73,14 @@ function reducer(state, action) {
         balance: state.balance - state.payLoanInput,
         loan: state.loan - state.payLoanInput,
         payLoanInput: 0,
+        isError: false,
       };
     case "payLoanAll":
       return {
         ...state,
         balance: state.balance - state.loan,
         loan: 0,
+        isError: false,
       };
     case "closeAccount":
       return initialState;
@@ -75,6 +94,7 @@ function AccountProvider({ children }) {
     {
       isOpen,
       isError,
+      errorMsg,
       balance,
       loan,
       depositInput,
@@ -90,6 +110,7 @@ function AccountProvider({ children }) {
       value={{
         isOpen,
         isError,
+        errorMsg,
         balance,
         loan,
         depositInput,
