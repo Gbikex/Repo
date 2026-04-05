@@ -17,6 +17,8 @@ function AccountForm() {
     dispatch,
   } = useAccount();
 
+  const isLoan = loan === 0 ? true : false;
+
   function handleDepositInput(e) {
     dispatch({ type: "inputDeposit", payLoad: Number(e.target.value) });
   }
@@ -111,13 +113,13 @@ function AccountForm() {
         <p>Pay loan</p>
         <input
           value={payLoanInput}
-          disabled={!isOpen}
+          disabled={isLoan}
           onChange={(e) => {
             handlePayLoanInput(e);
           }}
         ></input>
         <Button
-          isDisabled={!isOpen}
+          isDisabled={isLoan}
           onClick={() => {
             dispatch({ type: "payLoan" });
           }}
@@ -125,7 +127,7 @@ function AccountForm() {
           Pay Loan
         </Button>
         <Button
-          isDisabled={!isOpen}
+          isDisabled={isLoan}
           onClick={() => {
             dispatch({ type: "payLoanAll" });
           }}
