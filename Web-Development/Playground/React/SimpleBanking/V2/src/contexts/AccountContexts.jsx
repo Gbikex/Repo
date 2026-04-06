@@ -29,14 +29,25 @@ function reducer(state, action) {
   const loanDemandMax = state.loan > state.maxAvailableLoan;
   // 3) Loan constrains on pay back
   const noLoan = state.loan === 0;
-  const balanceNotMet = state.balance < state.loan;
+  const balanceNotMet = state.balance < state.payLoanInput;
+  // 4) Close account
+  const noActiveBalance = state.balance !== 0;
+  const noActiveLoan = state.loan !== 0;
   //Returns error messages based on state
   const errorMessages = {
+    // 1) Withdraw
     withdrawMaxMsg: `The withdraw amount is more then the allowed limit as of ${state.maxWithdraw}`,
     withdrawBalanceMsg: `The requested withdraw ${state.withdrawInput} exceeds the current balance of ${state.balance}`,
+    // 2) Loan request
     loanMaxLimitMsg: `The requested loan exceeds the limit of  ${state.maxLoan}`,
     loanBalanceMinMsg: `The required minimum balance (${state.loanReq}) not met`,
     loanDemandMaxMsg: `Your loan exceeds the allowed maximum of ${state.maxAvailableLoan}`,
+    // 3) Loan pay back
+    noBalance: `Currently you account has no deposited amount`,
+    loanPayInputOver: `The entered value exceeds the accounts balance of ${state.balance}`,
+    // 4) Close account
+    activeBalanceMsg: `The account cannot be closed duo the active balance of ${state.balance}`,
+    activeLoanMsg: `The account cannot be closed dou the active loan of ${state.loan}`,
   };
 
   switch (action.type) {
@@ -98,6 +109,15 @@ function reducer(state, action) {
     case "inputPayLoan":
       return { ...state, payLoanInput: action.payLoad };
     case "payLoan":
+      if (noLoan || balanceNotMet)
+        return {
+          ...state,
+          isError: true,
+          errorMsg: "Error here",
+          errorMsg: noLoan
+            ? errorMessages.noBalance
+            : errorMessages.loanPayInputOver,
+        };
       return {
         ...state,
         balance: state.balance - state.payLoanInput,
@@ -106,6 +126,15 @@ function reducer(state, action) {
         isError: false,
       };
     case "payLoanAll":
+      if (noLoan || balanceNotMet)
+        return {
+          ...state,
+          isError: true,
+          errorMsg: "Error here",
+          errorMsg: noLoan
+            ? errorMessages.noBalance
+            : errorMessages.loanPayInputOver,
+        };
       return {
         ...state,
         balance: state.balance - state.loan,
@@ -113,6 +142,14 @@ function reducer(state, action) {
         isError: false,
       };
     case "closeAccount":
+      if (noActiveBalance || noActiveLoan)
+        return {
+          ...state,
+          isError: true,
+          errorMsg: noActiveBalance
+            ? errorMessages.activeBalanceMsg
+            : errorMessages.activeLoanMsg,
+        };
       return initialState;
     default:
       throw new Error("Unknown action 💣💣");
