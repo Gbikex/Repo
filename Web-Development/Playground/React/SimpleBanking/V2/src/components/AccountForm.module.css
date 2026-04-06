@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid brown;
+  border-radius: 5px;
+  width: 400px;
+  height: 100%;
+}
+
+.containerInput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.containerDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+}
