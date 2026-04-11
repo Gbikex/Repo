@@ -60,21 +60,51 @@ function TaskCreate() {
         <p>Corresponding Project</p>
         <input
           placeholder="Project name"
+          value={projectName}
+          onChange={(e) => {
+            handleProjectNameInput(e);
+          }}
+        ></input>
+        <p>Name of the task</p>
+        <input
+          placeholder="Task name"
           value={taskName}
           onChange={(e) => {
             handleTaskNameInput(e);
           }}
         ></input>
-        <p>Name of the task</p>
-        <input placeholder="Task name"></input>
         <p>Priority</p>
-        <input placeholder="1"></input>
+        <input
+          placeholder="1"
+          value={priority}
+          onChange={(e) => {
+            handlePriorityInput(e);
+          }}
+        ></input>
         <p>Deadline</p>
-        <input placeholder="Deadline"></input>
+        <input
+          placeholder="Deadline"
+          value={deadline}
+          onChange={(e) => {
+            handleDeadlineInput(e);
+          }}
+        ></input>
         <p>Assigned to</p>
-        <input placeholder="Assigned person"></input>
+        <input
+          placeholder="Assigned person"
+          value={assignedTo}
+          onChange={(e) => {
+            handleAssignedToInput(e);
+          }}
+        ></input>
         <p>Description</p>
-        <input placeholder="Description"></input>
+        <input
+          placeholder="Description"
+          value={taskDescription}
+          onChange={(e) => {
+            handleTaskDescriptionInput(e);
+          }}
+        ></input>
       </div>
     </>
   );
