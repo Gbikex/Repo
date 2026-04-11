@@ -1,3 +1,4 @@
+import { act } from "react";
 import { useTask } from "../context/Task";
 
 function TaskCreate() {
@@ -18,6 +19,38 @@ function TaskCreate() {
 
   function handleTaskNameInput(e) {
     dispatch({ type: "addTaskName", payLoad: e.target.value });
+  }
+
+  function handleProjectNameInput(e) {
+    dispatch({ type: "addProjectName", payLoad: e.target.value });
+  }
+
+  function handlePriorityInput(e) {
+    dispatch({ type: "addPriority", payLoad: e.target.value });
+  }
+
+  function handleDeadlineInput(e) {
+    dispatch({ type: "addDeadline", payLoad: e.target.value });
+  }
+
+  function handleAssignedToInput(e) {
+    dispatch({ type: "addAssignedTo", payLoad: e.target.value });
+  }
+
+  function handleExpectedInput(e) {
+    dispatch({ type: "addExpectedInput", payLoad: Number(e.target.value) });
+  }
+
+  function handleTaskDescriptionInput(e) {
+    dispatch({ type: "addTaskDescription", payLoad: e.target.value });
+  }
+
+  function sprintNameInput(e) {
+    dispatch({ type: "addSprintName", payLoad: e.target.value });
+  }
+
+  function handleAttachmentInput(e) {
+    dispatch({ type: "addAttachment", payLoad: e.target.value });
   }
 
   return (
