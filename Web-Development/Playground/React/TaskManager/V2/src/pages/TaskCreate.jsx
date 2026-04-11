@@ -1,4 +1,3 @@
-import { act } from "react";
 import { useTask } from "../context/Task";
 
 function TaskCreate() {
@@ -53,6 +52,19 @@ function TaskCreate() {
     dispatch({ type: "addAttachment", payLoad: e.target.value });
   }
 
+  function handleCreateNewTask() {
+    const newTask = {
+      taskName,
+      projectName,
+      priority,
+      deadline,
+      assignedTo,
+      taskDescription,
+    };
+
+    dispatch({ type: "addNewTask", payLoad: newTask });
+  }
+
   return (
     <>
       <p>Task Create Page</p>
@@ -105,6 +117,16 @@ function TaskCreate() {
             handleTaskDescriptionInput(e);
           }}
         ></input>
+      </div>
+      <div>
+        <button>Back</button>
+        <button
+          onClick={() => {
+            handleCreateNewTask();
+          }}
+        >
+          Create task
+        </button>
       </div>
     </>
   );

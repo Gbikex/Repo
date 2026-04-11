@@ -6,9 +6,9 @@ const initialState = {
   taskList: [],
   taskName: "",
   projectName: "",
-  priority: 1,
-  deadline: new Date().getFullYear,
-  assignedTo: "none",
+  priority: "",
+  deadline: "",
+  assignedTo: "",
   expectedInput: 0,
   taskDescription: "",
   sprintName: "",
@@ -36,6 +36,8 @@ function reducer(state, action) {
       return { ...state, sprintName: action.payLoad };
     case "addAttachment":
       return { ...state, attachment: action.pay };
+    case "addNewTask":
+      return { ...state, taskList: [...state.taskList, action.payLoad] };
     default:
       throw new Error("Unknown action 🫥");
   }
