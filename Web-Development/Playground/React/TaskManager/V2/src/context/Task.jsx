@@ -4,15 +4,25 @@ const TaskContext = createContext();
 
 const initialState = {
   taskList: [],
+  inputTaskName: "",
   taskName: "",
+  inputProjectName: "",
   projectName: "",
+  inputPriority: "",
   priority: "",
+  inputDeadline: "",
   deadline: "",
+  inputAssignedTo: "",
   assignedTo: "",
+  inputExpectedInput: "",
   expectedInput: 0,
+  inputTaskDescription: "",
   taskDescription: "",
+  inputSprintName: "",
   sprintName: "",
+  inputConnectedTaskName: "",
   connectedTaskName: "",
+  inputAttachment: "",
   attachment: "",
 };
 
@@ -38,6 +48,20 @@ function reducer(state, action) {
       return { ...state, attachment: action.pay };
     case "addNewTask":
       return { ...state, taskList: [...state.taskList, action.payLoad] };
+    case "resetInputData":
+      return {
+        ...state,
+        taskName: "",
+        projectName: "",
+        priority: "",
+        deadline: "",
+        assignedTo: "",
+        expectedInput: 0,
+        taskDescription: "",
+        sprintName: "",
+        connectedTaskName: "",
+        attachment: "",
+      };
     default:
       throw new Error("Unknown action 🫥");
   }
