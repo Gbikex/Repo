@@ -18,8 +18,26 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
+    case "addProjectName":
+      return { ...state, projectName: action.payLoad };
     case "addTaskName":
-      return { ...state };
+      return { ...state, taskName: action.payLoad };
+    case "addPriority":
+      return { ...state, priority: action.payLoad };
+    case "addDeadline":
+      return { ...state, deadline: action.payLoad };
+    case "addAssignedTo":
+      return { ...state, assignedTo: action.payLoad };
+    case "addExpectedInput":
+      return { ...state, expectedInput: action.payLoad };
+    case "addTaskDescription":
+      return { ...state, taskDescription: action.payLoad };
+    case "addSprintName":
+      return { ...state, sprintName: action.payLoad };
+    case "addAttachment":
+      return { ...state, attachment: action.pay };
+    default:
+      throw new Error("Unknown action 🫥");
   }
 }
 
