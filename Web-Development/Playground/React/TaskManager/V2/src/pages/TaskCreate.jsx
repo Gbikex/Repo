@@ -1,5 +1,5 @@
 import Button from "../components/Button";
-
+import ButtonBack from "../components/ButtonBack";
 import { useTask } from "../context/Task";
 
 function TaskCreate() {
@@ -80,7 +80,7 @@ function TaskCreate() {
     <>
       <p>Task Create Page</p>
       <div>
-        <Button style="primary">Back</Button>
+        <ButtonBack />
         <Button
           onClick={() => {
             handleResetInput();
