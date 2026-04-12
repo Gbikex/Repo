@@ -44,7 +44,7 @@ function TaskCreate() {
     dispatch({ type: "addTaskDescription", payLoad: e.target.value });
   }
 
-  function sprintNameInput(e) {
+  function handleSprintNameInput(e) {
     dispatch({ type: "addSprintName", payLoad: e.target.value });
   }
 
@@ -95,6 +95,14 @@ function TaskCreate() {
             handleProjectNameInput(e);
           }}
         ></input>
+        <p>Sprint Name</p>
+        <input
+          placeholder="Name of the sprint"
+          value={sprintName}
+          onChange={(e) => {
+            handleSprintNameInput(e);
+          }}
+        ></input>
         <p>Name of the task</p>
         <input
           placeholder="Task name"
@@ -109,6 +117,14 @@ function TaskCreate() {
           value={priority}
           onChange={(e) => {
             handlePriorityInput(e);
+          }}
+        ></input>
+        <p>Expected input</p>
+        <input
+          placeholder="In hours"
+          value={expectedInput}
+          onChange={(e) => {
+            handleExpectedInput(e);
           }}
         ></input>
         <p>Deadline</p>
@@ -134,6 +150,16 @@ function TaskCreate() {
           onChange={(e) => {
             handleTaskDescriptionInput(e);
           }}
+        ></input>
+        <p>Attachment</p>
+        <input
+          placeholder="WIP"
+          value={attachment}
+          onChange={(e) => {
+            handleAttachmentInput(e);
+          }}
+          //Work in progress no functionality implemented
+          disabled={true}
         ></input>
       </div>
       <div>
