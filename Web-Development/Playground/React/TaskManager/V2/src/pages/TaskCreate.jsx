@@ -1,3 +1,5 @@
+import Button from "../components/Button";
+
 import { useTask } from "../context/Task";
 
 function TaskCreate() {
@@ -78,13 +80,15 @@ function TaskCreate() {
     <>
       <p>Task Create Page</p>
       <div>
-        <button
+        <Button style="primary">Back</Button>
+        <Button
           onClick={() => {
             handleResetInput();
           }}
+          style="primary"
         >
           Reset
-        </button>
+        </Button>
       </div>
       <div>
         <p>Corresponding Project</p>
@@ -163,14 +167,14 @@ function TaskCreate() {
         ></input>
       </div>
       <div>
-        <button>Back</button>
-        <button
+        <Button
           onClick={() => {
             (handleCreateNewTask(), handleResetInput());
           }}
+          style="create"
         >
-          Create task
-        </button>
+          Create
+        </Button>
       </div>
     </>
   );
