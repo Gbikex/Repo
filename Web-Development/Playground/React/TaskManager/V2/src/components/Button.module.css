@@ -1,0 +1,15 @@
+.btn {
+  font-size: 15px;
+  font-weight: bolder;
+  border-radius: 5px;
+  width: 100px;
+  height: 25px;
+}
+
+.primary {
+  background-color: #fbefef;
+}
+
+.create {
+  background-color: #b5e18b;
+}
