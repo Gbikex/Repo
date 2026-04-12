@@ -85,7 +85,7 @@ function TaskCreate() {
           onClick={() => {
             handleResetInput();
           }}
-          style="primary"
+          type="primary"
         >
           Reset
         </Button>
@@ -171,7 +171,7 @@ function TaskCreate() {
           onClick={() => {
             (handleCreateNewTask(), handleResetInput());
           }}
-          style="create"
+          type="create"
         >
           Create
         </Button>

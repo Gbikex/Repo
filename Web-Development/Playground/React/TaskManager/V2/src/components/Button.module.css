@@ -13,3 +13,7 @@
 .create {
   background-color: #b5e18b;
 }
+
+.wide {
+  width: 200px;
+}

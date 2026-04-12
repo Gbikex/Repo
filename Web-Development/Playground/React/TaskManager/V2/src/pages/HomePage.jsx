@@ -2,15 +2,21 @@ import { Link } from "react-router";
 
 import styles from "./HomePage.module.css";
 
-import CreateNewTask from "../components/CreateNewTask";
+import TaskCard from "../components/TaskCard";
+import Button from "../components/Button";
 
 function Homepage() {
   return (
     <div>
       <h1>Welcome at the Homepage</h1>
-      <Link to="/create-account">
-        <CreateNewTask />
+      <Link to="/create-task">
+        <Button type="create" btnWide="wide">
+          Create New Task
+        </Button>
       </Link>
+      <div>
+        <TaskCard />
+      </div>
     </div>
   );
 }
