@@ -2,17 +2,17 @@ import { useTask } from "../context/Task";
 
 function TaskCreate() {
   const {
-    taskList,
-    taskName,
-    projectName,
-    priority,
-    deadline,
-    assignedTo,
-    expectedInput,
-    taskDescription,
-    sprintName,
-    connectedTaskName,
-    attachment,
+    inputTaskList,
+    inputTaskName,
+    inputProjectName,
+    inputPriority,
+    inputDeadline,
+    inputAssignedTo,
+    inputExpectedInput,
+    inputTaskDescription,
+    inputSprintName,
+    inputConnectedTaskName,
+    inputAttachment,
     dispatch,
   } = useTask();
 
@@ -54,25 +54,43 @@ function TaskCreate() {
 
   function handleCreateNewTask() {
     const newTask = {
-      taskName,
-      projectName,
-      priority,
-      deadline,
-      assignedTo,
-      taskDescription,
+      inputTaskList,
+      inputTaskName,
+      inputProjectName,
+      inputPriority,
+      inputDeadline,
+      inputAssignedTo,
+      inputExpectedInput,
+      inputTaskDescription,
+      inputSprintName,
+      inputConnectedTaskName,
+      inputAttachment,
     };
 
     dispatch({ type: "addNewTask", payLoad: newTask });
+  }
+
+  function handleResetInput() {
+    dispatch({ type: "resetInputData" });
   }
 
   return (
     <>
       <p>Task Create Page</p>
       <div>
+        <button
+          onClick={() => {
+            handleResetInput();
+          }}
+        >
+          Reset
+        </button>
+      </div>
+      <div>
         <p>Corresponding Project</p>
         <input
           placeholder="Project name"
-          value={projectName}
+          value={inputProjectName}
           onChange={(e) => {
             handleProjectNameInput(e);
           }}
@@ -80,7 +98,7 @@ function TaskCreate() {
         <p>Name of the task</p>
         <input
           placeholder="Task name"
-          value={taskName}
+          value={inputTaskName}
           onChange={(e) => {
             handleTaskNameInput(e);
           }}
@@ -88,7 +106,7 @@ function TaskCreate() {
         <p>Priority</p>
         <input
           placeholder="1"
-          value={priority}
+          value={inputPriority}
           onChange={(e) => {
             handlePriorityInput(e);
           }}
@@ -96,7 +114,7 @@ function TaskCreate() {
         <p>Deadline</p>
         <input
           placeholder="Deadline"
-          value={deadline}
+          value={inputDeadline}
           onChange={(e) => {
             handleDeadlineInput(e);
           }}
@@ -104,7 +122,7 @@ function TaskCreate() {
         <p>Assigned to</p>
         <input
           placeholder="Assigned person"
-          value={assignedTo}
+          value={inputAssignedTo}
           onChange={(e) => {
             handleAssignedToInput(e);
           }}
@@ -112,7 +130,7 @@ function TaskCreate() {
         <p>Description</p>
         <input
           placeholder="Description"
-          value={taskDescription}
+          value={inputTaskDescription}
           onChange={(e) => {
             handleTaskDescriptionInput(e);
           }}
