@@ -6,7 +6,7 @@ const initialState = {
   isError: false,
   errorMsg: "",
   taskList: [],
-  taskId: 1,
+  taskId: 0,
   taskName: "",
   taskNameError: "",
   projectName: "",
@@ -66,7 +66,11 @@ function reducer(state, action) {
     case "addAttachment":
       return { ...state, attachment: action.pay };
     case "addNewTask":
-      return { ...state, taskList: [...state.taskList, action.payLoad] };
+      return {
+        ...state,
+        taskId: state.taskId + 1,
+        taskList: [...state.taskList, action.payLoad],
+      };
     case "resetInputData":
       return {
         ...state,
