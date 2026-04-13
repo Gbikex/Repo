@@ -3,14 +3,19 @@ import { useReducer, createContext, useContext } from "react";
 const TaskContext = createContext();
 
 const initialState = {
+  isError: false,
+  errorMsg: "",
   taskList: [],
+  taskId: 1,
   taskName: "",
+  taskNameError: "",
   projectName: "",
   priority: "",
   deadline: "",
   assignedTo: "",
-  expectedInput: 0,
+  storyPointInput: 1,
   taskDescription: "",
+  taskDescriptionError: "",
   sprintName: "",
   connectedTaskName: "",
   attachment: "",
@@ -21,17 +26,41 @@ function reducer(state, action) {
     case "addProjectName":
       return { ...state, projectName: action.payLoad };
     case "addTaskName":
-      return { ...state, taskName: action.payLoad };
+      if (action.payLoad.length > 50)
+        return {
+          ...state,
+          isError: true,
+          taskNameError: "Task name is too long",
+        };
+      return {
+        ...state,
+        isError: false,
+        taskNameError: "",
+        errorMsg: "",
+        taskName: action.payLoad,
+      };
     case "addPriority":
       return { ...state, priority: action.payLoad };
     case "addDeadline":
       return { ...state, deadline: action.payLoad };
     case "addAssignedTo":
       return { ...state, assignedTo: action.payLoad };
-    case "addExpectedInput":
-      return { ...state, expectedInput: action.payLoad };
+    case "addStoryPointInput":
+      return { ...state, storyPointInput: action.payLoad };
     case "addTaskDescription":
-      return { ...state, taskDescription: action.payLoad };
+      if (action.payLoad.length > 200)
+        return {
+          ...state,
+          isError: true,
+          taskDescriptionError: "Description is too long",
+        };
+      return {
+        ...state,
+        isError: false,
+        taskDescriptionError: "",
+        errorMsg: "",
+        taskDescription: action.payLoad,
+      };
     case "addSprintName":
       return { ...state, sprintName: action.payLoad };
     case "addAttachment":
@@ -41,12 +70,16 @@ function reducer(state, action) {
     case "resetInputData":
       return {
         ...state,
+        isError: false,
+        errorMsg: "",
+        taskNameError: "",
+        taskDescriptionError: "",
         taskName: "",
         projectName: "",
         priority: "",
         deadline: "",
         assignedTo: "",
-        expectedInput: 0,
+        storyPointInput: 1,
         taskDescription: "",
         sprintName: "",
         connectedTaskName: "",
@@ -60,14 +93,19 @@ function reducer(state, action) {
 function TaskProvider({ children }) {
   const [
     {
+      isError,
+      errorMsg,
       taskList,
+      taskId,
       taskName,
+      taskNameError,
       projectName,
       priority,
       deadline,
       assignedTo,
-      expectedInput,
+      storyPointInput,
       taskDescription,
+      taskDescriptionError,
       sprintName,
       connectedTaskName,
       attachment,
@@ -78,14 +116,19 @@ function TaskProvider({ children }) {
   return (
     <TaskContext.Provider
       value={{
+        isError,
+        errorMsg,
         taskList,
+        taskId,
         taskName,
+        taskNameError,
         projectName,
         priority,
         deadline,
         assignedTo,
-        expectedInput,
+        storyPointInput,
         taskDescription,
+        taskDescriptionError,
         sprintName,
         connectedTaskName,
         attachment,
