@@ -4,13 +4,18 @@ import { useTask } from "../context/Task";
 
 function TaskCreate() {
   const {
+    isError,
+    errorMsg,
     taskList,
+    taskId,
     taskName,
+    taskNameError,
     projectName,
     priority,
     deadline,
     assignedTo,
-    expectedInput,
+    storyPointInput,
+    taskDescriptionError,
     taskDescription,
     sprintName,
     connectedTaskName,
@@ -38,8 +43,8 @@ function TaskCreate() {
     dispatch({ type: "addAssignedTo", payLoad: e.target.value });
   }
 
-  function handleExpectedInput(e) {
-    dispatch({ type: "addExpectedInput", payLoad: Number(e.target.value) });
+  function handleStoryPointInput(e) {
+    dispatch({ type: "addStoryPointInput", payLoad: Number(e.target.value) });
   }
 
   function handleTaskDescriptionInput(e) {
@@ -56,13 +61,13 @@ function TaskCreate() {
 
   function handleCreateNewTask() {
     const newTask = {
-      taskList,
+      taskId: taskId + 1,
       taskName,
       projectName,
       priority,
       deadline,
       assignedTo,
-      expectedInput,
+      storyPointInput,
       taskDescription,
       sprintName,
       connectedTaskName,
@@ -79,6 +84,7 @@ function TaskCreate() {
   return (
     <>
       <p>Task Create Page</p>
+      {isError && <p>{errorMsg}</p>}
       <div>
         <ButtonBack />
         <Button
@@ -115,6 +121,7 @@ function TaskCreate() {
             handleTaskNameInput(e);
           }}
         ></input>
+        {isError && <p>{taskNameError}</p>}
         <p>Priority</p>
         <input
           placeholder="1"
@@ -123,12 +130,12 @@ function TaskCreate() {
             handlePriorityInput(e);
           }}
         ></input>
-        <p>Expected input</p>
+        <p>Story points</p>
         <input
           placeholder="In hours"
-          value={expectedInput}
+          value={storyPointInput}
           onChange={(e) => {
-            handleExpectedInput(e);
+            handleStoryPointInput(e);
           }}
         ></input>
         <p>Deadline</p>
@@ -155,6 +162,7 @@ function TaskCreate() {
             handleTaskDescriptionInput(e);
           }}
         ></input>
+        {isError && <p>{taskDescriptionError}</p>}
         <p>Attachment</p>
         <input
           placeholder="WIP"
@@ -172,6 +180,7 @@ function TaskCreate() {
             (handleCreateNewTask(), handleResetInput());
           }}
           type="create"
+          isDisabled={isError}
         >
           Create
         </Button>
