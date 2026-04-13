@@ -8,7 +8,7 @@ function TaskCard() {
     <>
       <p>Task Card</p>
       {taskList.map((task) => (
-        <TaskCardData task={task} key={new Date()} />
+        <TaskCardData task={task} key={task.id} />
       ))}
     </>
   );
