@@ -6,6 +6,7 @@ import { useProject } from "../context/Project";
 function ProjectCreate() {
   const {
     isError,
+    projectId,
     projectName,
     projectNameError,
     projectNameErrorMsg,
@@ -30,6 +31,7 @@ function ProjectCreate() {
 
   function handleCreateNewProject() {
     const newProject = {
+      projectId,
       projectName,
       projectDescription,
     };
