@@ -8,8 +8,11 @@ function ProjectCreate() {
     isError,
     projectName,
     projectNameError,
+    projectNameErrorMsg,
     projectDescription,
     projectDescriptionError,
+    projectDescriptionErrorMsg,
+    projectCreateErrorMsg,
     dispatch,
   } = useProject();
 
@@ -48,7 +51,9 @@ function ProjectCreate() {
           Reset
         </Button>
       </div>
+      {isError && <p>{projectCreateErrorMsg}</p>}
       <p>Project Name</p>
+      <p> {projectNameError && <p>{projectNameErrorMsg}</p>}</p>
       <input
         value={projectName}
         onChange={(e) => {
@@ -56,6 +61,7 @@ function ProjectCreate() {
         }}
       ></input>
       <p>Project Description</p>
+      {projectDescriptionError && <p>{projectDescriptionErrorMsg}</p>}
       <input
         value={projectDescription}
         onChange={(e) => {
@@ -68,6 +74,7 @@ function ProjectCreate() {
           onClick={() => {
             (handleCreateNewProject(), handleResetInput());
           }}
+          isDisabled={isError}
         >
           Create
         </Button>
