@@ -14,6 +14,11 @@ function Homepage() {
           Create New Task
         </Button>
       </Link>
+      <Link to="/create-project">
+        <Button type="create" btnWide="wide">
+          Create New Project
+        </Button>
+      </Link>
       <div>
         <TaskCard />
       </div>
