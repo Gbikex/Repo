@@ -8,16 +8,45 @@ const initialState = {
   projectId: 0,
   projectName: "",
   projectNameError: false,
+  projectNameErrorMsg: "",
   projectDescription: "",
   projectDescriptionError: false,
+  projectDescriptionErrorMsg: "",
+  projectCreateErrorMsg: "",
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case "addProjectName":
-      return { ...state, projectName: action.payLoad };
+      if (action.payLoad.length > 10)
+        return {
+          ...state,
+          isError: true,
+          projectNameError: true,
+          projectNameErrorMsg: "Project name is too long",
+        };
+      return {
+        ...state,
+        projectNameError: false,
+        isError: false,
+        projectNameErrorMsg: "",
+        projectName: action.payLoad,
+      };
     case "addProjectDescription":
-      return { ...state, projectDescription: action.payLoad };
+      if (action.payLoad.length > 10)
+        return {
+          ...state,
+          projectDescriptionError: true,
+          isError: true,
+          projectDescriptionErrorMsg: "Project description is too long",
+        };
+      return {
+        ...state,
+        projectDescriptionError: false,
+        isError: false,
+        projectDescriptionErrorMsg: "",
+        projectDescription: action.payLoad,
+      };
     case "resetInput":
       return {
         ...state,
@@ -27,6 +56,16 @@ function reducer(state, action) {
         projectDescriptionError: false,
       };
     case "addNewProject":
+      if (
+        state.projectName.length === 0 ||
+        state.projectDescription.length === 0
+      )
+        return {
+          ...state,
+          isError: true,
+          projectCreateErrorMsg:
+            "Project Name and Description can not be empty",
+        };
       return {
         ...state,
         projectId: state.projectId + 1,
@@ -45,8 +84,11 @@ function ProjectProvider({ children }) {
       projectId,
       projectName,
       projectNameError,
+      projectNameErrorMsg,
       projectDescription,
       projectDescriptionError,
+      projectDescriptionErrorMsg,
+      projectCreateErrorMsg,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -59,8 +101,11 @@ function ProjectProvider({ children }) {
         projectId,
         projectName,
         projectNameError,
+        projectNameErrorMsg,
         projectDescription,
         projectDescriptionError,
+        projectDescriptionErrorMsg,
+        projectCreateErrorMsg,
         dispatch,
       }}
     >
