@@ -106,6 +106,7 @@ function TaskCreate() {
         <select
           name="ProjectList"
           id="ProjectList"
+          value={projectName}
           onChange={(e) => handleProjectNameInput(e)}
         >
           <option selected>--Please choose an option--</option>
@@ -136,11 +137,12 @@ function TaskCreate() {
         <select
           name="PriorityList"
           id="PriorityList"
+          value={priority}
           onChange={(e) => {
             handlePriorityInput(e);
           }}
         >
-          <option selected>--Please choose an option--</option>
+          <option value="">--Please choose an option--</option>
           {PRIORITY.map((el) => (
             <option value={el} key={el}>
               {el}
@@ -151,11 +153,12 @@ function TaskCreate() {
         <select
           name="StoryPointsList"
           id="StoryPointsList"
+          value={storyPointInput}
           onChange={(e) => {
             handleStoryPointInput(e);
           }}
         >
-          <option selected>--Please choose an option--</option>
+          <option value="">--Please choose an option--</option>
           {STORY_POINTS.map((el) => (
             <option value={el} key={el}>
               {el}
