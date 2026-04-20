@@ -1,6 +1,7 @@
 import Button from "../components/Button";
 import ButtonBack from "../components/ButtonBack";
 import { useTask } from "../context/Task";
+import { useProject } from "../context/Project";
 
 function TaskCreate() {
   const {
@@ -22,6 +23,8 @@ function TaskCreate() {
     attachment,
     dispatch,
   } = useTask();
+
+  const { projectList } = useProject();
 
   function handleTaskNameInput(e) {
     dispatch({ type: "addTaskName", payLoad: e.target.value });
@@ -98,13 +101,21 @@ function TaskCreate() {
       </div>
       <div>
         <p>Corresponding Project</p>
-        <input
+        <select name="ProjectList" id="ProjectList">
+          <option value="0" selected>
+            --Please choose an option--
+          </option>
+          {[...projectList].map((el) => (
+            <option selected="selected">{el.projectName}</option>
+          ))}
+        </select>
+        {/*        <input
           placeholder="Project name"
           value={projectName}
           onChange={(e) => {
             handleProjectNameInput(e);
           }}
-        ></input>
+        ></input>*/}
         <p>Sprint Name</p>
         <input
           placeholder="Name of the sprint"
