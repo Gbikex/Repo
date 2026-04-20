@@ -3,6 +3,8 @@ import ButtonBack from "../components/ButtonBack";
 import { useTask } from "../context/Task";
 import { useProject } from "../context/Project";
 
+import { PRIORITY, STORY_POINTS } from "../constants/constants.js";
+
 function TaskCreate() {
   const {
     isError,
@@ -102,13 +104,12 @@ function TaskCreate() {
       <div>
         <p>Corresponding Project</p>
         <select name="ProjectList" id="ProjectList">
-          <option value="0" selected>
-            --Please choose an option--
-          </option>
+          <option selected>--Please choose an option--</option>
           {[...projectList].map((el) => (
-            <option selected="selected">{el.projectName}</option>
+            <option key={el.id}>{el.projectName}</option>
           ))}
         </select>
+        {/*CLEAN*/}
         {/*        <input
           placeholder="Project name"
           value={projectName}
@@ -134,21 +135,35 @@ function TaskCreate() {
         ></input>
         {isError && <p>{taskNameError}</p>}
         <p>Priority</p>
-        <input
+        <select>
+          <option selected>--Please choose an option--</option>
+          {PRIORITY.map((el) => (
+            <option key={el}>{el}</option>
+          ))}
+        </select>
+        {/*CLEAN*/}
+        {/*    <input
           placeholder="1"
           value={priority}
           onChange={(e) => {
             handlePriorityInput(e);
           }}
-        ></input>
+        ></input>*/}
         <p>Story points</p>
-        <input
+        <select>
+          <option selected>--Please choose an option--</option>
+          {STORY_POINTS.map((el) => (
+            <option key={el}>{el}</option>
+          ))}
+        </select>
+        {/*CLEAN*/}
+        {/* <input
           placeholder="In hours"
           value={storyPointInput}
           onChange={(e) => {
             handleStoryPointInput(e);
           }}
-        ></input>
+        ></input>*/}
         <p>Deadline</p>
         <input
           placeholder="Deadline"
