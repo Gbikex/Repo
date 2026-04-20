@@ -103,20 +103,18 @@ function TaskCreate() {
       </div>
       <div>
         <p>Corresponding Project</p>
-        <select name="ProjectList" id="ProjectList">
+        <select
+          name="ProjectList"
+          id="ProjectList"
+          onChange={(e) => handleProjectNameInput(e)}
+        >
           <option selected>--Please choose an option--</option>
           {[...projectList].map((el) => (
-            <option key={el.id}>{el.projectName}</option>
+            <option value={el.projectName} key={el.id}>
+              {el.projectName}
+            </option>
           ))}
         </select>
-        {/*CLEAN*/}
-        {/*        <input
-          placeholder="Project name"
-          value={projectName}
-          onChange={(e) => {
-            handleProjectNameInput(e);
-          }}
-        ></input>*/}
         <p>Sprint Name</p>
         <input
           placeholder="Name of the sprint"
@@ -135,35 +133,35 @@ function TaskCreate() {
         ></input>
         {isError && <p>{taskNameError}</p>}
         <p>Priority</p>
-        <select>
-          <option selected>--Please choose an option--</option>
-          {PRIORITY.map((el) => (
-            <option key={el}>{el}</option>
-          ))}
-        </select>
-        {/*CLEAN*/}
-        {/*    <input
-          placeholder="1"
-          value={priority}
+        <select
+          name="PriorityList"
+          id="PriorityList"
           onChange={(e) => {
             handlePriorityInput(e);
           }}
-        ></input>*/}
-        <p>Story points</p>
-        <select>
+        >
           <option selected>--Please choose an option--</option>
-          {STORY_POINTS.map((el) => (
-            <option key={el}>{el}</option>
+          {PRIORITY.map((el) => (
+            <option value={el} key={el}>
+              {el}
+            </option>
           ))}
         </select>
-        {/*CLEAN*/}
-        {/* <input
-          placeholder="In hours"
-          value={storyPointInput}
+        <p>Story points</p>
+        <select
+          name="StoryPointsList"
+          id="StoryPointsList"
           onChange={(e) => {
             handleStoryPointInput(e);
           }}
-        ></input>*/}
+        >
+          <option selected>--Please choose an option--</option>
+          {STORY_POINTS.map((el) => (
+            <option value={el} key={el}>
+              {el}
+            </option>
+          ))}
+        </select>
         <p>Deadline</p>
         <input
           placeholder="Deadline"
