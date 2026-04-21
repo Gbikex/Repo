@@ -17,7 +17,7 @@ function reducer(state, action) {
   }
 }
 
-function UserProvider({ children }) {
+function PersonProvider({ children }) {
   const [{ name, nameList }, dispatch] = useReducer(reducer, initialState);
   return (
     <UserContext.Provider value={{ name, nameList, dispatch }}>
@@ -26,7 +26,7 @@ function UserProvider({ children }) {
   );
 }
 
-function useProject() {
+function usePerson() {
   const context = useContext(UserContext);
 
   if (context === undefined) {
@@ -36,4 +36,4 @@ function useProject() {
   return context;
 }
 
-export { UserProvider, useProject };
+export { PersonProvider, usePerson };
