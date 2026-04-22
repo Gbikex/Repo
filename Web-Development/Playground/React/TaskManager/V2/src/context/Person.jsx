@@ -1,11 +1,12 @@
 import { createContext, useContext, useReducer } from "react";
 
-const UserContext = createContext();
+const PersonContext = createContext();
 
 const initialState = {
   id: 0,
-  name: "",
   nameList: [],
+  firstName: "",
+  lastName: "",
 };
 
 function reducer(state, action) {
@@ -18,16 +19,21 @@ function reducer(state, action) {
 }
 
 function PersonProvider({ children }) {
-  const [{ name, nameList }, dispatch] = useReducer(reducer, initialState);
+  const [{ id, firstName, lastName, nameList }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
   return (
-    <UserContext.Provider value={{ name, nameList, dispatch }}>
+    <PersonContext.Provider
+      value={{ id, firstName, lastName, nameList, dispatch }}
+    >
       {children}
-    </UserContext.Provider>
+    </PersonContext.Provider>
   );
 }
 
 function usePerson() {
-  const context = useContext(UserContext);
+  const context = useContext(PersonContext);
 
   if (context === undefined) {
     throw new Error("The Context was used outside the scope 🤔");

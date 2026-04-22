@@ -11,12 +11,17 @@ function Homepage() {
       <h1>Welcome at the Homepage</h1>
       <Link to="/create-task">
         <Button type="create" btnWide="wide">
-          Create New Task
+          New Task
         </Button>
       </Link>
       <Link to="/create-project">
         <Button type="create" btnWide="wide">
-          Create New Project
+          New Project
+        </Button>
+      </Link>
+      <Link to="/create-person">
+        <Button type="create" btnWide="wide">
+          New Person
         </Button>
       </Link>
       <div>
