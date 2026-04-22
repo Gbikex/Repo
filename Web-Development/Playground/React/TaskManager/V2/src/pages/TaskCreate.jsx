@@ -2,6 +2,7 @@ import Button from "../components/Button";
 import ButtonBack from "../components/ButtonBack";
 import { useTask } from "../context/Task";
 import { useProject } from "../context/Project";
+import { usePerson } from "../context/Person.jsx";
 
 import { PRIORITY, STORY_POINTS } from "../constants/constants.js";
 
@@ -27,6 +28,7 @@ function TaskCreate() {
   } = useTask();
 
   const { projectList } = useProject();
+  const { personList } = usePerson();
 
   function handleTaskNameInput(e) {
     dispatch({ type: "addTaskName", payLoad: e.target.value });
@@ -174,13 +176,29 @@ function TaskCreate() {
           }}
         ></input>
         <p>Assigned to</p>
-        <input
+        <select
+          name="AssignedTo"
+          id="AssignedTo"
+          value={assignedTo}
+          onChange={(e) => {
+            handleAssignedToInput(e);
+          }}
+        >
+          {" "}
+          <option selected>--Please choose an option--</option>
+          {[...personList].map((el) => (
+            <option value={el.fullName} key={el.id}>
+              {el.fullName}
+            </option>
+          ))}
+        </select>
+        {/*<input
           placeholder="Assigned person"
           value={assignedTo}
           onChange={(e) => {
             handleAssignedToInput(e);
           }}
-        ></input>
+        ></input>*/}
         <p>Description</p>
         <input
           placeholder="Description"
