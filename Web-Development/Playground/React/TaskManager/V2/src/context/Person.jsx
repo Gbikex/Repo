@@ -11,8 +11,18 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case "createName":
-      return { ...state };
+    case "personFirsNameInput":
+      return { ...state, firstName: action.payLoad };
+    case "personLastNameInput":
+      return { ...state, lastName: action.payLoad };
+    case "personCreateNew":
+      return {
+        ...state,
+        id: state.id + 1,
+        nameList: [...state.nameList, action.payLoad],
+      };
+    case "personResetInput":
+      return { ...state, firstName: "", lastName: "" };
     default:
       throw new Error("Unknown action 🫥");
   }
