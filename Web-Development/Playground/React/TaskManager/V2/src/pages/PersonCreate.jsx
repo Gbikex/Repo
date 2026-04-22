@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import { usePerson } from "../context/Person";
 
 function PersonCreate() {
-  const { id, firstName, lastName, dispatch } = usePerson();
+  const { id, firstName, lastName, fullName, dispatch } = usePerson();
 
   function handleFNameInput(e) {
     dispatch({ type: "personFirsNameInput", payLoad: e.target.value });
@@ -16,8 +16,11 @@ function PersonCreate() {
 
   function handleCreatePerson() {
     const newPerson = {
+      id,
       firstName,
       lastName,
+      fullName: `${firstName} ${lastName}`,
+      userName: `${lastName.charAt(0).toLowerCase()}${lastName.toLowerCase()}`,
     };
 
     dispatch({ type: "personCreateNew", payLoad: newPerson });
