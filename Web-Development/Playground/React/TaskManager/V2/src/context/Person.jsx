@@ -4,9 +4,11 @@ const PersonContext = createContext();
 
 const initialState = {
   id: 0,
-  nameList: [],
+  personList: [],
   firstName: "",
   lastName: "",
+  fullName: "",
+  userName: "",
 };
 
 function reducer(state, action) {
@@ -19,23 +21,31 @@ function reducer(state, action) {
       return {
         ...state,
         id: state.id + 1,
-        nameList: [...state.nameList, action.payLoad],
+        personList: [...state.personList, action.payLoad],
       };
     case "personResetInput":
-      return { ...state, firstName: "", lastName: "" };
+      return { ...state, firstName: "", lastName: "", fullName: "" };
     default:
       throw new Error("Unknown action 🫥");
   }
 }
 
 function PersonProvider({ children }) {
-  const [{ id, firstName, lastName, nameList }, dispatch] = useReducer(
-    reducer,
-    initialState,
-  );
+  const [
+    { id, firstName, lastName, fullName, userName, personList },
+    dispatch,
+  ] = useReducer(reducer, initialState);
   return (
     <PersonContext.Provider
-      value={{ id, firstName, lastName, nameList, dispatch }}
+      value={{
+        id,
+        firstName,
+        lastName,
+        fullName,
+        userName,
+        personList,
+        dispatch,
+      }}
     >
       {children}
     </PersonContext.Provider>
