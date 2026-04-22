@@ -32,7 +32,14 @@ function PersonCreate() {
       <p>Person Create Page</p>
       <div>
         <ButtonBack />
-        <Button type="primary">Reset</Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            handleResetPerson();
+          }}
+        >
+          Reset
+        </Button>
       </div>
       <div>
         <p>First Name</p>
