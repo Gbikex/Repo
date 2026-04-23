@@ -6,7 +6,7 @@ const initialState = {
   isError: false,
   errorMsg: "",
   taskList: [],
-  taskId: 0,
+  id: 0,
   taskName: "",
   taskNameError: "",
   projectName: "",
@@ -68,7 +68,7 @@ function reducer(state, action) {
     case "addNewTask":
       return {
         ...state,
-        taskId: state.taskId + 1,
+        id: state.id + 1,
         taskList: [...state.taskList, action.payLoad],
       };
     case "resetInputData":
@@ -100,7 +100,7 @@ function TaskProvider({ children }) {
       isError,
       errorMsg,
       taskList,
-      taskId,
+      id,
       taskName,
       taskNameError,
       projectName,
@@ -123,7 +123,7 @@ function TaskProvider({ children }) {
         isError,
         errorMsg,
         taskList,
-        taskId,
+        id,
         taskName,
         taskNameError,
         projectName,

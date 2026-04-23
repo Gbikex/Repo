@@ -5,7 +5,7 @@ const ProjectContext = createContext();
 const initialState = {
   isError: false,
   projectList: [],
-  projectId: 0,
+  id: 0,
   projectName: "",
   projectNameError: false,
   projectNameErrorMsg: "",
@@ -68,7 +68,7 @@ function reducer(state, action) {
         };
       return {
         ...state,
-        projectId: state.projectId + 1,
+        id: state.id + 1,
         projectList: [...state.projectList, action.payLoad],
       };
     default:
@@ -81,7 +81,7 @@ function ProjectProvider({ children }) {
     {
       isError,
       projectList,
-      projectId,
+      id,
       projectName,
       projectNameError,
       projectNameErrorMsg,
@@ -98,7 +98,7 @@ function ProjectProvider({ children }) {
       value={{
         isError,
         projectList,
-        projectId,
+        id,
         projectName,
         projectNameError,
         projectNameErrorMsg,
