@@ -4,14 +4,18 @@ import { useTask } from "../context/Task";
 import { useProject } from "../context/Project";
 import { usePerson } from "../context/Person.jsx";
 
-import { PRIORITY, STORY_POINTS } from "../constants/constants.js";
+import {
+  PRIORITY,
+  STORY_POINTS,
+  DEFAULT_SELECT_PLACEHOLDER,
+} from "../constants/constants.js";
 
 function TaskCreate() {
   const {
     isError,
     errorMsg,
     taskList,
-    taskId,
+    id,
     taskName,
     taskNameError,
     projectName,
@@ -68,7 +72,7 @@ function TaskCreate() {
 
   function handleCreateNewTask() {
     const newTask = {
-      taskId: taskId + 1,
+      id: id + 1,
       taskName,
       projectName,
       priority,
@@ -111,7 +115,7 @@ function TaskCreate() {
           value={projectName}
           onChange={(e) => handleProjectNameInput(e)}
         >
-          <option selected>--Please choose an option--</option>
+          <option value="">{DEFAULT_SELECT_PLACEHOLDER}</option>
           {[...projectList].map((el) => (
             <option value={el.projectName} key={el.id}>
               {el.projectName}
@@ -144,7 +148,7 @@ function TaskCreate() {
             handlePriorityInput(e);
           }}
         >
-          <option value="">--Please choose an option--</option>
+          <option value="">{DEFAULT_SELECT_PLACEHOLDER}</option>
           {PRIORITY.map((el) => (
             <option value={el} key={el}>
               {el}
@@ -160,7 +164,7 @@ function TaskCreate() {
             handleStoryPointInput(e);
           }}
         >
-          <option value="">--Please choose an option--</option>
+          <option value="">{DEFAULT_SELECT_PLACEHOLDER}</option>
           {STORY_POINTS.map((el) => (
             <option value={el} key={el}>
               {el}
@@ -185,7 +189,7 @@ function TaskCreate() {
           }}
         >
           {" "}
-          <option selected>--Please choose an option--</option>
+          <option value="">{DEFAULT_SELECT_PLACEHOLDER}</option>
           {[...personList].map((el) => (
             <option value={el.fullName} key={el.id}>
               {el.fullName}
