@@ -16,6 +16,7 @@ function TaskCreate() {
     errorMsg,
     taskList,
     id,
+    projectId,
     taskName,
     taskNameError,
     projectName,
@@ -39,7 +40,13 @@ function TaskCreate() {
   }
 
   function handleProjectNameInput(e) {
-    dispatch({ type: "addProjectName", payLoad: e.target.value });
+    //Filter project name from the project list as in the select we are sending id so we have to match it up!
+    dispatch({
+      type: "addProjectName",
+      payLoad: projectList.find((p) => p.id == e.target.value)?.projectName,
+    });
+    //Send ID
+    dispatch({ type: "addProjectId", payLoad: e.target.value });
   }
 
   function handlePriorityInput(e) {
@@ -73,6 +80,7 @@ function TaskCreate() {
   function handleCreateNewTask() {
     const newTask = {
       id: id + 1,
+      projectId,
       taskName,
       projectName,
       priority,
@@ -112,12 +120,12 @@ function TaskCreate() {
         <select
           name="ProjectList"
           id="ProjectList"
-          value={projectName}
+          value={projectId}
           onChange={(e) => handleProjectNameInput(e)}
         >
           <option value="">{DEFAULT_SELECT_PLACEHOLDER}</option>
           {[...projectList].map((el) => (
-            <option value={el.projectName} key={el.id}>
+            <option value={el.id} key={el.id}>
               {el.projectName}
             </option>
           ))}
