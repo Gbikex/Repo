@@ -22,7 +22,13 @@ function TaskCardData({ task }) {
         >
           Task
         </Button>
-        <Button>Project</Button>
+        <Button
+          onClick={() => {
+            navigate(`/project/${task.projectId}`);
+          }}
+        >
+          Project
+        </Button>
       </div>
     </div>
   );
