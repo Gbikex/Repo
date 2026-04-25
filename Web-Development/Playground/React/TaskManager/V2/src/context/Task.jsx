@@ -7,6 +7,7 @@ const initialState = {
   errorMsg: "",
   taskList: [],
   id: 0,
+  projectId: "",
   taskName: "",
   taskNameError: "",
   projectName: "",
@@ -25,6 +26,8 @@ function reducer(state, action) {
   switch (action.type) {
     case "addProjectName":
       return { ...state, projectName: action.payLoad };
+    case "addProjectId":
+      return { ...state, projectId: action.payLoad };
     case "addTaskName":
       if (action.payLoad.length > 50)
         return {
@@ -80,6 +83,7 @@ function reducer(state, action) {
         taskDescriptionError: "",
         taskName: "",
         projectName: "",
+        projectId: "",
         priority: "",
         deadline: "",
         assignedTo: "",
@@ -101,6 +105,7 @@ function TaskProvider({ children }) {
       errorMsg,
       taskList,
       id,
+      projectId,
       taskName,
       taskNameError,
       projectName,
@@ -124,6 +129,7 @@ function TaskProvider({ children }) {
         errorMsg,
         taskList,
         id,
+        projectId,
         taskName,
         taskNameError,
         projectName,
