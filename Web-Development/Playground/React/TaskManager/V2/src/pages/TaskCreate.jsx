@@ -1,5 +1,7 @@
 import Button from "../components/Button";
 import ButtonBack from "../components/ButtonBack";
+import InputWithTitle from "../components/InputWithTitle.jsx";
+
 import { useTask } from "../context/Task";
 import { useProject } from "../context/Project";
 import { usePerson } from "../context/Person.jsx";
@@ -130,22 +132,22 @@ function TaskCreate() {
             </option>
           ))}
         </select>
-        <p>Sprint Name</p>
-        <input
+        <InputWithTitle
+          isTitle="Sprint Name"
           placeholder="Name of the sprint"
           value={sprintName}
           onChange={(e) => {
             handleSprintNameInput(e);
           }}
-        ></input>
-        <p>Name of the task</p>
-        <input
+        />
+        <InputWithTitle
+          isTitle="Name of the task"
           placeholder="Task name"
           value={taskName}
           onChange={(e) => {
             handleTaskNameInput(e);
           }}
-        ></input>
+        />
         {isError && <p>{taskNameError}</p>}
         <p>Priority</p>
         <select
@@ -179,14 +181,22 @@ function TaskCreate() {
             </option>
           ))}
         </select>
-        <p>Deadline</p>
+        <InputWithTitle
+          isTitle="Deadline"
+          placeholder="Deadline"
+          value={deadline}
+          onChange={(e) => {
+            handleDeadlineInput(e);
+          }}
+        />
+        {/*<p>Deadline</p>
         <input
           placeholder="Deadline"
           value={deadline}
           onChange={(e) => {
             handleDeadlineInput(e);
           }}
-        ></input>
+        ></input>*/}
         <p>Assigned to</p>
         <select
           name="AssignedTo"
@@ -196,7 +206,6 @@ function TaskCreate() {
             handleAssignedToInput(e);
           }}
         >
-          {" "}
           <option value="">{DEFAULT_SELECT_PLACEHOLDER}</option>
           {[...personList].map((el) => (
             <option value={el.fullName} key={el.id}>
@@ -204,21 +213,14 @@ function TaskCreate() {
             </option>
           ))}
         </select>
-        {/*<input
-          placeholder="Assigned person"
-          value={assignedTo}
-          onChange={(e) => {
-            handleAssignedToInput(e);
-          }}
-        ></input>*/}
-        <p>Description</p>
-        <input
+        <InputWithTitle
+          isTitle="Description"
           placeholder="Description"
           value={taskDescription}
           onChange={(e) => {
             handleTaskDescriptionInput(e);
           }}
-        ></input>
+        />
         {isError && <p>{taskDescriptionError}</p>}
         <p>Attachment</p>
         <input
