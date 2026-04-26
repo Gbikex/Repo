@@ -1,26 +1,66 @@
 import { useState } from "react";
 
-import Button from "./Button";
 import ButtonBack from "./ButtonBack";
+import ButtonReset from "./ButtonReset";
+import ButtonUpdate from "./ButtonUpdate";
+import InputWithTitle from "./InputWithTitle";
+
+import { PRIORITY, STORY_POINTS } from "../constants/constants";
+
+console.log(PRIORITY);
 
 import { useTask } from "../context/Task";
+import { useProject } from "../context/Project";
 import { useParams } from "react-router-dom";
 
 function TaskCardDetails() {
   const { id } = useParams();
-  const { taskList } = useTask();
+  const { taskList, dispatch } = useTask();
+  const { projectList } = useProject();
 
   const task = [...taskList].find((task) => Number(task.id) === Number(id));
+  const project = [...projectList];
 
-  const [updatedTaskName, setUpdatedTaskName] = useState();
-  const [updatedProjectName, setUpdatedProjectName] = useState();
-  const [updatedPriority, setUpdatedPriority] = useState();
-  const [updatedStoryPoints, setUpdatedStoryPoints] = useState();
-  const [updatedSprintName, setUpdatedSprintName] = useState();
-  const [updatedAssignedTo, setUpdatedAssignedTo] = useState();
-  const [updatedDeadline, setUpdatedDeadline] = useState();
-  const [updatedDescription, setUpdatedDescription] = useState();
-  const [updateAttachment, setUpdateAttachment] = useState();
+  const [updatedTaskName, setUpdatedTaskName] = useState(task.taskName);
+  const [updatedProjectName, setUpdatedProjectName] = useState(
+    task.projectName,
+  );
+  const [updatedProjectId, setUpdatedProjectId] = useState(task.projectId);
+  const [updatedPriority, setUpdatedPriority] = useState(task.priority);
+  const [updatedStoryPoints, setUpdatedStoryPoints] = useState(
+    task.storyPointInput,
+  );
+  const [updatedSprintName, setUpdatedSprintName] = useState(task.sprintName);
+  const [updatedAssignedTo, setUpdatedAssignedTo] = useState(task.assignedTo);
+  const [updatedDeadline, setUpdatedDeadline] = useState(task.deadline);
+  const [updatedDescription, setUpdatedDescription] = useState(
+    task.taskDescription,
+  );
+  const [updateAttachment, setUpdateAttachment] = useState("");
+
+  function handleUpdate() {
+    dispatch({
+      type: "updateTask",
+      payLoad: {
+        id: task.id,
+        taskName: updatedTaskName,
+        projectName: updatedProjectName,
+        projectId: updatedProjectId,
+        priority: updatedPriority,
+        storyPoints: updatedStoryPoints,
+        sprintName: updatedSprintName,
+      },
+    });
+  }
+
+  function handleReset() {
+    setUpdatedTaskName(task.taskName);
+    setUpdatedProjectName(task.projectName);
+    setUpdatedProjectId(task.projectId);
+    setUpdatedPriority(task.priority);
+    setUpdatedStoryPoints(task.storyPointInput);
+    setUpdatedSprintName(task.sprintName);
+  }
 
   return (
     <div>
@@ -34,8 +74,84 @@ function TaskCardDetails() {
       <p>Deadline: {task.deadline}</p>
       <p>Description: {task.taskDescription}</p>
       <p>Attachment: {task.attachment}</p>
+      <h1>New local state</h1>
       <div>
         <ButtonBack />
+        <ButtonReset
+          onClick={() => {
+            handleReset();
+          }}
+        />
+      </div>
+      <InputWithTitle
+        isTitle="Task Name"
+        value={updatedTaskName}
+        onChange={(e) => {
+          setUpdatedTaskName(e.target.value);
+        }}
+      />
+      <div>
+        <p>Project Name</p>
+        <select
+          value={updatedProjectId}
+          onChange={(e) => {
+            const selected = projectList.find(
+              (project) => Number(project.id) === Number(e.target.value),
+            );
+            setUpdatedProjectId(selected.id);
+            setUpdatedProjectName(selected.projectName);
+          }}
+        >
+          {projectList.map((el) => (
+            <option value={el.id} key={el.id}>
+              {el.projectName}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <p>Priority</p>
+        <select
+          value={updatedPriority}
+          onChange={(e) => {
+            setUpdatedPriority(e.target.value);
+          }}
+        >
+          {[...PRIORITY].map((el) => (
+            <option value={el} key={el}>
+              {el}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <p>Story points</p>
+        <select
+          value={updatedStoryPoints}
+          onChange={(e) => {
+            setUpdatedStoryPoints(e.target.value);
+          }}
+        >
+          {[...STORY_POINTS].map((el) => (
+            <option value={el} key={el}>
+              {el}
+            </option>
+          ))}
+        </select>
+      </div>
+      <InputWithTitle
+        isTitle="Sprint Name"
+        value={updatedSprintName}
+        onChange={(e) => {
+          setUpdatedSprintName(e.target.value);
+        }}
+      />
+      <div>
+        <ButtonUpdate
+          onClick={() => {
+            handleUpdate();
+          }}
+        />
       </div>
     </div>
   );
