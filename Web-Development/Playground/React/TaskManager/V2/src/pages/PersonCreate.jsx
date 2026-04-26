@@ -1,4 +1,5 @@
 import ButtonBack from "../components/ButtonBack";
+import ButtonCreate from "../components/ButtonCreate";
 import Button from "../components/Button";
 
 import { usePerson } from "../context/Person";
@@ -20,7 +21,7 @@ function PersonCreate() {
       firstName,
       lastName,
       fullName: `${firstName} ${lastName}`,
-      userName: `${lastName.charAt(0).toLowerCase()}${lastName.toLowerCase()}`,
+      userName: `${firstName.charAt(0).toLowerCase()}${lastName.toLowerCase()}`,
     };
 
     dispatch({ type: "personCreateNew", payLoad: newPerson });
@@ -51,15 +52,13 @@ function PersonCreate() {
         <input value={lastName} onChange={(e) => handleLNameInput(e)}></input>
       </div>
       <div>
-        <Button
-          type="create"
+        <ButtonCreate
           onClick={() => {
+            console.log("Click");
             handleCreatePerson();
             handleResetPerson();
           }}
-        >
-          Create
-        </Button>
+        ></ButtonCreate>
       </div>
     </>
   );

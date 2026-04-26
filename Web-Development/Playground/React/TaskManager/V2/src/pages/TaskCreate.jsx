@@ -1,5 +1,7 @@
 import Button from "../components/Button";
 import ButtonBack from "../components/ButtonBack";
+import ButtonCreate from "../components/ButtonCreate.jsx";
+
 import InputWithTitle from "../components/InputWithTitle.jsx";
 import SelectListWithTitle from "../components/SelectListWithTitle.jsx";
 
@@ -222,17 +224,13 @@ function TaskCreate() {
           disabled={true}
         ></input>
       </div>
-
       <div>
-        <Button
+        <ButtonCreate
+          isDisabled={isError}
           onClick={() => {
             (handleCreateNewTask(), handleResetInput());
           }}
-          type="create"
-          isDisabled={isError}
-        >
-          Create
-        </Button>
+        />
       </div>
     </>
   );

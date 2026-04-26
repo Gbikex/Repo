@@ -1,12 +1,13 @@
 import Button from "../components/Button";
 import ButtonBack from "../components/ButtonBack";
+import ButtonCreate from "../components/ButtonCreate";
 
 import { useProject } from "../context/Project";
 
 function ProjectCreate() {
   const {
     isError,
-    projectId,
+    id,
     projectName,
     projectNameError,
     projectNameErrorMsg,
@@ -31,7 +32,7 @@ function ProjectCreate() {
 
   function handleCreateNewProject() {
     const newProject = {
-      projectId,
+      id,
       projectName,
       projectDescription,
     };
@@ -71,15 +72,11 @@ function ProjectCreate() {
         }}
       ></input>
       <div>
-        <Button
-          type="create"
+        <ButtonCreate
           onClick={() => {
             (handleCreateNewProject(), handleResetInput());
           }}
-          isDisabled={isError}
-        >
-          Create
-        </Button>
+        />
       </div>
     </>
   );
