@@ -93,6 +93,23 @@ function reducer(state, action) {
         connectedTaskName: "",
         attachment: "",
       };
+    case "updateTask":
+      return {
+        ...state,
+        taskList: state.taskList.map((task) =>
+          Number(task.id) === Number(action.payLoad.id)
+            ? {
+                ...task,
+                taskName: action.payLoad.taskName,
+                projectName: action.payLoad.projectName,
+                projectId: action.payLoad.projectId,
+                priority: action.payLoad.priority,
+                storyPointInput: action.payLoad.storyPoints,
+                sprintName: action.payLoad.sprintName,
+              }
+            : task,
+        ),
+      };
     default:
       throw new Error("Unknown action 🫥");
   }
