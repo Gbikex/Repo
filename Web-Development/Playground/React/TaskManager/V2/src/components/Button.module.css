@@ -4,6 +4,7 @@
   border-radius: 5px;
   width: 100px;
   height: 25px;
+  cursor: pointer;
 }
 
 .primary {
@@ -12,6 +13,14 @@
 
 .create {
   background-color: #b5e18b;
+}
+
+.update {
+  background-color: #ff9644;
+}
+
+.reset {
+  background-color: #f26076;
 }
 
 .wide {
