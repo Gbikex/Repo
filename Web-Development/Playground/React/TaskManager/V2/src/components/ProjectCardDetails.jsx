@@ -1,10 +1,13 @@
 import { useState } from "react";
 
 import ButtonBack from "./ButtonBack";
+import ButtonUpdate from "./ButtonUpdate";
 import Button from "./Button";
+import InputWithTitle from "./InputWithTitle";
 
 import { useProject } from "../context/Project";
 import { useParams } from "react-router-dom";
+import ButtonReset from "./ButtonReset";
 
 function ProjectCardDetail() {
   const { projectList, dispatch } = useProject();
@@ -40,32 +43,26 @@ function ProjectCardDetail() {
       <p>Project Card Detail</p>
       <div>
         <ButtonBack />
-        <Button
+        <ButtonReset
           onClick={() => {
             handleReset();
           }}
-        >
-          Reset
-        </Button>
+        />
       </div>
-      <p>
-        Project Name:
-        <input
-          value={updatedName}
-          onChange={(e) => setUpdatedName(e.target.value)}
-        ></input>
-      </p>
-      <p>
-        Project Description: {project.projectDescription}
-        <input
-          value={updatedDescription}
-          onChange={(e) => {
-            setUpdatedDescription(e.target.value);
-          }}
-        ></input>
-      </p>
+      <InputWithTitle
+        isTitle="Project Name:"
+        value={updatedName}
+        onChange={(e) => setUpdatedName(e.target.value)}
+      />
+      <InputWithTitle
+        isTitle=" Project Description:"
+        value={updatedDescription}
+        onChange={(e) => {
+          setUpdatedDescription(e.target.value);
+        }}
+      />
       <div>
-        <Button onClick={handleUpdate}>Update</Button>
+        <ButtonUpdate onClick={handleUpdate} />
       </div>
     </>
   );
