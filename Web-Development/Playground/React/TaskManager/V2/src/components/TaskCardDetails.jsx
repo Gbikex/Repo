@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Button from "./Button";
 import ButtonBack from "./ButtonBack";
 
@@ -9,6 +11,16 @@ function TaskCardDetails() {
   const { taskList } = useTask();
 
   const task = [...taskList].find((task) => Number(task.id) === Number(id));
+
+  const [updatedTaskName, setUpdatedTaskName] = useState();
+  const [updatedProjectName, setUpdatedProjectName] = useState();
+  const [updatedPriority, setUpdatedPriority] = useState();
+  const [updatedStoryPoints, setUpdatedStoryPoints] = useState();
+  const [updatedSprintName, setUpdatedSprintName] = useState();
+  const [updatedAssignedTo, setUpdatedAssignedTo] = useState();
+  const [updatedDeadline, setUpdatedDeadline] = useState();
+  const [updatedDescription, setUpdatedDescription] = useState();
+  const [updateAttachment, setUpdateAttachment] = useState();
 
   return (
     <div>
