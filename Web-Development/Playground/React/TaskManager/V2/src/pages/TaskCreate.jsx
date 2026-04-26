@@ -1,6 +1,7 @@
 import Button from "../components/Button";
 import ButtonBack from "../components/ButtonBack";
 import InputWithTitle from "../components/InputWithTitle.jsx";
+import SelectListWithTitle from "../components/SelectListWithTitle.jsx";
 
 import { useTask } from "../context/Task";
 import { useProject } from "../context/Project";
@@ -118,20 +119,19 @@ function TaskCreate() {
         </Button>
       </div>
       <div>
-        <p>Corresponding Project</p>
-        <select
-          name="ProjectList"
-          id="ProjectList"
+        <SelectListWithTitle
+          name="ProjectList1"
+          id="ProjectList1"
+          isTitle="Projects"
           value={projectId}
           onChange={(e) => handleProjectNameInput(e)}
         >
-          <option value="">{DEFAULT_SELECT_PLACEHOLDER}</option>
           {[...projectList].map((el) => (
             <option value={el.id} key={el.id}>
               {el.projectName}
             </option>
           ))}
-        </select>
+        </SelectListWithTitle>
         <InputWithTitle
           isTitle="Sprint Name"
           placeholder="Name of the sprint"
@@ -149,38 +149,36 @@ function TaskCreate() {
           }}
         />
         {isError && <p>{taskNameError}</p>}
-        <p>Priority</p>
-        <select
+        <SelectListWithTitle
           name="PriorityList"
           id="PriorityList"
+          isTitle="Priority"
           value={priority}
           onChange={(e) => {
             handlePriorityInput(e);
           }}
         >
-          <option value="">{DEFAULT_SELECT_PLACEHOLDER}</option>
           {PRIORITY.map((el) => (
             <option value={el} key={el}>
               {el}
             </option>
           ))}
-        </select>
-        <p>Story points</p>
-        <select
-          name="StoryPointsList"
-          id="StoryPointsList"
+        </SelectListWithTitle>
+        <SelectListWithTitle
+          name="StoryPointsList1"
+          id="StoryPointsList1"
+          isTitle="Story points 1"
           value={storyPointInput}
           onChange={(e) => {
             handleStoryPointInput(e);
           }}
         >
-          <option value="">{DEFAULT_SELECT_PLACEHOLDER}</option>
           {STORY_POINTS.map((el) => (
             <option value={el} key={el}>
               {el}
             </option>
           ))}
-        </select>
+        </SelectListWithTitle>
         <InputWithTitle
           isTitle="Deadline"
           placeholder="Deadline"
@@ -189,30 +187,21 @@ function TaskCreate() {
             handleDeadlineInput(e);
           }}
         />
-        {/*<p>Deadline</p>
-        <input
-          placeholder="Deadline"
-          value={deadline}
-          onChange={(e) => {
-            handleDeadlineInput(e);
-          }}
-        ></input>*/}
-        <p>Assigned to</p>
-        <select
-          name="AssignedTo"
-          id="AssignedTo"
+        <SelectListWithTitle
+          name="AssignedTo1"
+          id="AssignedTo1"
+          isTitle="Assigned To1"
           value={assignedTo}
           onChange={(e) => {
             handleAssignedToInput(e);
           }}
         >
-          <option value="">{DEFAULT_SELECT_PLACEHOLDER}</option>
           {[...personList].map((el) => (
             <option value={el.fullName} key={el.id}>
               {el.fullName}
             </option>
           ))}
-        </select>
+        </SelectListWithTitle>
         <InputWithTitle
           isTitle="Description"
           placeholder="Description"
@@ -233,6 +222,7 @@ function TaskCreate() {
           disabled={true}
         ></input>
       </div>
+
       <div>
         <Button
           onClick={() => {
