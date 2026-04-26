@@ -71,6 +71,19 @@ function reducer(state, action) {
         id: state.id + 1,
         projectList: [...state.projectList, action.payLoad],
       };
+    case "updateProject":
+      return {
+        ...state,
+        projectList: state.projectList.map((project) =>
+          Number(project.id) === Number(action.payLoad.id)
+            ? {
+                ...project,
+                projectName: action.payLoad.projectName,
+                projectDescription: action.payLoad.projectDescription,
+              }
+            : project,
+        ),
+      };
     default:
       throw new Error("Unknown action 🫥");
   }
