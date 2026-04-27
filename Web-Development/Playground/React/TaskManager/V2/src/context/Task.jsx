@@ -14,6 +14,7 @@ const initialState = {
   priority: "",
   deadline: "",
   assignedTo: "",
+  assignedToId: "",
   storyPointInput: "",
   taskDescription: "",
   taskDescriptionError: "",
@@ -48,6 +49,8 @@ function reducer(state, action) {
       return { ...state, deadline: action.payLoad };
     case "addAssignedTo":
       return { ...state, assignedTo: action.payLoad };
+    case "addAssignedToId":
+      return { ...state, assignedToId: action.payLoad };
     case "addStoryPointInput":
       return { ...state, storyPointInput: action.payLoad };
     case "addTaskDescription":
@@ -87,6 +90,7 @@ function reducer(state, action) {
         priority: "",
         deadline: "",
         assignedTo: "",
+        assignedToId: "",
         storyPointInput: "",
         taskDescription: "",
         sprintName: "",
@@ -129,6 +133,7 @@ function TaskProvider({ children }) {
       priority,
       deadline,
       assignedTo,
+      assignedToId,
       storyPointInput,
       taskDescription,
       taskDescriptionError,
@@ -153,6 +158,7 @@ function TaskProvider({ children }) {
         priority,
         deadline,
         assignedTo,
+        assignedToId,
         storyPointInput,
         taskDescription,
         taskDescriptionError,
