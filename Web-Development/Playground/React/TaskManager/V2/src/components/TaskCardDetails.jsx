@@ -11,12 +11,16 @@ console.log(PRIORITY);
 
 import { useTask } from "../context/Task";
 import { useProject } from "../context/Project";
+import { usePerson } from "../context/Person";
 import { useParams } from "react-router-dom";
 
 function TaskCardDetails() {
   const { id } = useParams();
   const { taskList, dispatch } = useTask();
   const { projectList } = useProject();
+  const { personList } = usePerson();
+
+  console.log(personList);
 
   const task = [...taskList].find((task) => Number(task.id) === Number(id));
   const project = [...projectList];
@@ -32,6 +36,9 @@ function TaskCardDetails() {
   );
   const [updatedSprintName, setUpdatedSprintName] = useState(task.sprintName);
   const [updatedAssignedTo, setUpdatedAssignedTo] = useState(task.assignedTo);
+  const [updatedAssignedToId, setUpdatedAssignedToId] = useState(
+    task.assignedToId,
+  );
   const [updatedDeadline, setUpdatedDeadline] = useState(task.deadline);
   const [updatedDescription, setUpdatedDescription] = useState(
     task.taskDescription,
@@ -49,6 +56,10 @@ function TaskCardDetails() {
         priority: updatedPriority,
         storyPoints: updatedStoryPoints,
         sprintName: updatedSprintName,
+        assignedTo: updatedAssignedTo,
+        assignedToId: updatedAssignedToId,
+        deadline: updatedDeadline,
+        taskDescription: updatedDescription,
       },
     });
   }
@@ -60,6 +71,10 @@ function TaskCardDetails() {
     setUpdatedPriority(task.priority);
     setUpdatedStoryPoints(task.storyPointInput);
     setUpdatedSprintName(task.sprintName);
+    setUpdatedAssignedTo(task.assignedTo);
+    setUpdatedAssignedToId(task.assignedToId);
+    setUpdatedDeadline(task.deadline);
+    setUpdatedDescription(task.taskDescription);
   }
 
   return (
@@ -144,6 +159,39 @@ function TaskCardDetails() {
         value={updatedSprintName}
         onChange={(e) => {
           setUpdatedSprintName(e.target.value);
+        }}
+      />
+      <div>
+        <p>Assigned To</p>
+        <select
+          value={updatedAssignedToId}
+          onChange={(e) => {
+            const selected = personList.find(
+              (person) => Number(person.id) === Number(e.target.value),
+            );
+            setUpdatedAssignedTo(selected.fullName);
+            setUpdatedAssignedToId(selected.id);
+          }}
+        >
+          {personList.map((el) => (
+            <option value={el.id} key={el.id}>
+              {el.fullName}
+            </option>
+          ))}
+        </select>
+      </div>
+      <InputWithTitle
+        isTitle="Deadline"
+        value={updatedDeadline}
+        onChange={(e) => {
+          setUpdatedDeadline(e.target.value);
+        }}
+      />
+      <InputWithTitle
+        isTitle="Description"
+        value={updatedDescription}
+        onChange={(e) => {
+          setUpdatedDescription(e.target.value);
         }}
       />
       <div>
