@@ -28,6 +28,7 @@ function TaskCreate() {
     priority,
     deadline,
     assignedTo,
+    assignedToId,
     storyPointInput,
     taskDescriptionError,
     taskDescription,
@@ -39,6 +40,8 @@ function TaskCreate() {
 
   const { projectList } = useProject();
   const { personList } = usePerson();
+
+  console.log(personList);
 
   function handleTaskNameInput(e) {
     dispatch({ type: "addTaskName", payLoad: e.target.value });
@@ -63,7 +66,12 @@ function TaskCreate() {
   }
 
   function handleAssignedToInput(e) {
-    dispatch({ type: "addAssignedTo", payLoad: e.target.value });
+    dispatch({
+      type: "addAssignedTo",
+      payLoad: personList.find((person) => person.id == e.target.value)
+        ?.fullName,
+    });
+    dispatch({ type: "addAssignedToId", payLoad: e.target.value });
   }
 
   function handleStoryPointInput(e) {
@@ -91,6 +99,7 @@ function TaskCreate() {
       priority,
       deadline,
       assignedTo,
+      assignedToId,
       storyPointInput,
       taskDescription,
       sprintName,
@@ -193,13 +202,13 @@ function TaskCreate() {
           name="AssignedTo1"
           id="AssignedTo1"
           isTitle="Assigned To1"
-          value={assignedTo}
+          value={assignedToId}
           onChange={(e) => {
             handleAssignedToInput(e);
           }}
         >
           {[...personList].map((el) => (
-            <option value={el.fullName} key={el.id}>
+            <option value={el.id} key={el.id}>
               {el.fullName}
             </option>
           ))}
