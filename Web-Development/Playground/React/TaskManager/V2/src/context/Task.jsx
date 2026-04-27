@@ -110,6 +110,10 @@ function reducer(state, action) {
                 priority: action.payLoad.priority,
                 storyPointInput: action.payLoad.storyPoints,
                 sprintName: action.payLoad.sprintName,
+                assignedTo: action.payLoad.assignedTo,
+                assignedToId: action.payLoad.assignedToId,
+                deadline: action.payLoad.deadline,
+                taskDescription: action.payLoad.taskDescription,
               }
             : task,
         ),
