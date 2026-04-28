@@ -9,11 +9,7 @@ import { useTask } from "../context/Task";
 import { useProject } from "../context/Project";
 import { usePerson } from "../context/Person.jsx";
 
-import {
-  PRIORITY,
-  STORY_POINTS,
-  DEFAULT_SELECT_PLACEHOLDER,
-} from "../constants/constants.js";
+import { PRIORITY, STORY_POINTS, TASK_TYPE } from "../constants/constants.js";
 
 function TaskCreate() {
   const {
@@ -22,6 +18,8 @@ function TaskCreate() {
     taskList,
     id,
     projectId,
+    taskTypeId,
+    taskTypeName,
     taskName,
     taskNameError,
     projectName,
@@ -90,10 +88,17 @@ function TaskCreate() {
     dispatch({ type: "addAttachment", payLoad: e.target.value });
   }
 
+  function handleTaskType(name, id) {
+    dispatch({ type: "addTypeName", payLoad: name });
+    dispatch({ type: "addTypeId", payLoad: id });
+  }
+
   function handleCreateNewTask() {
     const newTask = {
       id: id + 1,
       projectId,
+      taskTypeId,
+      taskTypeName,
       taskName,
       projectName,
       priority,
@@ -131,8 +136,8 @@ function TaskCreate() {
       </div>
       <div>
         <SelectListWithTitle
-          name="ProjectList1"
-          id="ProjectList1"
+          name="ProjectList"
+          id="ProjectList"
           isTitle="Projects"
           value={projectId}
           onChange={(e) => handleProjectNameInput(e)}
@@ -140,6 +145,23 @@ function TaskCreate() {
           {[...projectList].map((el) => (
             <option value={el.id} key={el.id}>
               {el.projectName}
+            </option>
+          ))}
+        </SelectListWithTitle>
+        <SelectListWithTitle
+          isTitle="Task type"
+          value={taskTypeId}
+          onChange={(e) => {
+            const selected = [...TASK_TYPE].find(
+              (type) => Number(type.id) === Number(e.target.value),
+            );
+
+            handleTaskType(selected.type, selected.id);
+          }}
+        >
+          {[...TASK_TYPE].map((el) => (
+            <option value={el.id} key={el.id}>
+              {el.type}
             </option>
           ))}
         </SelectListWithTitle>
@@ -176,9 +198,9 @@ function TaskCreate() {
           ))}
         </SelectListWithTitle>
         <SelectListWithTitle
-          name="StoryPointsList1"
-          id="StoryPointsList1"
-          isTitle="Story points 1"
+          name="StoryPointsList"
+          id="StoryPointsList"
+          isTitle="Story points"
           value={storyPointInput}
           onChange={(e) => {
             handleStoryPointInput(e);
@@ -199,9 +221,9 @@ function TaskCreate() {
           }}
         />
         <SelectListWithTitle
-          name="AssignedTo1"
-          id="AssignedTo1"
-          isTitle="Assigned To1"
+          name="AssignedTo"
+          id="AssignedTo"
+          isTitle="Assigned To"
           value={assignedToId}
           onChange={(e) => {
             handleAssignedToInput(e);
