@@ -29,6 +29,10 @@ function reducer(state, action) {
       return { ...state, projectName: action.payLoad };
     case "addProjectId":
       return { ...state, projectId: action.payLoad };
+    case "addTypeName":
+      return { ...state, taskTypeName: action.payLoad };
+    case "addTypeId":
+      return { ...state, taskTypeId: action.payLoad };
     case "addTaskName":
       if (action.payLoad.length > 50)
         return {
@@ -85,6 +89,8 @@ function reducer(state, action) {
         taskNameError: "",
         taskDescriptionError: "",
         taskName: "",
+        taskTypeId: "",
+        taskTypeName: "",
         projectName: "",
         projectId: "",
         priority: "",
@@ -132,6 +138,8 @@ function TaskProvider({ children }) {
       id,
       projectId,
       taskName,
+      taskTypeId,
+      taskTypeName,
       taskNameError,
       projectName,
       priority,
@@ -156,6 +164,8 @@ function TaskProvider({ children }) {
         taskList,
         id,
         projectId,
+        taskTypeId,
+        taskTypeName,
         taskName,
         taskNameError,
         projectName,
