@@ -4,6 +4,7 @@ import ButtonBack from "./ButtonBack";
 import ButtonReset from "./ButtonReset";
 import ButtonUpdate from "./ButtonUpdate";
 import InputWithTitle from "./InputWithTitle";
+import SelectListWithTitle from "./SelectListWithTitle";
 
 import { PRIORITY, STORY_POINTS } from "../constants/constants";
 
@@ -106,8 +107,11 @@ function TaskCardDetails() {
         }}
       />
       <div>
-        <p>Project Name</p>
-        <select
+        <SelectListWithTitle
+          isTitle="Project Name"
+          isDefaultOption={false}
+          name="projects"
+          id="projects-list"
           value={updatedProjectId}
           onChange={(e) => {
             const selected = projectList.find(
@@ -122,26 +126,32 @@ function TaskCardDetails() {
               {el.projectName}
             </option>
           ))}
-        </select>
+        </SelectListWithTitle>
       </div>
       <div>
-        <p>Priority</p>
-        <select
+        <SelectListWithTitle
+          isTitle="Priority"
+          isDefaultOption={false}
+          name="Priority"
+          id="priority"
           value={updatedPriority}
           onChange={(e) => {
             setUpdatedPriority(e.target.value);
           }}
         >
-          {[...PRIORITY].map((el) => (
-            <option value={el} key={el}>
+          {PRIORITY.map((el) => (
+            <option value={el} id={el}>
               {el}
             </option>
           ))}
-        </select>
+        </SelectListWithTitle>
       </div>
       <div>
-        <p>Story points</p>
-        <select
+        <SelectListWithTitle
+          isTitle="Story Points"
+          isDefaultOption={false}
+          name="story-points"
+          id="story-points"
           value={updatedStoryPoints}
           onChange={(e) => {
             setUpdatedStoryPoints(e.target.value);
@@ -152,7 +162,7 @@ function TaskCardDetails() {
               {el}
             </option>
           ))}
-        </select>
+        </SelectListWithTitle>
       </div>
       <InputWithTitle
         isTitle="Sprint Name"
@@ -162,15 +172,18 @@ function TaskCardDetails() {
         }}
       />
       <div>
-        <p>Assigned To</p>
-        <select
+        <SelectListWithTitle
+          isTitle="Assigned To"
+          isDefaultOption={false}
+          name="assigned-to"
+          id="assigned-to"
           value={updatedAssignedToId}
           onChange={(e) => {
             const selected = personList.find(
               (person) => Number(person.id) === Number(e.target.value),
             );
-            setUpdatedAssignedTo(selected.fullName);
             setUpdatedAssignedToId(selected.id);
+            setUpdatedAssignedTo(selected.fullName);
           }}
         >
           {personList.map((el) => (
@@ -178,7 +191,7 @@ function TaskCardDetails() {
               {el.fullName}
             </option>
           ))}
-        </select>
+        </SelectListWithTitle>
       </div>
       <InputWithTitle
         isTitle="Deadline"
