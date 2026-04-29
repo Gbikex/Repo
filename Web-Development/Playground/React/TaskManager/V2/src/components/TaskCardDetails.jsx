@@ -6,7 +6,7 @@ import ButtonUpdate from "./ButtonUpdate";
 import InputWithTitle from "./InputWithTitle";
 import SelectListWithTitle from "./SelectListWithTitle";
 
-import { PRIORITY, STORY_POINTS } from "../constants/constants";
+import { PRIORITY, STORY_POINTS, TASK_TYPE } from "../constants/constants";
 
 console.log(PRIORITY);
 
@@ -29,6 +29,10 @@ function TaskCardDetails() {
   const [updatedTaskName, setUpdatedTaskName] = useState(task.taskName);
   const [updatedProjectName, setUpdatedProjectName] = useState(
     task.projectName,
+  );
+  const [updatedTaskTypeId, setUpdatedTaskTypeId] = useState(task.taskTypeId);
+  const [updatedTaskTypeName, setUpdatedTaskTypeName] = useState(
+    task.taskTypeName,
   );
   const [updatedProjectId, setUpdatedProjectId] = useState(task.projectId);
   const [updatedPriority, setUpdatedPriority] = useState(task.priority);
@@ -53,6 +57,8 @@ function TaskCardDetails() {
         id: task.id,
         taskName: updatedTaskName,
         projectName: updatedProjectName,
+        taskTypeId: updatedTaskTypeId,
+        taskTypeName: updatedTaskTypeName,
         projectId: updatedProjectId,
         priority: updatedPriority,
         storyPoints: updatedStoryPoints,
@@ -76,6 +82,8 @@ function TaskCardDetails() {
     setUpdatedAssignedToId(task.assignedToId);
     setUpdatedDeadline(task.deadline);
     setUpdatedDescription(task.taskDescription);
+    setUpdatedTaskTypeId(task.taskTypeId);
+    setUpdatedTaskTypeName(task.taskTypeName);
   }
 
   return (
@@ -106,6 +114,26 @@ function TaskCardDetails() {
           setUpdatedTaskName(e.target.value);
         }}
       />
+      <SelectListWithTitle
+        isTitle="Task Type"
+        isDefaultOption={false}
+        name="task-type"
+        id="task-type"
+        value={updatedTaskTypeId}
+        onChange={(e) => {
+          const selected = [...TASK_TYPE].find(
+            (task) => Number(task.id) === Number(e.target.value),
+          );
+          setUpdatedTaskTypeName(selected.type);
+          setUpdatedTaskTypeId(selected.id);
+        }}
+      >
+        {[...TASK_TYPE].map((el) => (
+          <option value={el.id} key={el.id}>
+            {el.type}
+          </option>
+        ))}
+      </SelectListWithTitle>
       <div>
         <SelectListWithTitle
           isTitle="Project Name"
