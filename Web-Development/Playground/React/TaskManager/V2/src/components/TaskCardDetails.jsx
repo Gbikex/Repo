@@ -88,17 +88,6 @@ function TaskCardDetails() {
 
   return (
     <div>
-      <p>Task Card Details Component</p>
-      <p>Task name: {task.taskName}</p>
-      <p>Project name: {task.projectName}</p>
-      <p>Priority: {task.priority}</p>
-      <p>Story Points: {task.storyPointInput}</p>
-      <p>Sprint Name: {task.sprintName}</p>
-      <p>Assigned To: {task.assignedTo}</p>
-      <p>Deadline: {task.deadline}</p>
-      <p>Description: {task.taskDescription}</p>
-      <p>Attachment: {task.attachment}</p>
-      <h1>New local state</h1>
       <div>
         <ButtonBack />
         <ButtonReset
