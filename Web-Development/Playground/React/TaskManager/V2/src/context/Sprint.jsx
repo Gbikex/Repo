@@ -11,8 +11,13 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case "":
-      return { ...state };
+    case "addSprintName":
+      return { ...state, sprintName: action.payLoad };
+    case "resetInputs":
+      return {
+        ...state,
+        sprintName: "",
+      };
     default:
       throw new Error("Unknown action 🫥");
   }
